@@ -1,0 +1,15 @@
+{
+  "name": "Form-Museum",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/sadnessOjisan/Form-Museum.git",
+  "author": "sadness_ojisan <sadness.ojisan@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "formik": "^1.5.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "styled-components": "^4.2.0",
+    "yup": "^0.27.0"
+  }
+}
