@@ -4,7 +4,7 @@ import styled from "styled-components";
 interface IProps {
   className: string;
   onClick: any;
-  children: React.Node;
+  children: React.ReactNode;
 }
 
 const Button = (props: IProps) => {
