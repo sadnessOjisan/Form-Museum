@@ -8,8 +8,12 @@ interface IProps {
 }
 
 const Button = (props: IProps) => {
-  const { children, className } = props;
-  return <StyledButton className={className}>{children}</StyledButton>;
+  const { children, className, onClick } = props;
+  return (
+    <StyledButton className={className} onClick={onClick}>
+      {children}
+    </StyledButton>
+  );
 };
 
 const StyledButton = styled.button<IProps>``;
