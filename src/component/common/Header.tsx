@@ -31,10 +31,19 @@ const Wrapper = styled.div`
   width: 100%;
   height: 70px;
   background-color: pink;
+  padding: 12px;
 `;
 
-const LeftArea = styled.div``;
+const LeftArea = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
 
-const RightArea = styled.div``;
+const RightArea = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
 
 export { Header };

@@ -3,13 +3,17 @@ import styled from "styled-components";
 
 interface IProps {
   className?: string;
-  onClick?: any;
+  onClick: () => void;
   name: string;
 }
 
 const SideBarItem = (props: IProps) => {
-  const { className, name } = props;
-  return <Wrapper className={className}>{name}</Wrapper>;
+  const { className, name, onClick } = props;
+  return (
+    <Wrapper className={className} onClick={onClick}>
+      {name}
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`

@@ -6,6 +6,7 @@
   "author": "sadness_ojisan <sadness.ojisan@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@air-kit/air-kit": "^0.5.1",
     "formik": "^1.5.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

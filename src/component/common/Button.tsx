@@ -1,21 +1,16 @@
 import * as React from "react";
 import styled from "styled-components";
+import { Button } from "@air-kit/air-kit";
 
-interface IProps {
-  className: string;
-  onClick: any;
-  children: React.ReactNode;
-}
-
-const Button = (props: IProps) => {
-  const { children, className, onClick } = props;
+const StyeldButton = props => {
+  const { className, children, onClick } = props;
   return (
-    <StyledButton className={className} onClick={onClick}>
+    <Wrapper className={className} onClick={onClick}>
       {children}
-    </StyledButton>
+    </Wrapper>
   );
 };
 
-const StyledButton = styled.button<IProps>``;
+const Wrapper = styled(Button)``;
 
-export { Button };
+export { StyeldButton as Button };

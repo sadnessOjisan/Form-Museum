@@ -1,18 +1,20 @@
 import * as React from "react";
 import styled from "styled-components";
 import { SideBarItem } from "./SideBarItem";
+import { withRouter, RouteComponentProps } from "react-router";
 
-interface IProps {
+interface IProps extends RouteComponentProps {
   className?: string;
 }
 
 const SideBar = (props: IProps) => {
-  const { className } = props;
+  const { className, history } = props;
+  const { push } = history;
   return (
     <Wrapper className={className}>
-      <SideBarItem name="kuso" />
-      <SideBarItem name="masi" />
-      <SideBarItem name="good" />
+      <SideBarItem name="kuso" onClick={() => push("/kuso")} />
+      <SideBarItem name="masi" onClick={() => push("/masi")} />
+      <SideBarItem name="good" onClick={() => alert(3)} />
     </Wrapper>
   );
 };
@@ -25,4 +27,6 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-export { SideBar };
+const SideBarr = withRouter(SideBar);
+
+export { SideBarr as SideBar };
