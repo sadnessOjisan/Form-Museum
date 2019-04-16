@@ -33,6 +33,7 @@
     "@types/react-router": "^4.4.5",
     "@types/redux-logger": "^3.0.7",
     "@types/styled-components": "^4.1.14",
+    "@types/yup": "^0.26.12",
     "babel-loader": "^8.0.5",
     "css-loader": "^2.1.1",
     "eslint": "^5.16.0",

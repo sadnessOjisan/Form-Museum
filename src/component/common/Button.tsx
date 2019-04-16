@@ -5,7 +5,7 @@ import { Button } from "@air-kit/air-kit";
 const StyeldButton = props => {
   const { className, children, onClick } = props;
   return (
-    <Wrapper className={className} onClick={onClick}>
+    <Wrapper {...props} style={{ backgroundColor: "pink" }}>
       {children}
     </Wrapper>
   );

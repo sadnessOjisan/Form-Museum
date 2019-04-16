@@ -1,10 +1,12 @@
 import * as React from "react";
 import styled from "styled-components";
-import { withFormik, FormikProps, FormikErrors } from "formik";
+import { withFormik, FormikProps } from "formik";
 import { Button } from "../component/common/Button";
 
 interface FormValues {
   name: string;
+  sales: number;
+  cost: number;
 }
 
 interface IProps {}
@@ -13,11 +15,21 @@ const Kuso = (props: IProps & FormikProps<FormValues>) => {
   const { errors, handleSubmit, handleChange } = props;
   return (
     <Wrapper>
-      <Input name="name" onChange={handleChange} />
-      <Button type="submit" onClick={handleSubmit}>
+      <div>
+        <label>今日の日付</label>
+        <input name="name" onChange={handleChange} />
+      </div>
+      <div>
+        <label>売り上げ</label>
+        <input name="sales" onChange={handleChange} />
+      </div>
+      <div>
+        <label>人件費</label>
+        <input name="cost" onChange={handleChange} />
+      </div>
+      <Button type="submit" onClick={handleSubmit} primary={true}>
         送信
       </Button>
-      {JSON.stringify(errors)}
     </Wrapper>
   );
 };
@@ -25,30 +37,21 @@ const Kuso = (props: IProps & FormikProps<FormValues>) => {
 const Wrapper = styled.form``;
 
 interface MyFormProps {
-  name?: string;
+  name: string;
+  sales: number;
+  cost: number;
 }
 
 const KusoForm = withFormik<MyFormProps, FormValues>({
-  // Transform outer props into form values
-  mapPropsToValues: props => {
-    return {
-      name: props.name
-    };
-  },
-  validate: (values: FormValues) => {
-    let errors: FormikErrors<FormValues> = {};
-    console.log(values);
-    if (!values.name) {
-      errors.name = "Required";
-    }
-    return errors;
-  },
+  mapPropsToValues: props => ({
+    name: props.name,
+    sales: props.sales,
+    cost: props.cost
+  }),
   handleSubmit: values => {
     console.log(values);
     alert("submit");
   }
 })(Kuso);
-
-const Input = styled.input``;
 
 export { KusoForm as Kuso };
