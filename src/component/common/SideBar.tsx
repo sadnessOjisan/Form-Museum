@@ -8,13 +8,21 @@ interface IProps extends RouteComponentProps {
 }
 
 const SideBar = (props: IProps) => {
-  const { className, history } = props;
+  const { className, history, location } = props;
   const { push } = history;
+  const { pathname } = location;
   return (
     <Wrapper className={className}>
-      <SideBarItem name="kuso" onClick={() => push("/kuso")} />
-      <SideBarItem name="masi" onClick={() => push("/masi")} />
-      <SideBarItem name="good" onClick={() => alert(3)} />
+      <SideBarItem
+        name="kuso"
+        onClick={() => push("/kuso")}
+        selected={pathname === "/kuso"}
+      />
+      <SideBarItem
+        name="masi"
+        onClick={() => push("/masi")}
+        selected={pathname === "/masi"}
+      />
     </Wrapper>
   );
 };

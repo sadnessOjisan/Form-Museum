@@ -13,21 +13,22 @@ interface FormValues {
 interface IProps {}
 
 const Masi = (props: IProps & FormikProps<FormValues>) => {
-  const { errors, handleSubmit, handleChange } = props;
+  const { errors, handleSubmit, handleChange, values } = props;
   console.log(errors);
   return (
     <Wrapper>
+      <h1>mASI</h1>
       <div>
         <label>今日の日付</label>
-        <input name="name" onChange={handleChange} />
+        <input name="name" onChange={handleChange} value={values.name} />
       </div>
       <div>
         <label>売り上げ</label>
-        <input name="sales" onChange={handleChange} />
+        <input name="sales" onChange={handleChange} value={values.sales} />
       </div>
       <div>
         <label>人件費</label>
-        <input name="cost" onChange={handleChange} />
+        <input name="cost" onChange={handleChange} value={values.cost} />
       </div>
       <Button
         type="submit"
@@ -71,7 +72,8 @@ const MasiForm = withFormik<MyFormProps, FormValues>({
     console.log(values);
     alert("submit");
   },
-  validationSchema: MasiSchema
+  validationSchema: MasiSchema,
+  isInitialValid: true
 })(Masi);
 
 export { MasiForm as Masi };

@@ -5,22 +5,24 @@ interface IProps {
   className?: string;
   onClick: () => void;
   name: string;
+  selected: boolean;
 }
 
 const SideBarItem = (props: IProps) => {
-  const { className, name, onClick } = props;
+  const { className, name, onClick, selected } = props;
   return (
-    <Wrapper className={className} onClick={onClick}>
+    <Wrapper className={className} onClick={onClick} selected={selected}>
       {name}
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ selected: boolean }>`
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 70px;
+  background-color: ${props => (props.selected ? "red" : "white")};
 `;
 
 export { SideBarItem };

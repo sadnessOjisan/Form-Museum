@@ -15,6 +15,7 @@ const Kuso = (props: IProps & FormikProps<FormValues>) => {
   const { errors, handleSubmit, handleChange } = props;
   return (
     <Wrapper>
+      <h1>kUSO</h1>
       <div>
         <label>今日の日付</label>
         <input name="name" onChange={handleChange} />
