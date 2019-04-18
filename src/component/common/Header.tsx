@@ -1,13 +1,22 @@
 import * as React from "react";
 import styled from "styled-components";
+import { Dispatch } from "redux";
+import { connect } from "react-redux";
+import { actions as kintaiActions } from "../../redux/module/kintai";
 
-interface IProps {
-  className?: string;
-  onClick?: any;
+interface OwnProps {
+  readonly className?: string;
+  readonly onClick?: any;
 }
 
+interface DispatchProps {
+  openModal: typeof kintaiActions.openModal;
+}
+
+type IProps = OwnProps & DispatchProps;
+
 const Header = (props: IProps) => {
-  const { className } = props;
+  const { className, openModal } = props;
   return (
     <Wrapper className={className}>
       <LeftArea>
@@ -18,11 +27,20 @@ const Header = (props: IProps) => {
         <div>loginaddress</div>
         <div>osirasebox</div>
         <div>notify</div>
-        <div>loginicon</div>
+        <div onClick={openModal}>kintai</div>
       </RightArea>
     </Wrapper>
   );
 };
+
+const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
+  openModal: () => dispatch(kintaiActions.openModal())
+});
+
+const ConnectedHeader = connect(
+  undefined,
+  mapDispatchToProps
+)(Header);
 
 const Wrapper = styled.div`
   display: flex;
@@ -46,4 +64,4 @@ const RightArea = styled.div`
   align-items: center;
 `;
 
-export { Header };
+export { ConnectedHeader as Header };

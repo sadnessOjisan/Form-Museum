@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { withFormik, FormikProps } from "formik";
 import * as Yup from "yup";
 import { Button } from "../component/common/Button";
+import { Header } from "../component/common/Header";
+import { SideBar } from "../component/common/Sidebar";
 
 interface FormValues {
   name: string;
@@ -17,32 +19,51 @@ const Masi = (props: IProps & FormikProps<FormValues>) => {
   console.log(errors);
   return (
     <Wrapper>
-      <h1>mASI</h1>
-      <div>
-        <label>今日の日付</label>
-        <input name="name" onChange={handleChange} value={values.name} />
-      </div>
-      <div>
-        <label>売り上げ</label>
-        <input name="sales" onChange={handleChange} value={values.sales} />
-      </div>
-      <div>
-        <label>人件費</label>
-        <input name="cost" onChange={handleChange} value={values.cost} />
-      </div>
-      <Button
-        type="submit"
-        onClick={handleSubmit}
-        primary={true}
-        disabled={Object.keys(errors).length !== 0 ? true : false}
-      >
-        送信
-      </Button>
+      <Header />
+      <ContentsBox>
+        <SideBar />
+        <MainContentsWrapper>
+          <h1>mASI</h1>
+          <div>
+            <label>今日の日付</label>
+            <input name="name" onChange={handleChange} value={values.name} />
+          </div>
+          <div>
+            <label>売り上げ</label>
+            <input name="sales" onChange={handleChange} value={values.sales} />
+          </div>
+          <div>
+            <label>人件費</label>
+            <input name="cost" onChange={handleChange} value={values.cost} />
+          </div>
+          <Button
+            type="submit"
+            onClick={handleSubmit}
+            primary={true}
+            disabled={Object.keys(errors).length !== 0 ? true : false}
+          >
+            送信
+          </Button>
+        </MainContentsWrapper>
+      </ContentsBox>
     </Wrapper>
   );
 };
 
-const Wrapper = styled.form``;
+const Wrapper = styled.div`
+  height: 100%;
+`;
+
+const ContentsBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+`;
+
+const MainContentsWrapper = styled.form`
+  width: 100%;
+`;
 
 interface MyFormProps {
   name: string;
