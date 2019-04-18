@@ -2,18 +2,52 @@ import * as React from "react";
 import styled from "styled-components";
 import { Dispatch } from "redux";
 import { connect } from "react-redux";
+import { useSpring, animated, useTransition } from "react-spring";
 import { Button } from "../component/common/Button";
 import { blue } from "../const/color";
-import { actions as kintaiActions } from "../redux/module/kintai";
+import { IStore } from "../redux/module";
+import { actions as kintaiActions, ModalType } from "../redux/module/kintai";
+import KintaiModal from "../component/kintai";
+
+interface StateProps {
+  readonly selectedModal: ModalType;
+}
 
 interface DispatchProps {
   closeModal: typeof kintaiActions.closeModal;
+  selectModal: typeof kintaiActions.selectModal;
 }
 
-type IProps = DispatchProps;
+type IProps = DispatchProps & StateProps;
+
+const HEADER_HEIGHT = 40;
 
 const Kintai = (props: IProps) => {
-  const { closeModal } = props;
+  const { closeModal, selectedModal, selectModal } = props;
+  const pages = {
+    WORKING_TIME: ({ style }) => (
+      <Body style={{ ...style }}>
+        <KintaiModal.WorkingTime />
+        <Button onClick={() => selectModal("WEATHER")}>次へ</Button>
+      </Body>
+    ),
+    WEATHER: ({ style }) => (
+      <Body style={{ ...style }}>
+        <KintaiModal.Weather />
+        <Button onClick={() => selectModal("THANKS")}>次へ</Button>
+      </Body>
+    ),
+    THANKS: ({ style }) => (
+      <Body style={{ ...style }}>
+        <KintaiModal.Thanks />
+      </Body>
+    )
+  };
+  const transitions = useTransition(selectedModal, p => p, {
+    from: { opacity: 0, transform: "translate3d(100%,0,0)" },
+    enter: { opacity: 1, transform: "translate3d(0%,0,0)" },
+    leave: { opacity: 0, transform: "translate3d(-50%,0,0)" }
+  });
   return (
     <Wrapper>
       <Content>
@@ -21,7 +55,10 @@ const Kintai = (props: IProps) => {
           <CloseButton onClick={closeModal}>閉じる</CloseButton>
           <ModalTitle>勤怠</ModalTitle>
         </Header>
-        <Body>body</Body>
+        {transitions.map(({ item, props, key }) => {
+          const Page = pages[selectedModal];
+          return <Page key={key} style={props} />;
+        })}
         <Footer>
           <Button>eee</Button>
         </Footer>
@@ -30,12 +67,17 @@ const Kintai = (props: IProps) => {
   );
 };
 
+const mapStateToProps = (state: IStore) => ({
+  selectedModal: state.kintai.selectedModal
+});
+
 const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
-  closeModal: () => dispatch(kintaiActions.closeModal())
+  closeModal: () => dispatch(kintaiActions.closeModal()),
+  selectModal: (modal: ModalType) => dispatch(kintaiActions.selectModal(modal))
 });
 
 const ConnectedKintai = connect(
-  undefined,
+  mapStateToProps,
   mapDispatchToProps
 )(Kintai);
 
@@ -62,6 +104,7 @@ const Content = styled.div`
 
 const Header = styled.div`
   width: 100%;
+  height: ${HEADER_HEIGHT}px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -80,7 +123,11 @@ const ModalTitle = styled.h2`
   font-weight: bold;
 `;
 
-const Body = styled.div``;
+const Body = styled(animated.div)`
+  height: 100%;
+  position: absolute;
+  top: ${HEADER_HEIGHT}px;
+`;
 
 const Footer = styled.div`
   width: 100%;
