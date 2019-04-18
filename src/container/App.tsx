@@ -5,15 +5,17 @@ import { connect } from "react-redux";
 import { Kuso } from "./Kuso";
 import { Masi } from "./Masi";
 import { IStore } from "../redux/module";
+import { Kintai } from "./Kintai";
 
-interface DispatchProps {
-  isOpenModal: boolean;
+interface IStateProps {
+  isOpenKintaiModal: boolean;
 }
 
-type Props = DispatchProps;
+type Props = IStateProps;
 
 const App = (props: Props) => {
-  const { isOpenModal } = props;
+  console.log(props);
+  const { isOpenKintaiModal } = props;
   return (
     <PageWrapper>
       <Switch>
@@ -21,7 +23,7 @@ const App = (props: Props) => {
         <Route path="/kuso" component={Kuso} exact />
         <Route path="/masi" component={Masi} exact />
       </Switch>
-      {isOpenModal && <p>hoge</p>}
+      {isOpenKintaiModal && <Kintai />}
     </PageWrapper>
   );
 };
