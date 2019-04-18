@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { Dispatch } from "redux";
 import { connect } from "react-redux";
-import { useSpring, animated, useTransition } from "react-spring";
+import { animated, useTransition } from "react-spring";
 import { Button } from "../component/common/Button";
 import { blue } from "../const/color";
 import { IStore } from "../redux/module";
@@ -25,19 +25,19 @@ const HEADER_HEIGHT = 40;
 const Kintai = (props: IProps) => {
   const { closeModal, selectedModal, selectModal } = props;
   const pages = {
-    WORKING_TIME: ({ style }) => (
+    WORKING_TIME: ({ style }: { style: React.CSSProperties }) => (
       <Body style={{ ...style }}>
         <KintaiModal.WorkingTime />
         <Button onClick={() => selectModal("WEATHER")}>次へ</Button>
       </Body>
     ),
-    WEATHER: ({ style }) => (
+    WEATHER: ({ style }: { style: React.CSSProperties }) => (
       <Body style={{ ...style }}>
         <KintaiModal.Weather />
         <Button onClick={() => selectModal("THANKS")}>次へ</Button>
       </Body>
     ),
-    THANKS: ({ style }) => (
+    THANKS: ({ style }: { style: React.CSSProperties }) => (
       <Body style={{ ...style }}>
         <KintaiModal.Thanks />
       </Body>
@@ -55,7 +55,7 @@ const Kintai = (props: IProps) => {
           <CloseButton onClick={closeModal}>閉じる</CloseButton>
           <ModalTitle>勤怠</ModalTitle>
         </Header>
-        {transitions.map(({ item, props, key }) => {
+        {transitions.map(({ props, key }) => {
           const Page = pages[selectedModal];
           return <Page key={key} style={props} />;
         })}
@@ -67,11 +67,11 @@ const Kintai = (props: IProps) => {
   );
 };
 
-const mapStateToProps = (state: IStore) => ({
+const mapStateToProps = (state: IStore): StateProps => ({
   selectedModal: state.kintai.selectedModal
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
+const mapDispatchToProps = (dispatch: Dispatch<any>): DispatchProps => ({
   closeModal: () => dispatch(kintaiActions.closeModal()),
   selectModal: (modal: ModalType) => dispatch(kintaiActions.selectModal(modal))
 });

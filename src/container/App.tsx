@@ -32,13 +32,13 @@ const mapStateToProps = (state: IStore) => ({
   isOpenKintaiModal: state.kintai.isOpenModal
 });
 
-const ConnectedApp = connect(mapStateToProps)(App);
-
 const PageWrapper = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
 `;
+
+const ConnectedApp = connect(mapStateToProps)(App);
 
 export { ConnectedApp as App };
