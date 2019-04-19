@@ -3,11 +3,13 @@ export type ModalType = "WORKING_TIME" | "WEATHER" | "THANKS";
 const OPEN_MODAL: "KINTAI/OPEN_MODAL" = "KINTAI/OPEN_MODAL";
 const CLOSE_MODAL: "KINTAI/CLOSE_MODAL" = "KINTAI/CLOSE_MODAL";
 const SELECT_MODAL: "KINTAI/SELECT_MODAL" = "KINTAI/SELECT_MODAL";
+const RESET: "KINTAI/RESET" = "KINTAI/RESET";
 
 export const types = {
   OPEN_MODAL,
   CLOSE_MODAL,
-  SELECT_MODAL
+  SELECT_MODAL,
+  RESET
 };
 
 interface IOpenModalAction {
@@ -20,10 +22,18 @@ interface ICloseModalAction {
 
 interface ISelectModalAction {
   readonly type: typeof SELECT_MODAL;
-  readonly payload: Modal;
+  readonly payload: ModalType;
 }
 
-type Action = IOpenModalAction | ICloseModalAction | ISelectModalAction;
+interface IResetAction {
+  readonly type: typeof RESET;
+}
+
+type Action =
+  | IOpenModalAction
+  | ICloseModalAction
+  | ISelectModalAction
+  | IResetAction;
 
 export const actions = {
   openModal: (): IOpenModalAction => ({
@@ -32,15 +42,18 @@ export const actions = {
   closeModal: (): ICloseModalAction => ({
     type: types.CLOSE_MODAL
   }),
-  selectModal: (selectedModal: Modal): ISelectModalAction => ({
+  selectModal: (selectedModal: ModalType): ISelectModalAction => ({
     type: types.SELECT_MODAL,
     payload: selectedModal
+  }),
+  reset: (): IResetAction => ({
+    type: types.RESET
   })
 };
 
 export interface IState {
   isOpenModal: boolean;
-  selectedModal: Modal;
+  selectedModal: ModalType;
 }
 
 const initialState: IState = {
@@ -59,6 +72,8 @@ const reducer = (state: IState = initialState, action: Action): IState => {
       };
     case types.SELECT_MODAL:
       return { ...state, selectedModal: action.payload };
+    case types.RESET:
+      return initialState;
     default:
       return state;
   }

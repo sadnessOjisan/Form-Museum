@@ -6,6 +6,7 @@ import { Kuso } from "./Kuso";
 import { Masi } from "./Masi";
 import { IStore } from "../redux/module";
 import { Kintai } from "./Kintai";
+import { Login } from "./Login";
 
 interface IStateProps {
   isOpenKintaiModal: boolean;
@@ -22,6 +23,7 @@ const App = (props: Props) => {
         <Route path="/" component={() => <span>home</span>} exact />
         <Route path="/kuso" component={Kuso} exact />
         <Route path="/masi" component={Masi} exact />
+        <Route path="/login" component={Login} exact />
       </Switch>
       {isOpenKintaiModal && <Kintai />}
     </PageWrapper>
