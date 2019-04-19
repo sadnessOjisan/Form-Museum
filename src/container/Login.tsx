@@ -34,11 +34,15 @@ const Login = () => {
       `translate(${xy[0] / 18 + 188},${xy[1] / 20 + 230 + o / 1.7}) scale(0.8)`
   );
   const interpHair = st.interpolate(o => `translate(79,${o / 4})`);
-  const onMove = useCallback(
-    ({ clientX: x, clientY: y }) =>
-      set({ xy: [x - window.innerWidth / 2, y - window.innerHeight / 2] }),
-    []
-  );
+  const onMove = e => {
+    const value = e.target.value;
+    set({
+      xy: [
+        value.length * 30 - window.innerWidth / 2,
+        20 - window.innerHeight / 2
+      ]
+    });
+  };
   const onScroll = useCallback(e => set({ st: e.target.scrollTop / 30 }), []);
   return (
     <Wrapper class="container" onScroll={onScroll}>
