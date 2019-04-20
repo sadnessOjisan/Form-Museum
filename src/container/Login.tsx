@@ -1,55 +1,48 @@
 import * as React from "react";
-import { useCallback } from "react";
 import styled from "styled-components";
 import { useSpring, animated as a, interpolate } from "react-spring";
+import { withFormik, FormikProps } from "formik";
+import * as Yup from "yup";
+import { Button } from "../component/common/Button";
 
-const Login = () => {
+interface FormValues {
+  email: string;
+  password: string;
+}
+
+interface IProps {}
+
+const Login = (props: IProps & FormikProps<FormValues>) => {
+  const { handleSubmit, errors, handleChange } = props;
   const [{ st, xy }, set] = useSpring(() => ({ st: 0, xy: [0, 0] }));
-  const interpBg = xy.interpolate(
-    (x, y) =>
-      `perspective(400px) rotateY(${x / 60}deg) rotateX(${-y /
-        60}deg) translate3d(-50%, -50%, 0)`
-  );
-  const interpFace = st.interpolate(o => `translate(90,${105 + o / 4})`);
   const interpEye = interpolate(
+    // @ts-ignore xyの型を直す
     [st, xy],
-    (o, xy) =>
+    (o: number, xy: number[]) =>
       `translate(${xy[0] / 30 + 157},${xy[1] / 30 + 80 + o / 2}) scale(0.8)`
   );
   const interpIris = interpolate(
+    // @ts-ignore xyの型を直す
     [st, xy],
-    (o, xy) => `translate(${xy[0] / 30},${xy[1] / 30 + -10 + o / 8})`
-  );
-  const interpPupil = interpolate(
-    [st, xy],
-    (o, xy) => `translate(${xy[0] / 25},${xy[1] / 25 + -10 + o / 8})`
-  );
-  const interpSpot = interpolate(
-    [st, xy],
-    (o, xy) => `translate(${8 + -xy[0] / 80},${-xy[1] / 80 + -10 + o / 8})`
+    (o: number, xy: number[]) =>
+      `translate(${xy[0] / 30},${xy[1] / 30 + -10 + o / 8})`
   );
   const interpMouth = interpolate(
+    // @ts-ignore xyの型を直す
     [st, xy],
-    (o, xy) =>
+    (o: number, xy: number[]) =>
       `translate(${xy[0] / 18 + 188},${xy[1] / 20 + 230 + o / 1.7}) scale(0.8)`
   );
-  const interpHair = st.interpolate(o => `translate(79,${o / 4})`);
-  const onMove = e => {
+  const onMove = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     set({
-      xy: [
-        value.length * 30 - window.innerWidth / 2,
-        20 - window.innerHeight / 2
-      ]
+      xy: [value.length * 30 - window.innerWidth / 2, 500]
     });
+    handleChange(e);
   };
-  const onScroll = useCallback(e => set({ st: e.target.scrollTop / 30 }), []);
   return (
-    <Wrapper class="container" onScroll={onScroll}>
-      <div style={{ height: "700%", overflow: "hidden" }}>
-        {/* {lorem({ count: 200 })} */}
-      </div>
-      <SVG style={{ transform: interpBg }} viewBox="0 0 490 512">
+    <Wrapper>
+      <SVG viewBox="0 0 490 512">
         <Bg>
           <path d="M490,267 C490,402.308594 380.308594,512 245,512 C109.691406,512 0,402.308594 0,267 C0,131.691406 109.691406,22 245,22 C380.308594,22 490,131.691406 490,267 Z" />
         </Bg>
@@ -58,7 +51,7 @@ const Login = () => {
           <path d="M0,20 L0,98.945312 C9.464844,106.359375 19.492188,113.089844 30,119.066406 L30,20 C30,9 39,0 50,0 L20,0 C9,0 0,9 0,20 Z" />
           <path d="M151,151 C175.925781,151 199.984375,147.277344 222.648438,140.355469 C217.285156,105.605469 187.25,79 151,79 C114.75,79 84.714844,105.605469 79.355469,140.355469 C102.015625,147.277344 126.074219,151 151,151 Z" />
         </Sweater>
-        <Face transform={interpFace}>
+        <Face transform={`translate(90,105)`}>
           <path d="M155,294 C69.746094,294 0.382812,224.640625 0.382812,139.382812 C0.382812,124.1875 2.59375,109.15625 6.949219,94.707031 C7.535156,92.765625 9.230469,91.371094 11.246094,91.175781 C25.488281,89.773438 54.296875,85.5 87.210938,72.605469 C127.386719,56.867188 162.125,33.175781 190.460938,2.191406 C191.414062,1.148438 192.753906,0.566406 194.148438,0.566406 C194.351562,0.566406 194.554688,0.578125 194.761719,0.601562 C196.367188,0.800781 197.777344,1.765625 198.546875,3.1875 C231.648438,64.441406 280.03125,84.359375 299.296875,90.082031 C300.894531,90.558594 302.152344,91.796875 302.648438,93.390625 C307.269531,108.242188 309.613281,123.714844 309.613281,139.382812 C309.613281,224.640625 240.257812,294 155,294 Z" />
           <path d="M24.769531,128.816406 C24.1468237,115.207898 26.566406,101.660156 30.085938,88.578125 C22.433594,89.910156 16.019531,90.707031 11.246094,91.175781 C9.230469,91.371094 7.535156,92.769531 6.949219,94.707031 C2.59375,109.15625 0.382812,124.1875 0.382812,139.382812 C0.382812,215.429688 55.570312,278.828125 128,291.636719 C62.7239587,260.545573 28.3138023,206.272135 24.769531,128.816406 Z" />
         </Face>
@@ -69,13 +62,10 @@ const Login = () => {
             <path d="M171.507812,103.921875 C171.507812,140.652344 141.730469,170.429688 105,170.429688 C68.269531,170.429688 38.492188,140.652344 38.492188,103.921875 C38.492188,67.191406 68.269531,37.414062 105,37.414062 C141.730469,37.414062 171.507812,67.191406 171.507812,103.921875 Z" />
             <path d="M59,103.921875 C59,70.679688 83.390625,43.132812 115.253906,38.203125 C111.910156,37.683594 108.488281,37.414062 105,37.414062 C68.269531,37.414062 38.492188,67.191406 38.492188,103.921875 C38.492188,140.652344 68.269531,170.429688 105,170.429688 C108.488281,170.429688 111.910156,170.160156 115.253906,169.640625 C83.390625,164.710938 59,137.164062 59,103.921875 Z" />
           </a.g>
-          <a.g transform={interpPupil} fill="#FFFFFF">
+          <a.g fill="#FFFFFF">
             <circle fill="#333031" cx="105" cy="104" r="36" />
             <path d="M83,103.921875 C83,86.402344 95.484375,71.804688 112.042969,68.527344 C109.765625,68.078125 107.410156,67.835938 105,67.835938 C85.070312,67.835938 68.914062,83.992188 68.914062,103.921875 C68.914062,123.851562 85.070312,140.007812 105,140.007812 C107.410156,140.007812 109.765625,139.765625 112.042969,139.316406 C95.484375,136.039062 83,121.441406 83,103.921875 Z" />
-            <a.path
-              transform={interpSpot}
-              d="M148.335938,81.246094 C148.335938,92.210938 139.445312,101.101562 128.480469,101.101562 C117.511719,101.101562 108.625,92.210938 108.625,81.246094 C108.625,70.277344 117.515625,61.386719 128.480469,61.386719 C139.445312,61.386719 148.335938,70.277344 148.335938,81.246094 Z"
-            />
+            <a.path d="M148.335938,81.246094 C148.335938,92.210938 139.445312,101.101562 128.480469,101.101562 C117.511719,101.101562 108.625,92.210938 108.625,81.246094 C108.625,70.277344 117.515625,61.386719 128.480469,61.386719 C139.445312,61.386719 148.335938,70.277344 148.335938,81.246094 Z" />
           </a.g>
         </Eye>
         <Mouth transform={interpMouth}>
@@ -84,7 +74,7 @@ const Login = () => {
           <path d="M41.132812,63.109375 C46,67 57,70.470421 64,70.470421 C55.667969,62.450889 39.871094,38.113281 37.796875,25.953125 C37.632812,24.988281 37.671875,24.019531 37.875,23.089844 L22.136719,41.734375 C26.53125,50.46875 33.121094,57.804688 41.132812,63.109375 Z" />
           <path d="M127.046875,25.953125 C127.417969,23.78125 126.816406,21.578125 125.398438,19.894531 C123.980469,18.214844 121.90625,17.253906 119.710938,17.253906 L24.296875,17.253906 C22.09375,17.253906 20.019531,18.214844 18.601562,19.898438 C17.183594,21.578125 16.582031,23.78125 16.953125,25.953125 C17.910156,31.574219 19.6875,36.867188 22.140625,41.730469 L38.152344,22.761719 C39.019531,21.730469 40.449219,21.730469 41.316406,22.761719 L54.285156,38.121094 C55.15625,39.148438 56.582031,39.148438 57.453125,38.121094 L70.421875,22.761719 C71.289062,21.730469 72.714844,21.730469 73.585938,22.761719 L86.550781,38.121094 C87.425781,39.148438 88.847656,39.148438 89.71875,38.121094 L102.6875,22.761719 C103.554688,21.730469 104.984375,21.730469 105.851562,22.761719 L121.863281,41.730469 C124.308594,36.863281 126.089844,31.574219 127.046875,25.953125 Z" />
         </Mouth>
-        <Hair transform={interpHair}>
+        <Hair transform={`translate(79,0)`}>
           <g
             id="ears"
             transform="translate(-20.000000, 203.000000)"
@@ -103,38 +93,84 @@ const Login = () => {
           <path d="M26.144531,466.957031 C27.078125,468.011719 28.027344,469.050781 29,470.066406 L29,468.941406 C28.042969,468.289062 27.09375,467.621094 26.144531,466.957031 Z" />
         </Hair>
       </SVG>
-      <input onChange={onMove} />
+      <InputBox>
+        {/* 送信する直前でvalidsationするようにする */}
+        {errors.email}
+        {errors.password}
+        <MailInput onChange={onMove} name="email" />
+        <PassInput onChange={onMove} name="password" />
+        <Button type="submit" onClick={handleSubmit}>
+          送信
+        </Button>
+      </InputBox>
     </Wrapper>
   );
 };
+
+const LoginSchema = Yup.object().shape({
+  email: Yup.string().email("email形式を入力してください"),
+  password: Yup.string().min(8, "8文字以上でお願いします")
+});
+
+interface MyFormProps {
+  email: string;
+  password: string;
+}
+
+const LoginForm = withFormik<MyFormProps, FormValues>({
+  mapPropsToValues: () => ({
+    email: "",
+    password: ""
+  }),
+  handleSubmit: values => {
+    console.log(values);
+    alert("submit");
+  },
+  validationSchema: LoginSchema,
+  isInitialValid: true
+})(Login);
 
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: scroll;
   text-align: justify;
   background: white;
-  color: lightpink;
-  font-size: 20em;
-  line-height: 0.9em;
-  font-weight: 800;
-  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 36px;
 `;
 
 const SVG = styled(a.svg)`
   pointer-events: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 70vw;
-  max-width: 600px;
+  width: 300px;
   transform-origin: 0% 0%;
-  display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
   font-size: 10em;
+`;
+
+const InputBox = styled.form`
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const Input = styled.input`
+  height: 24px;
+  border-radius: 4px;
+  width: 300px;
+  border: solid 1px blue;
+`;
+
+const MailInput = styled(Input).attrs({ type: "email" })``;
+
+const PassInput = styled(Input).attrs({ type: "password" })`
+  margin-top: 12px;
 `;
 
 const Bg = styled.g`
@@ -204,4 +240,4 @@ const Hair = styled(a.g)`
   }
 `;
 
-export { Login };
+export { LoginForm as Login };

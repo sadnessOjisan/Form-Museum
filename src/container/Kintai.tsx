@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Dispatch } from "redux";
+import { Dispatch, Action } from "redux";
 import { connect } from "react-redux";
 import { animated, useTransition } from "react-spring";
 import { Button } from "../component/common/Button";
@@ -9,20 +9,22 @@ import { IStore } from "../redux/module";
 import { actions as kintaiActions, ModalType } from "../redux/module/kintai";
 import KintaiModal from "../component/kintai";
 
+interface OwnProps {}
+
 interface StateProps {
   readonly selectedModal: ModalType;
 }
 
 interface DispatchProps {
-  closeModal: typeof kintaiActions.closeModal;
-  selectModal: typeof kintaiActions.selectModal;
+  readonly closeModal: typeof kintaiActions.closeModal;
+  readonly selectModal: typeof kintaiActions.selectModal;
 }
 
-type IProps = DispatchProps & StateProps;
+type IProps = OwnProps & StateProps & DispatchProps;
 
 const HEADER_HEIGHT = 40;
 
-const Kintai = (props: IProps) => {
+const Kintai: React.SFC<IProps> = (props: IProps) => {
   const { closeModal, selectedModal, selectModal } = props;
   const pages = {
     WORKING_TIME: ({ style }: { style: React.CSSProperties }) => (
@@ -71,7 +73,7 @@ const mapStateToProps = (state: IStore): StateProps => ({
   selectedModal: state.kintai.selectedModal
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<any>): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   closeModal: () => dispatch(kintaiActions.closeModal()),
   selectModal: (modal: ModalType) => dispatch(kintaiActions.selectModal(modal))
 });
