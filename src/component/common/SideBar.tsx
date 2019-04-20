@@ -23,6 +23,11 @@ const SideBar = (props: IProps) => {
         onClick={() => push("/masi")}
         selected={pathname === "/masi"}
       />
+      <SideBarItem
+        name="with-button"
+        onClick={() => push("/with-button")}
+        selected={pathname === "/with-button"}
+      />
     </Wrapper>
   );
 };
@@ -30,9 +35,9 @@ const SideBar = (props: IProps) => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
   width: 200px;
   height: 100%;
+  background-color: navy;
 `;
 
 const SideBarr = withRouter(SideBar);

@@ -22,7 +22,8 @@ const Wrapper = styled.div<{ selected: boolean }>`
   flex-direction: column;
   width: 100%;
   height: 70px;
-  background-color: ${props => (props.selected ? "red" : "white")};
+  color: white;
+  background-color: ${props => (props.selected ? "red" : "initial")};
 `;
 
 export { SideBarItem };

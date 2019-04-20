@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Dispatch } from "redux";
+import { Dispatch, Action } from "redux";
 import { connect } from "react-redux";
 import { actions as kintaiActions } from "../../redux/module/kintai";
 
@@ -33,7 +33,7 @@ const Header = (props: IProps) => {
   );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
+const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   openModal: () => dispatch(kintaiActions.openModal())
 });
 
