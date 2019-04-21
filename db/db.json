@@ -1,0 +1,6 @@
+{
+  "places": [
+    { "id": 1, "name": "hogechapel", "place": "tokyo", "number": 200 },
+    { "id": 2, "name": "aaachapel", "place": "osaka", "number": 400 }
+  ]
+}

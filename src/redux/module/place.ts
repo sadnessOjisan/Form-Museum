@@ -1,7 +1,12 @@
-const START_FETCH_DATA: "SAMPLE/START_FETCH_DATA" = "SAMPLE/START_FETCH_DATA";
-const SUCCESS_FETCH_DATA: "SAMPLE/SUCCESS_FETCH_DATA" =
-  "SAMPLE/SUCCESS_FETCH_DATA";
-const FAIL_FETCH_DATA: "SAMPLE/FAIL_FETCH_DATA" = "SAMPLE/FAIL_FETCH_DATA";
+import { IPlaceQuery } from "../../typedef/request/PlaceQuery";
+import { IPlacesResponse } from "../../typedef/response/place";
+import { IError } from "../../typedef/Error";
+import { IPlace } from "../../typedef/model/Place";
+
+const START_FETCH_DATA: "PLACE/START_FETCH_DATA" = "PLACE/START_FETCH_DATA";
+const SUCCESS_FETCH_DATA: "PLACE/SUCCESS_FETCH_DATA" =
+  "PLACE/SUCCESS_FETCH_DATA";
+const FAIL_FETCH_DATA: "PLACE/FAIL_FETCH_DATA" = "PLACE/FAIL_FETCH_DATA";
 
 export const types = {
   START_FETCH_DATA,
@@ -9,34 +14,36 @@ export const types = {
   FAIL_FETCH_DATA
 };
 
-interface IStartFetchDataAction {
+export interface IStartFetchDataAction {
   readonly type: typeof START_FETCH_DATA;
+  readonly payload: IPlaceQuery;
 }
 
-interface ISuccessFetchDataAction {
+export interface ISuccessFetchDataAction {
   readonly type: typeof SUCCESS_FETCH_DATA;
-  readonly payload: any;
+  readonly payload: IPlace[];
 }
 
 interface IFailFetchDataAction {
   readonly type: typeof FAIL_FETCH_DATA;
-  readonly payload: any;
+  readonly payload: IError;
 }
 
-type Action =
+export type Action =
   | IStartFetchDataAction
   | ISuccessFetchDataAction
   | IFailFetchDataAction;
 
 export const actions = {
-  startFetchData: (): IStartFetchDataAction => ({
-    type: types.START_FETCH_DATA
+  startFetchData: (query: IPlaceQuery): IStartFetchDataAction => ({
+    type: types.START_FETCH_DATA,
+    payload: query
   }),
-  successFetchData: (data: any): ISuccessFetchDataAction => ({
+  successFetchData: (data: IPlace[]): ISuccessFetchDataAction => ({
     type: types.SUCCESS_FETCH_DATA,
     payload: data
   }),
-  failFetchData: (err: any): IFailFetchDataAction => ({
+  failFetchData: (err: IError): IFailFetchDataAction => ({
     type: types.FAIL_FETCH_DATA,
     payload: err
   })
@@ -45,11 +52,11 @@ export const actions = {
 export interface IState {
   isLoading: boolean;
   isLoaded: boolean;
-  data: any | null;
-  error: any | null;
+  data: IPlace[] | null;
+  error: IError | null;
 }
 
-const initialState: IState = {
+export const initialState: IState = {
   isLoading: false,
   isLoaded: false,
   data: null,

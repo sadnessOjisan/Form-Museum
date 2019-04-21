@@ -12,13 +12,14 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%;
+  width: calc(100% - 200px);
   height: 70px;
   padding: 12px;
-  position: absolute;
+  position: fixed;
   bottom: 0;
-  left: 0;
+  left: 200px;
   background-color: white;
+  border-top: solid 1px gray;
 `;
 
 export { FooterLayout };

@@ -8,6 +8,7 @@ interface Props {
   children: React.ReactNode;
   onClick?: any;
   type?: "submit" | "button";
+  primary: boolean;
 }
 
 const StyeldButton = (props: Props) => {
