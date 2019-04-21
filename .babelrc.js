@@ -11,5 +11,10 @@ module.exports = {
       }
     ],
     "@babel/typescript"
-  ]
+  ],
+  env: {
+    test: {
+      presets: [["@babel/preset-env"], "@babel/preset-react"]
+    }
+  }
 };

@@ -1,5 +1,4 @@
 import { IPlaceQuery } from "../../typedef/request/PlaceQuery";
-import { IPlacesResponse } from "../../typedef/response/place";
 import { IError } from "../../typedef/Error";
 import { IPlace } from "../../typedef/model/Place";
 
