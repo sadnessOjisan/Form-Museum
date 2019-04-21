@@ -8,7 +8,6 @@
   "dependencies": {
     "@air-kit/air-kit": "^0.5.1",
     "axios": "^0.18.0",
-    "babel-jest": "^24.7.1",
     "formik": "^1.5.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

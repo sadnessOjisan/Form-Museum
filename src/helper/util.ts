@@ -1,5 +1,5 @@
 // @flow
-
+import { AxiosError } from "axios";
 import { host } from "../const/url";
 import ENVS from "../const/env";
 
@@ -21,4 +21,8 @@ export const assert = (message: string) => {
     default:
       console.error(message);
   }
+};
+
+export const genAxiosErrorObject = (): AxiosError => {
+  return { name: "", message: "", config: {} };
 };

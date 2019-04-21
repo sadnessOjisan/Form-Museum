@@ -1,3 +1,4 @@
+import { Action as ReduxAction } from "redux";
 import { IPlaceQuery } from "../../typedef/request/PlaceQuery";
 import { IError } from "../../typedef/Error";
 import { IPlace } from "../../typedef/model/Place";
@@ -62,7 +63,10 @@ export const initialState: IState = {
   error: null
 };
 
-const reducer = (state: IState = initialState, action: Action): IState => {
+const reducer = (
+  state: IState = initialState,
+  action: Action | ReduxAction<"@@redux/INIT">
+): IState => {
   switch (action.type) {
     case types.START_FETCH_DATA:
       return { ...state, isLoading: true, error: null };
