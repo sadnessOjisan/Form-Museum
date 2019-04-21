@@ -11,7 +11,12 @@ interface IProps {
 const SideBarItem = (props: IProps) => {
   const { className, name, onClick, selected } = props;
   return (
-    <Wrapper className={className} onClick={onClick} selected={selected}>
+    <Wrapper
+      className={className}
+      onClick={onClick}
+      selected={selected}
+      data-testid="sidebarItem"
+    >
       {name}
     </Wrapper>
   );

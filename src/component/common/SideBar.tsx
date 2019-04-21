@@ -12,7 +12,7 @@ const SideBar = (props: IProps) => {
   const { push } = history;
   const { pathname } = location;
   return (
-    <Wrapper className={className}>
+    <Wrapper className={className} data-testid="sidebar">
       <SideBarItem
         name="kuso"
         onClick={() => push("/kuso")}
