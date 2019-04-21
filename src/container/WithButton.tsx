@@ -5,7 +5,6 @@ import { Dispatch, Action } from "redux";
 import { connect } from "react-redux";
 import { withFormik, FormikProps } from "formik";
 import { ChasingDots } from "styled-spinkit";
-import { Button } from "../component/common/Button";
 import { Header } from "../component/common/Header";
 import { SideBar } from "../component/common/Sidebar";
 import { FooterLayout } from "../component/common/Footer";
@@ -36,12 +35,12 @@ type IProps = StateProps & DispatchProps & FormikProps<FormValues>;
 
 const WithButton = (props: IProps) => {
   const {
-    handleSubmit,
     handleChange,
     isLoading,
     isLoaded,
     data,
-    startFetchData
+    startFetchData,
+    handleSubmit
   } = props;
   useEffect(() => {
     startFetchData({ budget: 100, ParticipantNum: 399 });
@@ -51,7 +50,7 @@ const WithButton = (props: IProps) => {
       <Header />
       <ContentsBox>
         <SideBar />
-        <MainContentsWrapper>
+        <MainContentsWrapper onSubmit={handleSubmit}>
           <h1>
             with-button・シミュレーションに適する。（面談シートから生成する）
           </h1>
@@ -96,9 +95,7 @@ const WithButton = (props: IProps) => {
           </div>
           <FooterLayout>
             <div>残り予算は ??? 円</div>
-            <Button type="submit" onClick={handleSubmit} primary={true}>
-              見積もり詳細をDLする
-            </Button>
+            <button type="submit">見積もり詳細をDLする</button>
           </FooterLayout>
         </MainContentsWrapper>
       </ContentsBox>
@@ -106,23 +103,12 @@ const WithButton = (props: IProps) => {
   );
 };
 
-interface MyFormProps {
+type MyFormProps = {
   name: string;
   sales: number;
   cost: number;
-}
-
-const WithButtonForm = withFormik<MyFormProps, FormValues>({
-  mapPropsToValues: props => ({
-    name: props.name,
-    sales: props.sales,
-    cost: props.cost
-  }),
-  handleSubmit: values => {
-    console.log(values);
-    alert("submit");
-  }
-})(WithButton);
+} & StateProps &
+  DispatchProps;
 
 const mapStateToProps = (state: IStore): StateProps => ({
   isLoading: state.place.isLoading,
@@ -131,15 +117,30 @@ const mapStateToProps = (state: IStore): StateProps => ({
   error: state.place.error
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-  startFetchData: (budget: number, ParticipantNum: number) =>
+const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => ({
+  startFetchData: ({ budget, ParticipantNum }) =>
     dispatch(placeActions.startFetchData({ budget, ParticipantNum }))
 });
 
 const ConnectedForm = connect(
   mapStateToProps,
   mapDispatchToProps
-)(WithButtonForm);
+)(
+  withFormik<MyFormProps, FormValues>({
+    mapPropsToValues: props => ({
+      name: props.name,
+      sales: props.sales,
+      cost: props.cost
+    }),
+    handleSubmit: (values, formikBag) => {
+      console.log(values);
+      const { props } = formikBag;
+      const { startFetchData } = props;
+      startFetchData({ budget: 1, ParticipantNum: 3 });
+      alert("submit");
+    }
+  })(WithButton)
+);
 
 const Wrapper = styled.div`
   height: 100%;

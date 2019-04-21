@@ -6,9 +6,9 @@ import { Button } from "@air-kit/air-kit";
 interface Props {
   className?: string;
   children: React.ReactNode;
-  onClick?: any;
+  onClick?: (e: React.MouseEvent) => void;
   type?: "submit" | "button";
-  primary: boolean;
+  primary?: boolean;
 }
 
 const StyeldButton = (props: Props) => {

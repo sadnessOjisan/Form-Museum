@@ -1,7 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
 import { withFormik, FormikProps } from "formik";
-import { Button } from "../component/common/Button";
 import { Header } from "../component/common/Header";
 import { SideBar } from "../component/common/Sidebar";
 
@@ -20,7 +19,7 @@ const Kuso = (props: IProps & FormikProps<FormValues>) => {
       <Header />
       <ContentsBox>
         <SideBar />
-        <MainContentsWrapper>
+        <MainContentsWrapper onSubmit={handleSubmit}>
           <h1>kUSO</h1>
           <div>
             <label>今日の日付</label>
@@ -34,9 +33,7 @@ const Kuso = (props: IProps & FormikProps<FormValues>) => {
             <label>人件費</label>
             <input name="cost" onChange={handleChange} />
           </div>
-          <Button type="submit" onClick={handleSubmit} primary={true}>
-            送信
-          </Button>
+          <button type="submit">送信</button>
         </MainContentsWrapper>
       </ContentsBox>
     </Wrapper>

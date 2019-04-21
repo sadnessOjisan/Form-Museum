@@ -2,7 +2,6 @@ import * as React from "react";
 import styled from "styled-components";
 import { withFormik, FormikProps } from "formik";
 import * as Yup from "yup";
-import { Button } from "../component/common/Button";
 import { Header } from "../component/common/Header";
 import { SideBar } from "../component/common/Sidebar";
 
@@ -22,7 +21,7 @@ const Masi = (props: IProps & FormikProps<FormValues>) => {
       <Header />
       <ContentsBox>
         <SideBar />
-        <MainContentsWrapper>
+        <MainContentsWrapper onSubmit={handleSubmit}>
           <h1>mASI</h1>
           <div>
             <label>今日の日付</label>
@@ -36,14 +35,12 @@ const Masi = (props: IProps & FormikProps<FormValues>) => {
             <label>人件費</label>
             <input name="cost" onChange={handleChange} value={values.cost} />
           </div>
-          <Button
+          <button
             type="submit"
-            onClick={handleSubmit}
-            primary={true}
             disabled={Object.keys(errors).length !== 0 ? true : false}
           >
             送信
-          </Button>
+          </button>
         </MainContentsWrapper>
       </ContentsBox>
     </Wrapper>

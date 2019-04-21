@@ -1,7 +1,9 @@
 import * as React from "react";
 import { useState } from "react";
 import styled from "styled-components";
+// @ts-ignore あとでちゃんとする
 import Rain from "../../asset/video/rain.mp4";
+// @ts-ignore あとでちゃんとする
 import Hare from "../../asset/video/hare.mp4";
 
 type TWeather = "晴れ" | "曇り" | "雨";

@@ -93,16 +93,14 @@ const Login = (props: IProps & FormikProps<FormValues>) => {
           <path d="M26.144531,466.957031 C27.078125,468.011719 28.027344,469.050781 29,470.066406 L29,468.941406 C28.042969,468.289062 27.09375,467.621094 26.144531,466.957031 Z" />
         </Hair>
       </SVG>
-      <InputBox>
+      <InputForm onSubmit={handleSubmit}>
         {/* 送信する直前でvalidsationするようにする */}
         {errors.email}
         {errors.password}
         <MailInput onChange={onMove} name="email" />
         <PassInput onChange={onMove} name="password" />
-        <Button type="submit" onClick={handleSubmit}>
-          送信
-        </Button>
-      </InputBox>
+        <button type="submit">送信</button>
+      </InputForm>
     </Wrapper>
   );
 };
@@ -152,7 +150,7 @@ const SVG = styled(a.svg)`
   font-size: 10em;
 `;
 
-const InputBox = styled.form`
+const InputForm = styled.form`
   margin-top: 24px;
   display: flex;
   justify-content: center;
