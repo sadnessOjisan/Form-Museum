@@ -17,7 +17,7 @@ export interface ILog {
   eventName: string; // select-user
   eventType: string; // click, load,...
   target: string; // test-data-id
-  property: string; // object
+  property?: object; // object
   timeStamp: string; // ISO
   userAgent: string;
 }
