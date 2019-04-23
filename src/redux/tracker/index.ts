@@ -5,6 +5,7 @@ import { ITracker, ILog } from "../../typedef/Tracker";
 import { IStore } from "../module";
 import { Action } from "../module";
 import { setTk } from "../module/logging";
+import { API } from "../../service/API";
 
 const trackerMiddleware = (store: Store<IStore, Action>) => (next: any) => (
   action: Action
@@ -16,10 +17,7 @@ const trackerMiddleware = (store: Store<IStore, Action>) => (next: any) => (
   }
   const state: IStore = store.getState();
   const log = _genLog(metaData, state);
-  fetch("https://example.com/posts", {
-    method: "POST",
-    body: log
-  });
+  API.saveLog(log);
   store.dispatch(setTk(log.pk));
   next(action);
   console.log("send log: ", log);
