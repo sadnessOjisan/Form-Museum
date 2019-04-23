@@ -1,3 +1,5 @@
+import { ITracker } from "../../typedef/Tracker";
+
 export type ModalType = "WORKING_TIME" | "WEATHER" | "THANKS";
 
 const OPEN_MODAL: "KINTAI/OPEN_MODAL" = "KINTAI/OPEN_MODAL";
@@ -14,15 +16,18 @@ export const types = {
 
 interface IOpenModalAction {
   readonly type: typeof OPEN_MODAL;
+  readonly meta: ITracker;
 }
 
 interface ICloseModalAction {
   readonly type: typeof CLOSE_MODAL;
+  readonly meta: ITracker;
 }
 
 interface ISelectModalAction {
   readonly type: typeof SELECT_MODAL;
   readonly payload: ModalType;
+  readonly meta: ITracker;
 }
 
 interface IResetAction {
@@ -36,15 +41,21 @@ type Action =
   | IResetAction;
 
 export const actions = {
-  openModal: (): IOpenModalAction => ({
-    type: types.OPEN_MODAL
+  openModal: (log: ITracker): IOpenModalAction => ({
+    type: types.OPEN_MODAL,
+    meta: log
   }),
-  closeModal: (): ICloseModalAction => ({
-    type: types.CLOSE_MODAL
+  closeModal: (log: ITracker): ICloseModalAction => ({
+    type: types.CLOSE_MODAL,
+    meta: log
   }),
-  selectModal: (selectedModal: ModalType): ISelectModalAction => ({
+  selectModal: (
+    selectedModal: ModalType,
+    log: ITracker
+  ): ISelectModalAction => ({
     type: types.SELECT_MODAL,
-    payload: selectedModal
+    payload: selectedModal,
+    meta: log
   }),
   reset: (): IResetAction => ({
     type: types.RESET

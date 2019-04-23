@@ -2,6 +2,7 @@
 import { AxiosError } from "axios";
 import { host } from "../const/url";
 import ENVS from "../const/env";
+import { ITracker } from "../typedef/Tracker";
 
 const REACT_APP_ENV = process.env.REACT_APP_ENV;
 

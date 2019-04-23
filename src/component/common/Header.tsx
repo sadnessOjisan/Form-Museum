@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Dispatch, Action } from "redux";
 import { connect } from "react-redux";
 import { actions as kintaiActions } from "../../redux/module/kintai";
+import { ITracker } from "../../typedef/Tracker";
 
 interface OwnProps {
   readonly className?: string;
@@ -27,14 +28,21 @@ const Header = (props: IProps) => {
         <div>loginaddress</div>
         <div>osirasebox</div>
         <div>notify</div>
-        <div onClick={openModal}>kintai</div>
+        <div onClick={() => openModal(log)}>kintai</div>
       </RightArea>
     </Wrapper>
   );
 };
 
+const log = {
+  url: window.location.pathname,
+  page: "kintai",
+  eventType: "click",
+  target: "hoge"
+};
+
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-  openModal: () => dispatch(kintaiActions.openModal())
+  openModal: (log: ITracker) => dispatch(kintaiActions.openModal(log))
 });
 
 const ConnectedHeader = connect(
