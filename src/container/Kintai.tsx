@@ -8,6 +8,8 @@ import { blue } from "../const/color";
 import { IStore } from "../redux/module";
 import { actions as kintaiActions, ModalType } from "../redux/module/kintai";
 import KintaiModal from "../component/kintai";
+import { ITracker } from "../typedef/Tracker";
+import { genLog } from "../helper/util";
 
 interface OwnProps {}
 
@@ -30,13 +32,13 @@ const Kintai: React.SFC<IProps> = (props: IProps) => {
     WORKING_TIME: ({ style }: { style: React.CSSProperties }) => (
       <Body style={{ ...style }}>
         <KintaiModal.WorkingTime />
-        <Button onClick={() => selectModal("WEATHER")}>次へ</Button>
+        <Button onClick={() => selectModal("WEATHER", selectLog)}>次へ</Button>
       </Body>
     ),
     WEATHER: ({ style }: { style: React.CSSProperties }) => (
       <Body style={{ ...style }}>
         <KintaiModal.Weather />
-        <Button onClick={() => selectModal("THANKS")}>次へ</Button>
+        <Button onClick={() => selectModal("THANKS", selectLog)}>次へ</Button>
       </Body>
     ),
     THANKS: ({ style }: { style: React.CSSProperties }) => (
@@ -54,7 +56,7 @@ const Kintai: React.SFC<IProps> = (props: IProps) => {
     <Wrapper>
       <Content>
         <Header>
-          <CloseButton onClick={closeModal}>閉じる</CloseButton>
+          <CloseButton onClick={() => closeModal(closeLog)}>閉じる</CloseButton>
           <ModalTitle>勤怠</ModalTitle>
         </Header>
         {transitions.map(({ props, key }) => {
@@ -74,8 +76,21 @@ const mapStateToProps = (state: IStore): StateProps => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-  closeModal: () => dispatch(kintaiActions.closeModal()),
-  selectModal: (modal: ModalType) => dispatch(kintaiActions.selectModal(modal))
+  closeModal: (log: ITracker) => dispatch(kintaiActions.closeModal(log)),
+  selectModal: (modal: ModalType, log: ITracker) =>
+    dispatch(kintaiActions.selectModal(modal, log))
+});
+
+const closeLog = genLog({
+  eventType: "click",
+  target: "hoge",
+  eventName: "openModal"
+});
+
+const selectLog = genLog({
+  eventType: "click",
+  target: "hoge",
+  eventName: "selectModal"
 });
 
 const ConnectedKintai = connect(

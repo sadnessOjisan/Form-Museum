@@ -34,7 +34,7 @@ interface IResetAction {
   readonly type: typeof RESET;
 }
 
-type Action =
+export type Action =
   | IOpenModalAction
   | ICloseModalAction
   | ISelectModalAction

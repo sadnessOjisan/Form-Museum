@@ -4,6 +4,8 @@ import { Dispatch, Action } from "redux";
 import { connect } from "react-redux";
 import { actions as kintaiActions } from "../../redux/module/kintai";
 import { ITracker } from "../../typedef/Tracker";
+import { path } from "../../const/page";
+import { genLog } from "../../helper/util";
 
 interface OwnProps {
   readonly className?: string;
@@ -28,18 +30,17 @@ const Header = (props: IProps) => {
         <div>loginaddress</div>
         <div>osirasebox</div>
         <div>notify</div>
-        <div onClick={() => openModal(log)}>kintai</div>
+        <div onClick={() => openModal(openModalLog)}>kintai</div>
       </RightArea>
     </Wrapper>
   );
 };
 
-const log = {
-  url: window.location.pathname,
-  page: "kintai",
+const openModalLog = genLog({
   eventType: "click",
-  target: "hoge"
-};
+  target: "hoge",
+  eventName: "openModal"
+});
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   openModal: (log: ITracker) => dispatch(kintaiActions.openModal(log))
