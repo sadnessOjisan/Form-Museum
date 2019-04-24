@@ -1,9 +1,19 @@
 import * as React from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { withFormik, FormikProps } from "formik";
 import * as Yup from "yup";
+import { Dispatch, Action } from "redux";
+import { connect } from "react-redux";
 import { Header } from "../component/common/Header";
 import { SideBar } from "../component/common/Sidebar";
+import { track } from "../redux/module/logging";
+import { genLoadLog } from "../helper/util";
+import { ITracker } from "../typedef/Tracker";
+
+interface DispatchProps {
+  track: typeof track;
+}
 
 interface FormValues {
   name: string;
@@ -11,11 +21,13 @@ interface FormValues {
   cost: number;
 }
 
-interface IProps {}
+type IProps = DispatchProps;
 
 const Masi = (props: IProps & FormikProps<FormValues>) => {
-  const { errors, handleSubmit, handleChange, values } = props;
-  console.log(errors);
+  const { track, errors, handleSubmit, handleChange, values } = props;
+  useEffect(() => {
+    track(genLoadLog("load_masi"));
+  }, []);
   return (
     <Wrapper>
       <Header />
@@ -62,11 +74,15 @@ const MainContentsWrapper = styled.form`
   width: 100%;
 `;
 
-interface MyFormProps {
+type MyFormProps = {
   name: string;
   sales: number;
   cost: number;
-}
+} & DispatchProps;
+
+const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => ({
+  track: (log: ITracker) => dispatch(track(log))
+});
 
 const MasiSchema = Yup.object().shape({
   name: Yup.string()
@@ -80,18 +96,23 @@ const MasiSchema = Yup.object().shape({
   cost: Yup.number().required("Required")
 });
 
-const MasiForm = withFormik<MyFormProps, FormValues>({
-  mapPropsToValues: props => ({
-    name: props.name,
-    sales: props.sales,
-    cost: props.cost
-  }),
-  handleSubmit: values => {
-    console.log(values);
-    alert("submit");
-  },
-  validationSchema: MasiSchema,
-  isInitialValid: true
-})(Masi);
+const MasiForm = connect(
+  undefined,
+  mapDispatchToProps
+)(
+  withFormik<MyFormProps, FormValues>({
+    mapPropsToValues: props => ({
+      name: props.name,
+      sales: props.sales,
+      cost: props.cost
+    }),
+    handleSubmit: values => {
+      console.log(values);
+      alert("submit");
+    },
+    validationSchema: MasiSchema,
+    isInitialValid: true
+  })(Masi)
+);
 
 export { MasiForm as Masi };

@@ -4,8 +4,8 @@ import { Dispatch, Action } from "redux";
 import { connect } from "react-redux";
 import { actions as kintaiActions } from "../../redux/module/kintai";
 import { ITracker } from "../../typedef/Tracker";
-import { path } from "../../const/page";
 import { genLog } from "../../helper/util";
+import { EVENT_TYPE } from "../../const/event";
 
 interface OwnProps {
   readonly className?: string;
@@ -17,6 +17,10 @@ interface DispatchProps {
 }
 
 type IProps = OwnProps & DispatchProps;
+
+const TEST_OR_TRACK_TARGET = {
+  kintaiModalOpener: "kintai-modal-opener"
+};
 
 const Header = (props: IProps) => {
   const { className, openModal } = props;
@@ -30,15 +34,20 @@ const Header = (props: IProps) => {
         <div>loginaddress</div>
         <div>osirasebox</div>
         <div>notify</div>
-        <div onClick={() => openModal(openModalLog)}>kintai</div>
+        <div
+          onClick={() => openModal(openModalLog)}
+          data-testid={TEST_OR_TRACK_TARGET.kintaiModalOpener}
+        >
+          kintai
+        </div>
       </RightArea>
     </Wrapper>
   );
 };
 
 const openModalLog = genLog({
-  eventType: "click",
-  target: "hoge",
+  eventType: EVENT_TYPE.click,
+  target: TEST_OR_TRACK_TARGET.kintaiModalOpener,
   eventName: "openModal"
 });
 

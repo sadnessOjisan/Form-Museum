@@ -13,5 +13,10 @@
       "number": 400
     }
   ],
+  "user": {
+    "id": 1,
+    "name": "poyo",
+    "image": "https://images.ciatr.jp/2018/11/w_828/Vi7Q62md3GkGgOzJM1fDaI4AFS0P8UznB4aW4OU2.jpeg"
+  },
   "log": []
 }

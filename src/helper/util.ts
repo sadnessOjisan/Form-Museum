@@ -4,6 +4,7 @@ import { host } from "../const/url";
 import ENVS from "../const/env";
 import { ITracker } from "../typedef/Tracker";
 import { path } from "../const/page";
+import { EVENT_TYPE } from "../const/event";
 
 const REACT_APP_ENV = process.env.REACT_APP_ENV;
 
@@ -33,7 +34,7 @@ interface IOpiton {
   page?: string;
   eventName: string;
   eventType: string;
-  target: string;
+  target?: string;
   property?: Object; // object
 }
 
@@ -48,11 +49,21 @@ export const genLog = (option: IOpiton): ITracker => {
       url,
       page: "不明"
     };
-  } else if (pageName) {
+  } else if (page) {
+    return {
+      ...option,
+      url,
+      page
+    };
+  } else {
     return {
       ...option,
       url,
       page: pageName
     };
   }
+};
+
+export const genLoadLog = (eventName: string): ITracker => {
+  return genLog({ eventName: eventName, eventType: EVENT_TYPE.load });
 };

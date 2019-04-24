@@ -17,6 +17,16 @@ const API = {
   },
   saveLog(log: ILog) {
     return axios.post<IPlacesResponse>(getUrl("log"), log);
+  },
+  fetchUser() {
+    return axios
+      .get<IPlacesResponse>(getUrl("user"))
+      .then(response => ({
+        payload: response.data
+      }))
+      .catch((error: AxiosError) => ({
+        error
+      }));
   }
 };
 

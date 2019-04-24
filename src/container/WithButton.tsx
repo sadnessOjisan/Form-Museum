@@ -13,6 +13,9 @@ import {
   initialState as placeState
 } from "../redux/module/place";
 import { IStore } from "../redux/module";
+import { track } from "../redux/module/logging";
+import { genLoadLog } from "../helper/util";
+import { ITracker } from "../typedef/Tracker";
 
 interface StateProps {
   isLoading: typeof placeState.isLoading;
@@ -23,6 +26,7 @@ interface StateProps {
 
 interface DispatchProps {
   startFetchData: typeof placeActions.startFetchData;
+  track: typeof track;
 }
 
 interface FormValues {
@@ -40,10 +44,12 @@ const WithButton = (props: IProps) => {
     isLoaded,
     data,
     startFetchData,
-    handleSubmit
+    handleSubmit,
+    track
   } = props;
   useEffect(() => {
     startFetchData({ budget: 100, ParticipantNum: 399 });
+    track(genLoadLog("load_with_button"));
   }, []);
   return (
     <Wrapper>
@@ -119,7 +125,8 @@ const mapStateToProps = (state: IStore): StateProps => ({
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => ({
   startFetchData: ({ budget, ParticipantNum }) =>
-    dispatch(placeActions.startFetchData({ budget, ParticipantNum }))
+    dispatch(placeActions.startFetchData({ budget, ParticipantNum })),
+  track: (log: ITracker) => dispatch(track(log))
 });
 
 const ConnectedForm = connect(

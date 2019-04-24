@@ -3,7 +3,7 @@ export interface ITracker {
   page: string;
   eventName: string;
   eventType: string;
-  target: string;
+  target?: string;
   property?: Object; // object
 }
 
