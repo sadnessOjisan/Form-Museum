@@ -25,7 +25,7 @@ const TEST_OR_TRACK_TARGET = {
 const Header = (props: IProps) => {
   const { className, openModal } = props;
   return (
-    <Wrapper className={className}>
+    <Wrapper className={className} data-testid="header">
       <LeftArea>
         <div>logo</div>
         <div>kensaku</div>

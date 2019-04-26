@@ -41,7 +41,6 @@ interface IOpiton {
 export const genLog = (option: IOpiton): ITracker => {
   const { page } = option;
   const url = window.location.pathname;
-  console.log("path: ", path);
   const pageName = path[url];
   if (!(pageName || page)) {
     return {

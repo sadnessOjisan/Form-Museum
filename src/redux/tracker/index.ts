@@ -10,6 +10,7 @@ import { API } from "../../service/API";
 const trackerMiddleware = (store: Store<IStore, Action>) => (next: any) => (
   action: Action
 ) => {
+  // @ts-ignore
   const metaData = action.meta;
   if (!metaData) {
     next(action);
