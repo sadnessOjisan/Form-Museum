@@ -53,7 +53,7 @@ const Kintai: React.SFC<IProps> = (props: IProps) => {
     leave: { opacity: 0, transform: "translate3d(0%,0,0)" }
   });
   return (
-    <Wrapper>
+    <Wrapper data-testid="kintai-modal">
       <Content>
         <Header>
           <CloseButton onClick={() => closeModal(closeLog)}>閉じる</CloseButton>
