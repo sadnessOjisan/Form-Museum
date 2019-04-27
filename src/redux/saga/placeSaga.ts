@@ -7,8 +7,8 @@ import { API } from "../../service/API";
 import { assert } from "../../helper/util";
 
 function* fetchPlaceDataSaga(action: IStartFetchDataAction): Iterable<Effect> {
+  console.info("fetchPlaceDataSaga: fire");
   const query: IPlaceQuery = action.payload;
-  console.log(query);
   const {
     payload,
     error
@@ -16,7 +16,7 @@ function* fetchPlaceDataSaga(action: IStartFetchDataAction): Iterable<Effect> {
     API.fetchPlaces,
     query
   );
-  console.info(payload);
+
   if (payload && !error) {
     yield put(actions.successFetchData(payload));
   } else if (!payload && error) {

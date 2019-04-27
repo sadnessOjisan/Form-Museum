@@ -48,6 +48,7 @@ const WithButton = (props: IProps) => {
     track
   } = props;
   useEffect(() => {
+    console.log("useEffect");
     startFetchData({ budget: 100, ParticipantNum: 399 });
     track(genLoadLog("load_with_button"));
   }, []);
@@ -87,15 +88,16 @@ const WithButton = (props: IProps) => {
                 <input name="sales" onChange={handleChange} />
               </InputGroup>
             </div>
-            <div style={{ width: "40%" }}>
+            <div style={{ width: "40%" }} data-testid="places">
               {!isLoading && isLoaded && data ? (
                 data.length === 0 ? (
-                  <p>データが存在しません</p>
+                  <p data-testid="error-message">データが存在しません</p>
                 ) : (
-                  data.map(d => d.name)
+                  data.map(d => <p data-testid="place-item">d.name</p>)
                 )
               ) : (
-                <ChasingDots />
+                <p data-testid="loader">a</p>
+                // <ChasingDots data-testid="loader" />
               )}
             </div>
           </div>

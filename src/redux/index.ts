@@ -29,10 +29,12 @@ switch (env) {
     middlewares.push(tracker);
     middlewares.push(sagaMiddleware);
     break;
+  case "test":
+    middlewares.push(sagaMiddleware);
+    break;
   default:
     middlewares.push(tracker);
     middlewares.push(sagaMiddleware);
-    middlewares.push(logger);
     break;
 }
 

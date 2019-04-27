@@ -28,7 +28,6 @@ const renderWithRedux = (
 describe("Header", () => {
   it("必要なヘッダがある", () => {
     const { getByTestId } = renderWithRedux(<Header />);
-    console.log(getByTestId("header"));
     expect(getByTestId("header")).toHaveTextContent("logo");
     expect(getByTestId("header")).toHaveTextContent("kensaku");
     expect(getByTestId("header")).toHaveTextContent("loginaddress");

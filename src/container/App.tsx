@@ -16,7 +16,6 @@ interface IStateProps {
 type Props = IStateProps;
 
 const App = (props: Props) => {
-  console.log(props);
   const { isOpenKintaiModal } = props;
   return (
     <PageWrapper>

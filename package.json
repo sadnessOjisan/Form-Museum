@@ -72,7 +72,7 @@
     "start:stg": "BUILD_MODE='production' REACT_APP_ENV='staging' webpack-dev-server",
     "start:prd": "BUILD_MODE='production' REACT_APP_ENV='production' webpack-dev-server",
     "mock:local": "json-server ./db/db.json --routes ./db/routes.json -p 3010",
-    "jest": "jest",
-    "test": "jest"
+    "jest": "jest REACT_APP_ENV='test'",
+    "test": "jest REACT_APP_ENV='test'"
   }
 }

@@ -14,7 +14,8 @@ describe("main test", () => {
   it("axios return 2 length value", async () => {
     const returnData = [
       { id: 1, name: "2", place: "2", number: 4 },
-      { id: 2, name: "2", place: "2", number: 4 }
+      { id: 2, name: "2", place: "2", number: 4 },
+      { id: 3, name: "2", place: "2", number: 4 }
     ];
     (axios.get as any).mockResolvedValue({ data: returnData });
     const query = { budget: 100, ParticipantNum: 30 };
