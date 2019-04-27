@@ -1,8 +1,6 @@
 // __tests__/fetch.test.js
 import React from "react";
-import { createStore } from "redux";
 import { Provider, connect } from "react-redux";
-import reducer from "../../redux/module";
 import {
   render,
   fireEvent,
@@ -12,13 +10,12 @@ import {
   wait
 } from "react-testing-library";
 import "jest-dom/extend-expect";
-import axiosMock from "axios";
-import { Kuso } from "../Kuso";
 import { Router } from "react-router";
 import { App } from "../App";
 import { createMemoryHistory } from "history";
 import axios from "axios";
 import configureStore from "../../redux";
+
 jest.mock("axios");
 afterEach(cleanup);
 
@@ -26,7 +23,7 @@ jest.mock("../../asset/video/rain.mp4");
 jest.mock("../../asset/video/hare.mp4");
 
 const renderWithReduxRouter = (
-  ui,
+  ui: React.ReactNode,
   { store = configureStore() } = {},
   {
     route = "/with-button",
