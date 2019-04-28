@@ -23,3 +23,11 @@ $ yarn run start:local
 // prd用にbuild
 $ yarn run build:prd
 ```
+
+## task
+
+- [ ] validation の example を作る
+- [ ] Toast 作る
+- [ ] log の再生部分を作る
+- [ ] CSS 整える
+- [ ] SVG の整理
