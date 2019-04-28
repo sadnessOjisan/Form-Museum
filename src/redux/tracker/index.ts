@@ -21,7 +21,6 @@ const trackerMiddleware = (store: Store<IStore, Action>) => (next: any) => (
   API.saveLog(log);
   store.dispatch(setTk(log.pk));
   next(action);
-  console.log("send log: ", log);
 };
 
 const _genLog = (tracker: ITracker, store: IStore): ILog => {

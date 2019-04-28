@@ -30,9 +30,9 @@ interface DispatchProps {
 }
 
 interface FormValues {
-  name: string;
-  sales: number;
-  cost: number;
+  name: string | null;
+  sales: number | null;
+  cost: number | null;
 }
 
 type IProps = StateProps & DispatchProps & FormikProps<FormValues>;
@@ -111,12 +111,7 @@ const WithButton = (props: IProps) => {
   );
 };
 
-type MyFormProps = {
-  name: string;
-  sales: number;
-  cost: number;
-} & StateProps &
-  DispatchProps;
+type MyFormProps = StateProps & DispatchProps;
 
 const mapStateToProps = (state: IStore): StateProps => ({
   isLoading: state.place.isLoading,
@@ -137,9 +132,9 @@ const ConnectedForm = connect(
 )(
   withFormik<MyFormProps, FormValues>({
     mapPropsToValues: props => ({
-      name: props.name,
-      sales: props.sales,
-      cost: props.cost
+      name: null,
+      sales: null,
+      cost: null
     }),
     handleSubmit: (values, formikBag) => {
       console.log(values);

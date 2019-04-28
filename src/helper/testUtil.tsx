@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import configureStore from "../redux";
 import { createMemoryHistory } from "history";
 import { Router } from "react-router";
@@ -23,4 +23,14 @@ const renderWithReduxRouter = (
   };
 };
 
-export { renderWithReduxRouter };
+const renderWithRedux = (
+  ui: React.ReactNode,
+  { store = configureStore() } = {}
+) => {
+  return {
+    ...render(<Provider store={store}>{ui}</Provider>),
+    store
+  };
+};
+
+export { renderWithReduxRouter, renderWithRedux };

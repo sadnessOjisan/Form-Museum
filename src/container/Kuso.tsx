@@ -5,9 +5,9 @@ import { Header } from "../component/common/Header";
 import { SideBar } from "../component/common/Sidebar";
 
 interface FormValues {
-  name: string;
-  sales: number;
-  cost: number;
+  name: string | null;
+  sales: number | null;
+  cost: number | null;
 }
 
 interface IProps {}
@@ -55,17 +55,13 @@ const MainContentsWrapper = styled.form`
   width: 100%;
 `;
 
-interface MyFormProps {
-  name: string;
-  sales: number;
-  cost: number;
-}
+interface MyFormProps {}
 
 const KusoForm = withFormik<MyFormProps, FormValues>({
-  mapPropsToValues: props => ({
-    name: props.name,
-    sales: props.sales,
-    cost: props.cost
+  mapPropsToValues: () => ({
+    name: null,
+    sales: null,
+    cost: null
   }),
   handleSubmit: values => {
     console.log(values);

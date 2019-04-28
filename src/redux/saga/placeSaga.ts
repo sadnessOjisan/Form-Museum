@@ -7,7 +7,6 @@ import { API } from "../../service/API";
 import { assert } from "../../helper/util";
 
 function* fetchPlaceDataSaga(action: IStartFetchDataAction): Iterable<Effect> {
-  console.info("fetchPlaceDataSaga: fire");
   const query: IPlaceQuery = action.payload;
   const {
     payload,
