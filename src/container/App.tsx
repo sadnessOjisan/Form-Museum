@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-import { Kuso } from "./Kuso";
+import { KusoFormPage } from "./Kuso";
 import { Masi } from "./Masi";
 import { IStore } from "../redux/module";
 import { Kintai } from "./Kintai";
@@ -21,7 +21,7 @@ const App = (props: Props) => {
     <PageWrapper>
       <Switch>
         <Route path="/" component={() => <span>home</span>} exact />
-        <Route path="/kuso" component={Kuso} exact />
+        <Route path="/kuso" component={KusoFormPage} exact />
         <Route path="/masi" component={Masi} exact />
         <Route path="/login" component={Login} exact />
         <Route path="/with-button" component={WithButton} exact />

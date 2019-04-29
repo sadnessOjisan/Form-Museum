@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { withFormik, FormikProps } from "formik";
 import { Header } from "../component/common/Header";
 import { SideBar } from "../component/common/Sidebar";
+import { Kuso } from "../component/kuso/Form";
 
 interface FormValues {
   name: string | null;
@@ -12,29 +13,14 @@ interface FormValues {
 
 interface IProps {}
 
-const Kuso = (props: IProps & FormikProps<FormValues>) => {
+const KusoFormPage = (props: IProps & FormikProps<FormValues>) => {
   const { errors, handleSubmit, handleChange } = props;
   return (
     <Wrapper>
       <Header />
       <ContentsBox>
         <SideBar />
-        <MainContentsWrapper onSubmit={handleSubmit}>
-          <h1>kUSO</h1>
-          <div>
-            <label>今日の日付</label>
-            <input name="name" onChange={handleChange} />
-          </div>
-          <div>
-            <label>売り上げ</label>
-            <input name="sales" onChange={handleChange} />
-          </div>
-          <div>
-            <label>人件費</label>
-            <input name="cost" onChange={handleChange} />
-          </div>
-          <button type="submit">送信</button>
-        </MainContentsWrapper>
+        <Kuso />
       </ContentsBox>
     </Wrapper>
   );
@@ -57,16 +43,4 @@ const MainContentsWrapper = styled.form`
 
 interface MyFormProps {}
 
-const KusoForm = withFormik<MyFormProps, FormValues>({
-  mapPropsToValues: () => ({
-    name: null,
-    sales: null,
-    cost: null
-  }),
-  handleSubmit: values => {
-    console.log(values);
-    alert("submit");
-  }
-})(Kuso);
-
-export { KusoForm as Kuso };
+export { KusoFormPage };
