@@ -7,6 +7,7 @@ import { Masi } from "./Masi";
 import { IStore } from "../redux/module";
 import { Kintai } from "./Kintai";
 import { Login } from "./Login";
+import { Order } from "./Order";
 import { WithButton } from "./WithButton";
 
 interface IStateProps {
@@ -24,6 +25,7 @@ const App = (props: Props) => {
         <Route path="/kuso" component={KusoFormPage} exact />
         <Route path="/masi" component={Masi} exact />
         <Route path="/login" component={Login} exact />
+        <Route path="/order" component={Order} exact />
         <Route path="/with-button" component={WithButton} exact />
       </Switch>
       {isOpenKintaiModal && <Kintai />}

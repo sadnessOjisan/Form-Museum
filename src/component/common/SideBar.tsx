@@ -28,6 +28,11 @@ const SideBar = (props: IProps) => {
         onClick={() => push("/with-button")}
         selected={pathname === "/with-button"}
       />
+      <SideBarItem
+        name="order"
+        onClick={() => push("/order")}
+        selected={pathname === "/order"}
+      />
     </Wrapper>
   );
 };

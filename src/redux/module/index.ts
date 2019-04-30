@@ -5,6 +5,7 @@ import kintai, {
   Action as kintaiAction
 } from "./kintai";
 import place, { IState as IPlaceState, Action as placeAction } from "./place";
+import order, { IState as IOrderState, Action as orderAction } from "./order";
 import logging, {
   IState as ILoggingState,
   Action as logingAction
@@ -15,15 +16,17 @@ export interface IStore {
   kintai: IKintaiState;
   place: IPlaceState;
   logging: ILoggingState;
+  order: IOrderState;
 }
 
-export type Action = kintaiAction | placeAction | logingAction;
+export type Action = kintaiAction | placeAction | logingAction | orderAction;
 
 const rootReducer = combineReducers<IStore>({
   test,
   kintai,
   place,
-  logging
+  logging,
+  order
 });
 
 export default rootReducer;
