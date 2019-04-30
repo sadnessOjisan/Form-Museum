@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Header } from "../component/common/Header";
 import { SideBar } from "../component/common/Sidebar";
 import { Form } from "../component/order/Form";
-
+import Button from "../component/common/Button";
 type IProps = {};
 
 const Order = (props: IProps) => {
@@ -16,7 +16,9 @@ const Order = (props: IProps) => {
       <ContentsBox>
         <SideBar />
         <MainContentsWrapper>
-          <PageTitle>order</PageTitle>
+          <PageTitleRow>
+            <PageTitle>スケジュール出力</PageTitle>
+          </PageTitleRow>
           <Form />
         </MainContentsWrapper>
       </ContentsBox>
@@ -42,8 +44,13 @@ const MainContentsWrapper = styled.form`
   padding: 8px;
 `;
 
-const PageTitle = styled.h1`
+const PageTitle = styled.h1``;
+
+const PageTitleRow = styled.div`
   height: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 `;
 
 export { Order };

@@ -20,36 +20,37 @@ const InputRow = (props: IProps) => {
   return (
     <Draggable draggableId={String(index)} index={index} isDragDisabled={false}>
       {(provided, snapshot) => (
-        <div
+        <Wrapper
+          isDragging={snapshot.isDragging}
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <Wrapper isDragging={snapshot.isDragging}>
-            <DragPoint />
+          <DragPoint />
+          <InputItems>
             <TimeInput
+              type="number"
               name={`${name}.${index}.startTime`}
               onChange={handleChange}
               value={startTime}
             />
             <span>-</span>
             <TimeInput
+              type="number"
               name={`${name}.${index}.endTime`}
               onChange={handleChange}
               value={endTime}
             />
             <span>-</span>
             <TextInput
+              type="text"
               name={`${name}.${index}.item`}
               onChange={handleChange}
               value={item}
             />
-            <Button.Trash
-              onClick={() => handleRowRemove(index)}
-              type="button"
-            />
-          </Wrapper>
-        </div>
+          </InputItems>
+          <TrashButton onClick={() => handleRowRemove(index)} type="button" />
+        </Wrapper>
       )}
     </Draggable>
   );
@@ -66,14 +67,27 @@ const Wrapper = styled.div<{ isDragging: boolean }>`
   height: 80px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   > *:first-child {
     margin-right: 24px;
   }
   background-color: ${props => props.isDragging && COLOR.blue};
+  position: relative;
+  width: 100%;
+`;
+
+const InputItems = styled.div`
+  width: calc(100% - 82px);
 `;
 
 const Input = styled.input`
-  height: 30px;
+  height: 40px;
+  padding-left: 4px;
+  border-radius: 4px;
+  &:focus {
+    outline: 0;
+    border-color: ${COLOR.blue};
+  }
 `;
 
 const TimeInput = styled(Input)`
@@ -84,6 +98,9 @@ const TextInput = styled(Input)`
   width: 120px;
 `;
 
+const TrashButton = styled(Button.Trash)``;
+
+// styled componentsに注意。memoizeしたものをs-cでかこうと、再計算が走る
 const MemoizedInputRow = React.memo(InputRow, (p, n) => {
   return (
     p.value.startTime === n.value.startTime &&

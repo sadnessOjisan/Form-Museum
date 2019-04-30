@@ -2,6 +2,8 @@ import * as React from "react";
 import styled from "styled-components";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { KusoFormPage } from "./Kuso";
 import { Masi } from "./Masi";
 import { IStore } from "../redux/module";
@@ -15,6 +17,8 @@ interface IStateProps {
 }
 
 type Props = IStateProps;
+
+library.add(faTrash);
 
 const App = (props: Props) => {
   const { isOpenKintaiModal } = props;

@@ -24,14 +24,18 @@ interface DispatchProps {
   startPostData: typeof orderActions.startPostData;
 }
 
+interface OwnProps {
+  handleOutput: () => void;
+}
+
 interface FormValues {
   schedule: IOrderItem[];
 }
 
-type IProps = StateProps & DispatchProps & FormikProps<FormValues>;
+type IProps = StateProps & DispatchProps & OwnProps & FormikProps<FormValues>;
 
 const Form = (props: IProps) => {
-  const { values, handleChange } = props;
+  const { values, handleChange, handleOutput } = props;
   const { schedule } = values;
   return (
     <FormWrapper>
@@ -55,10 +59,9 @@ const Form = (props: IProps) => {
                   <DrappableArea
                     ref={provided.innerRef}
                     {...provided.droppableProps}
-                    isDraggingOver={snapshot.isDraggingOver}
                   >
                     {values.schedule.map((item, idx) => (
-                      <InputRow
+                      <MemoizedInputRow
                         handleChange={handleChange}
                         handleRowRemove={(rowIndex: number) =>
                           arrayHelpers.remove(rowIndex)
@@ -69,7 +72,7 @@ const Form = (props: IProps) => {
                         key={idx}
                       />
                     ))}
-                    <Button.Cute
+                    <AddButton
                       type="button"
                       onClick={() =>
                         arrayHelpers.push({
@@ -80,7 +83,8 @@ const Form = (props: IProps) => {
                       }
                     >
                       ADD
-                    </Button.Cute>
+                    </AddButton>
+                    <SubmitButton />
                     {snapshot.isDraggingOver && (
                       <DragCover>
                         変更したい箇所でカーソルを離してください
@@ -101,7 +105,6 @@ const FormWrapper = styled.form`
   width: 100%;
   /* 高さ分を引き算 */
   height: calc(100% - 40px);
-
   display: flex;
 `;
 
@@ -114,17 +117,20 @@ const ViewerWrapper = styled.div`
 const Editor = styled.div`
   width: 50%;
   height: 100%;
-  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
-const DrappableArea = styled.div<{ isDraggingOver: boolean }>`
+const DrappableArea = styled.div`
   border: 1px solid lightgrey;
+  overflow-y: scroll;
   height: 100%;
   border-radius: 2px;
   padding: 8px;
   margin-bottom: 8px;
   transition: background-color 0.2s ease;
-  position: relative;
+  width: 100%;
 `;
 
 const DragCover = styled.div`
@@ -141,8 +147,16 @@ const DragCover = styled.div`
   font-size: 24px;
 `;
 
-const InputRow = styled(MemoizedInputRow)`
-  margin-top: 12px;
+const AddButton = styled(Button.Cute)`
+  margin: auto;
+  margin-top: 24px;
+  margin-bottom: 24px;
+`;
+
+const SubmitButton = styled(Button.Circle)`
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
 `;
 
 type MyFormProps = StateProps & DispatchProps;
@@ -163,7 +177,7 @@ const ConnectedForm = connect(
 )(
   withFormik<MyFormProps, FormValues>({
     mapPropsToValues: props => {
-      const dummy = new Array(4).fill(0);
+      const dummy = new Array(10).fill(0);
       console.log(dummy);
       const dummy2 = dummy.map(d => {
         return { startTime: "11", endTime: "12", item: "hoge" };

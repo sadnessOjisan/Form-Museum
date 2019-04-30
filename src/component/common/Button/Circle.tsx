@@ -9,7 +9,7 @@ interface Props {
   primary?: boolean;
 }
 
-const Trash = (props: Props) => {
+const Circle = (props: Props) => {
   const { className, onClick, type } = props;
   return (
     <Wrapper className={className} onClick={onClick} type={type}>
@@ -18,7 +18,7 @@ const Trash = (props: Props) => {
   );
 };
 
-const SIZE = 40;
+const SIZE = 90;
 
 const Wrapper = styled.button`
   width: ${`${SIZE}px`};
@@ -29,4 +29,4 @@ const Wrapper = styled.button`
   cursor: pointer;
 `;
 
-export { Trash };
+export { Circle };
