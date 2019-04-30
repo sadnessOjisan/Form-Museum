@@ -11,6 +11,7 @@ import { IOrderItem } from "../../typedef/model/OrderItem";
 import { IStore } from "../../redux/module";
 import { Viewer } from "./Viewer";
 import { MemoizedInputRow } from "./EditorRow";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 interface StateProps {
   isSending: typeof orderState.isSending;
@@ -40,32 +41,54 @@ const Form = (props: IProps) => {
         <FieldArray
           name="schedule"
           render={arrayHelpers => (
-            <div>
-              {values.schedule.map((item, idx) => (
-                <MemoizedInputRow
-                  handleChange={handleChange}
-                  handleRowRemove={(rowIndex: number) =>
-                    arrayHelpers.remove(rowIndex)
-                  }
-                  index={idx}
-                  name="schedule"
-                  value={item}
-                  key={idx}
-                />
-              ))}
-              <button
-                type="button"
-                onClick={() =>
-                  arrayHelpers.push({
-                    startTime: "11",
-                    endTime: "12",
-                    item: "hoge"
-                  })
-                }
-              >
-                ADD
-              </button>
-            </div>
+            <DragDropContext
+              onBeforeDragStart={() => {}}
+              onDragStart={() => {}}
+              onDragUpdate={() => {}}
+              onDragEnd={(result, provided) => {
+                const { source, destination } = result;
+                const sourceIndex = source.index;
+                const destinationIndex = destination ? destination.index : 0;
+                arrayHelpers.move(sourceIndex, destinationIndex);
+              }}
+            >
+              <Droppable droppableId="droppable-items" type="ITEM">
+                {(provided, snapshot) => (
+                  <div
+                    ref={provided.innerRef}
+                    style={{
+                      backgroundColor: snapshot.isDraggingOver ? "blue" : "grey"
+                    }}
+                    {...provided.droppableProps}
+                  >
+                    {values.schedule.map((item, idx) => (
+                      <MemoizedInputRow
+                        handleChange={handleChange}
+                        handleRowRemove={(rowIndex: number) =>
+                          arrayHelpers.remove(rowIndex)
+                        }
+                        index={idx}
+                        name="schedule"
+                        value={item}
+                        key={idx}
+                      />
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() =>
+                        arrayHelpers.push({
+                          startTime: "11",
+                          endTime: "12",
+                          item: "hoge"
+                        })
+                      }
+                    >
+                      ADD
+                    </button>
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
           )}
         />
       </Editor>
@@ -84,6 +107,14 @@ const ViewerWrapper = styled.div`
 
 const Editor = styled.div`
   width: 50%;
+`;
+
+const Container = styled.div`
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  padding: 8px;
+  margin-bottom: 8px;
+  transition: background-color 0.2s ease;
 `;
 
 type MyFormProps = StateProps & DispatchProps;
