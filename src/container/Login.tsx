@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useSpring, animated as a, interpolate } from "react-spring";
 import { withFormik, FormikProps } from "formik";
 import * as Yup from "yup";
-import { Button } from "../component/common/Button";
+import Button from "../component/common/Button";
 
 interface FormValues {
   email: string;
@@ -99,7 +99,7 @@ const Login = (props: IProps & FormikProps<FormValues>) => {
         {errors.password}
         <MailInput onChange={onMove} name="email" />
         <PassInput onChange={onMove} name="password" />
-        <button type="submit">送信</button>
+        <Button.Cute type="submit">送信</Button.Cute>
       </InputForm>
     </Wrapper>
   );

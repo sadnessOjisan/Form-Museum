@@ -1,7 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-// @ts-ignore air-kitの型定義ファイルをゲットする
-import { Button } from "@air-kit/air-kit";
+import { COLOR } from "../../../const/color";
 
 interface Props {
   className?: string;
@@ -11,7 +10,7 @@ interface Props {
   primary?: boolean;
 }
 
-const StyeldButton = (props: Props) => {
+const Cute = (props: Props) => {
   const { className, children, onClick, type } = props;
   return (
     <Wrapper
@@ -25,6 +24,21 @@ const StyeldButton = (props: Props) => {
   );
 };
 
-const Wrapper = styled(Button)``;
+const Wrapper = styled.button`
+  background: ${`linear-gradient(90deg, ${COLOR.peachYellow}, ${
+    COLOR.peachPink
+  })`};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  outline: 0;
+  border: 0;
+  border-radius: 21px;
+  padding: 8px 24px;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+`;
 
-export { StyeldButton as Button };
+export { Cute };

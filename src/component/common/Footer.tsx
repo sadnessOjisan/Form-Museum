@@ -4,10 +4,12 @@ import styled from "styled-components";
 interface IProps {
   children: React.ReactNode;
 }
+
 const FooterLayout = (props: IProps) => {
   const { children } = props;
   return <Wrapper>{children}</Wrapper>;
 };
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;

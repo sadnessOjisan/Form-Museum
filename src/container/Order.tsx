@@ -1,14 +1,8 @@
 import * as React from "react";
 import { useEffect } from "react";
 import styled from "styled-components";
-import { withFormik, FormikProps } from "formik";
-import { ChasingDots } from "styled-spinkit";
 import { Header } from "../component/common/Header";
 import { SideBar } from "../component/common/Sidebar";
-import { FooterLayout } from "../component/common/Footer";
-import { track } from "../redux/module/logging";
-import { genLoadLog } from "../helper/util";
-import { ITracker } from "../typedef/Tracker";
 import { Form } from "../component/order/Form";
 
 type IProps = {};
@@ -22,7 +16,7 @@ const Order = (props: IProps) => {
       <ContentsBox>
         <SideBar />
         <MainContentsWrapper>
-          <h1>order</h1>
+          <PageTitle>order</PageTitle>
           <Form />
         </MainContentsWrapper>
       </ContentsBox>
@@ -45,11 +39,11 @@ const MainContentsWrapper = styled.form`
   width: calc(100% - 200px);
   height: 100%;
   position: relative;
+  padding: 8px;
 `;
 
-const InputGroup = styled.div`
-  display: flex;
-  flex-direction: column;
+const PageTitle = styled.h1`
+  height: 40px;
 `;
 
 export { Order };

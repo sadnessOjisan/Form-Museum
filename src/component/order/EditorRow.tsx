@@ -1,7 +1,10 @@
 import * as React from "react";
 import styled from "styled-components";
 import { IOrderItem } from "../../typedef/model/OrderItem";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { Draggable } from "react-beautiful-dnd";
+import Button from "../common/Button";
+import { DragPoint } from "../common/DragPoint";
+import { COLOR } from "../../const/color";
 
 interface IProps {
   handleChange: any;
@@ -22,27 +25,29 @@ const InputRow = (props: IProps) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <Wrapper>
-            <input
+          <Wrapper isDragging={snapshot.isDragging}>
+            <DragPoint />
+            <TimeInput
               name={`${name}.${index}.startTime`}
               onChange={handleChange}
               value={startTime}
             />
             <span>-</span>
-            <input
+            <TimeInput
               name={`${name}.${index}.endTime`}
               onChange={handleChange}
               value={endTime}
             />
             <span>-</span>
-            <input
+            <TextInput
               name={`${name}.${index}.item`}
               onChange={handleChange}
               value={item}
             />
-            <button onClick={() => handleRowRemove(index)} type="button">
-              削除
-            </button>
+            <Button.Trash
+              onClick={() => handleRowRemove(index)}
+              type="button"
+            />
           </Wrapper>
         </div>
       )}
@@ -50,7 +55,34 @@ const InputRow = (props: IProps) => {
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div<{ isDragging: boolean }>`
+  padding: 8px 12px;
+  border-left: solid 1px black;
+  border-right: solid 1px black;
+  border-bottom: solid 1px black;
+  :first-child {
+    border-top: solid 1px black;
+  }
+  height: 80px;
+  display: flex;
+  align-items: center;
+  > *:first-child {
+    margin-right: 24px;
+  }
+  background-color: ${props => props.isDragging && COLOR.blue};
+`;
+
+const Input = styled.input`
+  height: 30px;
+`;
+
+const TimeInput = styled(Input)`
+  width: 40px;
+`;
+
+const TextInput = styled(Input)`
+  width: 120px;
+`;
 
 const MemoizedInputRow = React.memo(InputRow, (p, n) => {
   return (

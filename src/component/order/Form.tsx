@@ -12,6 +12,7 @@ import { IStore } from "../../redux/module";
 import { Viewer } from "./Viewer";
 import { MemoizedInputRow } from "./EditorRow";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import Button from "../common/Button";
 
 interface StateProps {
   isSending: typeof orderState.isSending;
@@ -42,9 +43,6 @@ const Form = (props: IProps) => {
           name="schedule"
           render={arrayHelpers => (
             <DragDropContext
-              onBeforeDragStart={() => {}}
-              onDragStart={() => {}}
-              onDragUpdate={() => {}}
               onDragEnd={(result, provided) => {
                 const { source, destination } = result;
                 const sourceIndex = source.index;
@@ -54,15 +52,13 @@ const Form = (props: IProps) => {
             >
               <Droppable droppableId="droppable-items" type="ITEM">
                 {(provided, snapshot) => (
-                  <div
+                  <DrappableArea
                     ref={provided.innerRef}
-                    style={{
-                      backgroundColor: snapshot.isDraggingOver ? "blue" : "grey"
-                    }}
                     {...provided.droppableProps}
+                    isDraggingOver={snapshot.isDraggingOver}
                   >
                     {values.schedule.map((item, idx) => (
-                      <MemoizedInputRow
+                      <InputRow
                         handleChange={handleChange}
                         handleRowRemove={(rowIndex: number) =>
                           arrayHelpers.remove(rowIndex)
@@ -73,19 +69,24 @@ const Form = (props: IProps) => {
                         key={idx}
                       />
                     ))}
-                    <button
+                    <Button.Cute
                       type="button"
                       onClick={() =>
                         arrayHelpers.push({
-                          startTime: "11",
-                          endTime: "12",
-                          item: "hoge"
+                          startTime: "",
+                          endTime: "",
+                          item: ""
                         })
                       }
                     >
                       ADD
-                    </button>
-                  </div>
+                    </Button.Cute>
+                    {snapshot.isDraggingOver && (
+                      <DragCover>
+                        変更したい箇所でカーソルを離してください
+                      </DragCover>
+                    )}
+                  </DrappableArea>
                 )}
               </Droppable>
             </DragDropContext>
@@ -98,23 +99,50 @@ const Form = (props: IProps) => {
 
 const FormWrapper = styled.form`
   width: 100%;
+  /* 高さ分を引き算 */
+  height: calc(100% - 40px);
+
   display: flex;
 `;
 
 const ViewerWrapper = styled.div`
   width: 50%;
+  height: 100%;
+  overflow-y: scroll;
 `;
 
 const Editor = styled.div`
   width: 50%;
+  height: 100%;
+  overflow-y: scroll;
 `;
 
-const Container = styled.div`
+const DrappableArea = styled.div<{ isDraggingOver: boolean }>`
   border: 1px solid lightgrey;
+  height: 100%;
   border-radius: 2px;
   padding: 8px;
   margin-bottom: 8px;
   transition: background-color 0.2s ease;
+  position: relative;
+`;
+
+const DragCover = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+`;
+
+const InputRow = styled(MemoizedInputRow)`
+  margin-top: 12px;
 `;
 
 type MyFormProps = StateProps & DispatchProps;
@@ -134,9 +162,14 @@ const ConnectedForm = connect(
   mapDispatchToProps
 )(
   withFormik<MyFormProps, FormValues>({
-    mapPropsToValues: props => ({
-      schedule: [{ startTime: "11", endTime: "12", item: "hoge" }]
-    }),
+    mapPropsToValues: props => {
+      const dummy = new Array(4).fill(0);
+      console.log(dummy);
+      const dummy2 = dummy.map(d => {
+        return { startTime: "11", endTime: "12", item: "hoge" };
+      });
+      return { schedule: dummy2 };
+    },
     handleSubmit: (values, formikBag) => {
       const { props } = formikBag;
       const { startPostData } = props;

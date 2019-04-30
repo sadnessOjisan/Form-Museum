@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Dispatch, Action } from "redux";
 import { connect } from "react-redux";
 import { animated, useTransition } from "react-spring";
-import { Button } from "../component/common/Button";
+import Button from "../component/common/Button";
 import { blue } from "../const/color";
 import { IStore } from "../redux/module";
 import { actions as kintaiActions, ModalType } from "../redux/module/kintai";
@@ -32,13 +32,17 @@ const Kintai: React.SFC<IProps> = (props: IProps) => {
     WORKING_TIME: ({ style }: { style: React.CSSProperties }) => (
       <Body style={{ ...style }}>
         <KintaiModal.WorkingTime />
-        <Button onClick={() => selectModal("WEATHER", selectLog)}>次へ</Button>
+        <Button.Normal onClick={() => selectModal("WEATHER", selectLog)}>
+          次へ
+        </Button.Normal>
       </Body>
     ),
     WEATHER: ({ style }: { style: React.CSSProperties }) => (
       <Body style={{ ...style }}>
         <KintaiModal.Weather />
-        <Button onClick={() => selectModal("THANKS", selectLog)}>次へ</Button>
+        <Button.Normal onClick={() => selectModal("THANKS", selectLog)}>
+          次へ
+        </Button.Normal>
       </Body>
     ),
     THANKS: ({ style }: { style: React.CSSProperties }) => (
@@ -64,7 +68,7 @@ const Kintai: React.SFC<IProps> = (props: IProps) => {
           return <Page key={key} style={props} />;
         })}
         <Footer>
-          <Button>eee</Button>
+          <Button.Normal>eee</Button.Normal>
         </Footer>
       </Content>
     </Wrapper>

@@ -8,9 +8,7 @@ interface FormValues {
   cost: number | null;
 }
 
-interface IProps extends FormikProps<FormValues> {}
-
-const Form = (props: IProps) => {
+const Form = (props: FormikProps<FormValues>) => {
   const { handleSubmit, handleChange } = props;
   return (
     <MainContentsWrapper onSubmit={handleSubmit}>
@@ -36,7 +34,7 @@ const MainContentsWrapper = styled.form`
   width: 100%;
 `;
 
-const KusoForm = withFormik<null, FormValues>({
+const KusoForm = withFormik<{}, FormValues>({
   mapPropsToValues: () => ({
     name: null,
     sales: null,

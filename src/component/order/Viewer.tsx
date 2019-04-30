@@ -10,7 +10,7 @@ interface IProps {
 const Viewer = (props: IProps) => {
   return (
     <Wrapper>
-      <h2>予定表</h2>
+      <h2>出力予定表イメージ</h2>
       {props.schedule.map((item, idx) => (
         <MemoizedScheduleItem item={item} key={idx} />
       ))}
@@ -18,6 +18,9 @@ const Viewer = (props: IProps) => {
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  border: solid 1px gray;
+  height: 100%;
+`;
 
 export { Viewer };
