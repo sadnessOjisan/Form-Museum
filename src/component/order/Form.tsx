@@ -9,6 +9,8 @@ import {
 } from "../../redux/module/order";
 import { IOrderItem } from "../../typedef/model/OrderItem";
 import { IStore } from "../../redux/module";
+import { Viewer } from "./Viewer";
+import { MemoizedInputRow } from "./EditorRow";
 
 interface StateProps {
   isSending: typeof orderState.isSending;
@@ -28,46 +30,28 @@ type IProps = StateProps & DispatchProps & FormikProps<FormValues>;
 
 const Form = (props: IProps) => {
   const { values, handleChange } = props;
+  const { schedule } = values;
   return (
     <FormWrapper>
-      <Viewer>
-        {values.schedule.map(d => (
-          <p>
-            {d.item}-{d.startTime}-{d.endTime}
-          </p>
-        ))}
-      </Viewer>
+      <ViewerWrapper>
+        <Viewer schedule={schedule} />
+      </ViewerWrapper>
       <Editor>
         <FieldArray
           name="schedule"
           render={arrayHelpers => (
             <div>
               {values.schedule.map((item, idx) => (
-                <div>
-                  <input
-                    name={`schedule.${idx}.startTime`}
-                    onChange={handleChange}
-                    value={item.startTime}
-                  />
-                  -
-                  <input
-                    name={`schedule.${idx}.endTime`}
-                    onChange={handleChange}
-                    value={item.endTime}
-                  />
-                  :
-                  <input
-                    name={`schedule.${idx}.item`}
-                    onChange={handleChange}
-                    value={item.item}
-                  />
-                  <button
-                    onClick={() => arrayHelpers.remove(idx)}
-                    type="button"
-                  >
-                    削除
-                  </button>
-                </div>
+                <MemoizedInputRow
+                  handleChange={handleChange}
+                  handleRowRemove={(rowIndex: number) =>
+                    arrayHelpers.remove(rowIndex)
+                  }
+                  index={idx}
+                  name="schedule"
+                  value={item}
+                  key={idx}
+                />
               ))}
               <button
                 type="button"
@@ -79,7 +63,7 @@ const Form = (props: IProps) => {
                   })
                 }
               >
-                push
+                ADD
               </button>
             </div>
           )}
@@ -94,7 +78,7 @@ const FormWrapper = styled.form`
   display: flex;
 `;
 
-const Viewer = styled.div`
+const ViewerWrapper = styled.div`
   width: 50%;
 `;
 
