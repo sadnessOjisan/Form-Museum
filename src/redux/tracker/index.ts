@@ -32,6 +32,7 @@ const _genLog = (tracker: ITracker, store: IStore): ILog => {
     timeStamp: moment().format(),
     userId: "store.user.id",
     userAgent: "",
+    sessionID: uuidv1(), // 更新するたびに新しい値が作られる
     ...tracker
   };
 };

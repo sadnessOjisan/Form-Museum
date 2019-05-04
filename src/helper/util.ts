@@ -66,3 +66,29 @@ export const genLog = (option: IOpiton): ITracker => {
 export const genLoadLog = (eventName: string): ITracker => {
   return genLog({ eventName: eventName, eventType: EVENT_TYPE.load });
 };
+
+export const genBlurLog = (
+  eventName: string,
+  target: string,
+  property: Object
+): ITracker => {
+  return genLog({
+    eventName,
+    target,
+    eventType: EVENT_TYPE.blur,
+    property
+  });
+};
+
+export const genClickLog = (
+  eventName: string,
+  target: string,
+  property?: Object
+): ITracker => {
+  return genLog({
+    eventName,
+    target,
+    eventType: EVENT_TYPE.click,
+    property
+  });
+};

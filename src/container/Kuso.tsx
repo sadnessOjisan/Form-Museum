@@ -37,10 +37,6 @@ const ContentsBox = styled.div`
   height: 100%;
 `;
 
-const MainContentsWrapper = styled.form`
-  width: 100%;
-`;
-
 interface MyFormProps {}
 
 export { KusoFormPage };

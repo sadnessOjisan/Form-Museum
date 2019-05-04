@@ -29,6 +29,10 @@ const Wrapper = styled.div<{ selected: boolean }>`
   height: 70px;
   color: white;
   background-color: ${props => (props.selected ? "red" : "initial")};
+  cursor: pointer;
+  &:hover {
+    background-color: yellow;
+  }
 `;
 
 export { SideBarItem };

@@ -74,6 +74,9 @@ const Wrapper = styled.div<{ isDragging: boolean }>`
   background-color: ${props => props.isDragging && COLOR.blue};
   position: relative;
   width: 100%;
+  &:hover {
+    background-color: yellow;
+  }
 `;
 
 const InputItems = styled.div`

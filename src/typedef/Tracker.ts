@@ -20,4 +20,5 @@ export interface ILog {
   property?: object; // object
   timeStamp: string; // ISO
   userAgent: string;
+  sessionID: string;
 }

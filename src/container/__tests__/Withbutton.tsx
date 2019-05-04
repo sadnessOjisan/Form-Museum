@@ -1,7 +1,6 @@
 import * as React from "react";
 import { cleanup, waitForElement } from "react-testing-library";
 import "jest-dom/extend-expect";
-import { App } from "../App";
 import { WithButton } from "../WithButton";
 import axios from "axios";
 import { renderWithReduxRouter } from "../../helper/testUtil";

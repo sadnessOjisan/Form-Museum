@@ -1,10 +1,8 @@
 import * as React from "react";
-import { useEffect } from "react";
 import styled from "styled-components";
 import { Dispatch, Action } from "redux";
 import { connect } from "react-redux";
 import { withFormik, FormikProps } from "formik";
-import { ChasingDots } from "styled-spinkit";
 import { Header } from "../component/common/Header";
 import { SideBar } from "../component/common/Sidebar";
 import { FooterLayout } from "../component/common/Footer";
@@ -14,7 +12,7 @@ import {
 } from "../redux/module/place";
 import { IStore } from "../redux/module";
 import { track } from "../redux/module/logging";
-import { genLoadLog } from "../helper/util";
+import { genBlurLog } from "../helper/util";
 import { ITracker } from "../typedef/Tracker";
 
 interface StateProps {
@@ -30,28 +28,21 @@ interface DispatchProps {
 }
 
 interface FormValues {
-  name: string | null;
-  sales: number | null;
-  cost: number | null;
+  budget: string | null;
+  number: number | null;
+  options: string[];
 }
 
 type IProps = StateProps & DispatchProps & FormikProps<FormValues>;
 
+const TEST_OR_TRACK_TARGET = {
+  inputBudget: "input-budget",
+  inputNumber: "input-number",
+  inputPlace: "input-place"
+};
+
 const WithButton = (props: IProps) => {
-  const {
-    handleChange,
-    isLoading,
-    isLoaded,
-    data,
-    startFetchData,
-    handleSubmit,
-    track
-  } = props;
-  useEffect(() => {
-    console.log("useEffect");
-    startFetchData({ budget: 100, ParticipantNum: 399 });
-    track(genLoadLog("load_with_button"));
-  }, []);
+  const { handleChange, handleSubmit, track, values, setFieldValue } = props;
   return (
     <Wrapper>
       <Header />
@@ -65,46 +56,86 @@ const WithButton = (props: IProps) => {
             <div>
               <InputGroup>
                 <label>予算</label>
-                <input name="budget" onChange={handleChange} />
+                <input
+                  name="budget"
+                  onChange={handleChange}
+                  onBlur={() =>
+                    track(
+                      genBlurLog(
+                        "input-budget",
+                        TEST_OR_TRACK_TARGET.inputBudget,
+                        { inputValue: values.budget }
+                      )
+                    )
+                  }
+                  data-testid={TEST_OR_TRACK_TARGET.inputBudget}
+                />
                 <button type="button">+</button>
                 <button type="button">-</button>
               </InputGroup>
               <InputGroup>
                 <label>何人</label>
-                <input name="number" onChange={handleChange} />
+                <input
+                  name="number"
+                  onChange={handleChange}
+                  onBlur={() =>
+                    track(
+                      genBlurLog(
+                        "input-number",
+                        TEST_OR_TRACK_TARGET.inputNumber,
+                        { inputValue: values.number }
+                      )
+                    )
+                  }
+                  data-testid={TEST_OR_TRACK_TARGET.inputNumber}
+                />
                 <button type="button">+</button>
                 <button type="button">-</button>
               </InputGroup>
               <InputGroup>
-                <label>場所</label>
-                <select name="place">
-                  <option value="東京">東京</option>
-                  <option value="大阪">大阪</option>
-                  <option value="福岡">福岡</option>
-                </select>
+                <label>オプションはどれにする</label>
+                <input
+                  type="checkbox"
+                  name="options"
+                  value="hoge"
+                  checked={values.options.includes("hoge")}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    const clickedValue = e.target.value;
+                    if (values.options.includes(clickedValue)) {
+                      const nextOptions = values.options.filter(
+                        option => option !== clickedValue
+                      );
+                      setFieldValue("options", nextOptions);
+                    } else {
+                      const nextOptions = [...values.options, clickedValue];
+                      setFieldValue("options", nextOptions);
+                    }
+                  }}
+                />
+                hoge
+                <input
+                  type="checkbox"
+                  name="options"
+                  value="fuga"
+                  checked={values.options.includes("fuga")}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    const clickedValue = e.target.value;
+                    if (values.options.includes(clickedValue)) {
+                      const nextOptions = values.options.filter(
+                        option => option !== clickedValue
+                      );
+                      setFieldValue("options", nextOptions);
+                    } else {
+                      const nextOptions = [...values.options, clickedValue];
+                      setFieldValue("options", nextOptions);
+                    }
+                  }}
+                />
+                fuga
               </InputGroup>
-              <InputGroup>
-                <label>式場はどれにする</label>
-                <input name="sales" onChange={handleChange} />
-              </InputGroup>
-            </div>
-            <div style={{ width: "40%" }} data-testid="places">
-              {!isLoading && isLoaded && data ? (
-                data.length === 0 ? (
-                  <p data-testid="error-message">データが存在しません</p>
-                ) : (
-                  data.map(d => <p data-testid="place-item">d.name</p>)
-                )
-              ) : (
-                <p data-testid="loader">a</p>
-                // <ChasingDots data-testid="loader" />
-              )}
             </div>
           </div>
-          <FooterLayout>
-            <div>残り予算は ??? 円</div>
-            <button type="submit">見積もり詳細をDLする</button>
-          </FooterLayout>
+          <button type="submit">見積もり詳細をDLする</button>
         </MainContentsWrapper>
       </ContentsBox>
     </Wrapper>
@@ -131,10 +162,10 @@ const ConnectedForm = connect(
   mapDispatchToProps
 )(
   withFormik<MyFormProps, FormValues>({
-    mapPropsToValues: props => ({
-      name: null,
-      sales: null,
-      cost: null
+    mapPropsToValues: () => ({
+      budget: null,
+      number: null,
+      options: []
     }),
     handleSubmit: (values, formikBag) => {
       console.log(values);

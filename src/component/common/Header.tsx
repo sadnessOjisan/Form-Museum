@@ -28,12 +28,8 @@ const Header = (props: IProps) => {
     <Wrapper className={className} data-testid="header">
       <LeftArea>
         <div>logo</div>
-        <div>kensaku</div>
       </LeftArea>
       <RightArea>
-        <div>loginaddress</div>
-        <div>osirasebox</div>
-        <div>notify</div>
         <div
           onClick={() => openModal(openModalLog)}
           data-testid={TEST_OR_TRACK_TARGET.kintaiModalOpener}
