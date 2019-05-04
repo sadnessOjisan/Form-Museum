@@ -45,6 +45,7 @@ const configureStore = (initialState?: IStore) => {
     compose(applyMiddleware(...middlewares))
   );
   sagaMiddleware.run(rootSaga);
+  store.dispatch({ type: "APP/INIT" });
   return store;
 };
 

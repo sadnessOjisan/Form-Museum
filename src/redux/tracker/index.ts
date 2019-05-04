@@ -30,8 +30,8 @@ const _genLog = (tracker: ITracker, store: IStore): ILog => {
     pk: uuidv1(),
     tk: store.logging.tk ? store.logging.tk : "-",
     timeStamp: moment().format(),
-    userId: "store.user.id",
-    userAgent: "",
+    userId: store.user.data ? store.user.data.id : "-",
+    userAgent: navigator.userAgent.toLowerCase(),
     sessionID: uuidv1(), // 更新するたびに新しい値が作られる
     ...tracker
   };

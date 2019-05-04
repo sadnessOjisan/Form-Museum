@@ -6,6 +6,7 @@ import kintai, {
 } from "./kintai";
 import place, { IState as IPlaceState, Action as placeAction } from "./place";
 import order, { IState as IOrderState, Action as orderAction } from "./order";
+import user, { IState as IUserState, Action as userAction } from "./user";
 import logging, {
   IState as ILoggingState,
   Action as logingAction
@@ -17,16 +18,23 @@ export interface IStore {
   place: IPlaceState;
   logging: ILoggingState;
   order: IOrderState;
+  user: IUserState;
 }
 
-export type Action = kintaiAction | placeAction | logingAction | orderAction;
+export type Action =
+  | kintaiAction
+  | placeAction
+  | logingAction
+  | orderAction
+  | userAction;
 
 const rootReducer = combineReducers<IStore>({
   test,
   kintai,
   place,
   logging,
-  order
+  order,
+  user
 });
 
 export default rootReducer;
