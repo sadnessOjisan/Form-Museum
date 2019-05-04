@@ -10,13 +10,13 @@ import { SideBar } from "../component/common/Sidebar";
 import { track } from "../redux/module/logging";
 import { genLoadLog } from "../helper/util";
 import { ITracker } from "../typedef/Tracker";
+import { InputItem } from "../component/masi/InputItem";
 
 interface DispatchProps {
   track: typeof track;
 }
 
 interface FormValues {
-  name: string;
   sales: number;
   cost: number;
 }
@@ -24,7 +24,16 @@ interface FormValues {
 type IProps = DispatchProps;
 
 const Masi = (props: IProps & FormikProps<FormValues>) => {
-  const { track, errors, handleSubmit, handleChange, values } = props;
+  const {
+    track,
+    errors,
+    handleSubmit,
+    handleChange,
+    values,
+    touched,
+    handleBlur
+  } = props;
+  console.log("touched", touched);
   useEffect(() => {
     track(genLoadLog("load_masi"));
   }, []);
@@ -35,18 +44,24 @@ const Masi = (props: IProps & FormikProps<FormValues>) => {
         <SideBar />
         <MainContentsWrapper onSubmit={handleSubmit}>
           <h1>mASI</h1>
-          <div>
-            <label>今日の日付</label>
-            <input name="name" onChange={handleChange} value={values.name} />
-          </div>
-          <div>
-            <label>売り上げ</label>
-            <input name="sales" onChange={handleChange} value={values.sales} />
-          </div>
-          <div>
-            <label>人件費</label>
-            <input name="cost" onChange={handleChange} value={values.cost} />
-          </div>
+          <InputItem
+            name="sales"
+            handleChange={handleChange}
+            handleBlur={handleBlur}
+            value={values.sales}
+            label="売り上げ"
+            errorMessage={errors.sales}
+            touched={touched.sales ? true : false}
+          />
+          <InputItem
+            name="cost"
+            handleChange={handleChange}
+            handleBlur={handleBlur}
+            value={values.cost}
+            label="人件費"
+            errorMessage={errors.cost}
+            touched={touched.cost ? true : false}
+          />
           <button
             type="submit"
             disabled={Object.keys(errors).length !== 0 ? true : false}
@@ -71,7 +86,10 @@ const ContentsBox = styled.div`
 `;
 
 const MainContentsWrapper = styled.form`
-  width: 100%;
+  width: calc(100% - 200px);
+  height: 100%;
+  position: relative;
+  padding: 8px;
 `;
 
 type MyFormProps = {
@@ -85,15 +103,14 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => ({
 });
 
 const MasiSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
   sales: Yup.number()
     .max(1000000, "最大値は100000です")
     .positive("正数を入れてください")
     .required("Required"),
-  cost: Yup.number().required("Required")
+  cost: Yup.number()
+    .max(1000000, "最大値は100000です")
+    .positive("正数を入れてください")
+    .required("Required")
 });
 
 const MasiForm = connect(
@@ -102,7 +119,6 @@ const MasiForm = connect(
 )(
   withFormik<MyFormProps, FormValues>({
     mapPropsToValues: props => ({
-      name: props.name,
       sales: props.sales,
       cost: props.cost
     }),

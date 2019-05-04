@@ -6,16 +6,17 @@ interface IProps {
   onClick: () => void;
   name: string;
   selected: boolean;
+  dataTestId: string;
 }
 
 const SideBarItem = (props: IProps) => {
-  const { className, name, onClick, selected } = props;
+  const { className, name, onClick, selected, dataTestId } = props;
   return (
     <Wrapper
       className={className}
       onClick={onClick}
       selected={selected}
-      data-testid="sidebarItem"
+      data-testid={dataTestId}
     >
       {name}
     </Wrapper>

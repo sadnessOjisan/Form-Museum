@@ -1,3 +1,8 @@
 export const path = {
-  "/with-button": "KINTAI"
+  "/": "HOME",
+  "/kuso": "KUSO",
+  "/masi": "MASI",
+  "/login": "LOGIN",
+  "/order": "ORDER",
+  "/with-button": "WITH_BUTTON"
 };

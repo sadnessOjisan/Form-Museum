@@ -38,7 +38,7 @@ const SideBar = (props: IProps & DispatchProps) => {
           push("/kuso");
         }} // 遷移を全部sagaにやらせてもよかったかも？
         selected={pathname === "/kuso"}
-        data-testid={TEST_OR_TRACK_TARGET.kuso}
+        dataTestId={TEST_OR_TRACK_TARGET.kuso}
       />
       <SideBarItem
         name="masi"
@@ -49,7 +49,7 @@ const SideBar = (props: IProps & DispatchProps) => {
           push("/masi");
         }}
         selected={pathname === "/masi"}
-        data-testid={TEST_OR_TRACK_TARGET.masi}
+        dataTestId={TEST_OR_TRACK_TARGET.masi}
       />
       <SideBarItem
         name="with-button"
@@ -64,7 +64,7 @@ const SideBar = (props: IProps & DispatchProps) => {
           push("/with-button");
         }}
         selected={pathname === "/with-button"}
-        data-testid={TEST_OR_TRACK_TARGET.withButton}
+        dataTestId={TEST_OR_TRACK_TARGET.withButton}
       />
       <SideBarItem
         name="order"
@@ -73,7 +73,7 @@ const SideBar = (props: IProps & DispatchProps) => {
           push("/order");
         }}
         selected={pathname === "/order"}
-        data-testid={TEST_OR_TRACK_TARGET.order}
+        dataTestId={TEST_OR_TRACK_TARGET.order}
       />
     </Wrapper>
   );
