@@ -16,7 +16,7 @@ interface IProps {
 
 const InputRow = (props: IProps) => {
   const { handleChange, index, name, value, handleRowRemove } = props
-  const { startTime, endTime, item } = value
+  const { startTime, endTime, event } = value
   return (
     <Draggable draggableId={String(index)} index={index} isDragDisabled={false}>
       {(provided, snapshot) => (
@@ -44,9 +44,9 @@ const InputRow = (props: IProps) => {
             <span>-</span>
             <TextInput
               type="text"
-              name={`${name}.${index}.item`}
+              name={`${name}.${index}.event`}
               onChange={handleChange}
-              value={item}
+              value={event}
             />
           </InputItems>
           <TrashButton onClick={() => handleRowRemove(index)} type="button" />
@@ -108,7 +108,7 @@ const MemoizedInputRow = React.memo(InputRow, (p, n) => {
   return (
     p.value.startTime === n.value.startTime &&
     p.value.endTime === n.value.endTime &&
-    p.value.item === n.value.item
+    p.value.event === n.value.event
   )
 })
 

@@ -96,7 +96,7 @@ const Form = (props: IProps) => {
                           arrayHelpers.push({
                             startTime: '',
                             endTime: '',
-                            item: '',
+                            event: '',
                           })
                         }
                       >
