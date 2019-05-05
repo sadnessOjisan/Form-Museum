@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { useEffect } from 'react'
 import styled from 'styled-components'
 import { Header } from '../component/common/Header'
 import { SideBar } from '../component/common/Sidebar'

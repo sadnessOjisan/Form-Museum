@@ -251,7 +251,7 @@ const ConnectedForm = connect(
       number: 0,
       options: [],
     }),
-    handleSubmit: (values, formikBag) => {
+    handleSubmit: () => {
       alert('submit')
     },
   })(WithButton)

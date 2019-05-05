@@ -11,7 +11,7 @@ import { IOrderItem } from '../../typedef/model/OrderItem'
 import { IStore } from '../../redux/module'
 import { Viewer } from './Viewer'
 import { MemoizedInputRow } from './EditorRow'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import Button from '../common/Button'
 
 interface StateProps {
@@ -35,7 +35,7 @@ interface FormValues {
 type IProps = StateProps & DispatchProps & OwnProps & FormikProps<FormValues>
 
 const Form = (props: IProps) => {
-  const { values, handleChange, handleOutput } = props
+  const { values, handleChange } = props
   const { schedule } = values
   return (
     <FormWrapper>
@@ -47,7 +47,7 @@ const Form = (props: IProps) => {
           name="schedule"
           render={arrayHelpers => (
             <DragDropContext
-              onDragEnd={(result, provided) => {
+              onDragEnd={result => {
                 const { source, destination } = result
                 const sourceIndex = source.index
                 const destinationIndex = destination ? destination.index : 0
@@ -159,7 +159,7 @@ const SubmitButton = styled(Button.Circle)`
   bottom: 8px;
 `
 
-type MyFormProps = StateProps & DispatchProps
+type MyFormProps = OwnProps & StateProps & DispatchProps
 
 const mapStateToProps = (state: IStore): StateProps => ({
   isSending: state.order.isSending,
@@ -176,9 +176,9 @@ const ConnectedForm = connect(
   mapDispatchToProps
 )(
   withFormik<MyFormProps, FormValues>({
-    mapPropsToValues: props => {
+    mapPropsToValues: () => {
       const dummy = new Array(10).fill(0)
-      const dummy2 = dummy.map(d => {
+      const dummy2 = dummy.map(() => {
         return { startTime: '11', endTime: '12', item: 'hoge' }
       })
       return { schedule: dummy2 }

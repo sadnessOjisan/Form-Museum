@@ -1,8 +1,5 @@
 import * as React from 'react'
 import styled from 'styled-components'
-// @ts-ignore air-kitの型定義ファイルをゲットする
-import { Button } from '@air-kit/air-kit'
-
 interface Props {
   className?: string
   children: React.ReactNode

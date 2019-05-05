@@ -1,18 +1,10 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { withFormik, FormikProps } from 'formik'
 import { Header } from '../component/common/Header'
 import { SideBar } from '../component/common/Sidebar'
 import { Kuso } from '../component/kuso/Form'
 
-interface FormValues {
-  name: string | null
-  sales: number | null
-  cost: number | null
-}
-
-const KusoFormPage = (props: FormikProps<FormValues>) => {
-  const { errors, handleSubmit, handleChange } = props
+const KusoFormPage = () => {
   return (
     <Wrapper>
       <Header />

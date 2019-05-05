@@ -76,7 +76,7 @@ const KusoForm = connect(
       sales: null,
       cost: null,
     }),
-    handleSubmit: values => {
+    handleSubmit: () => {
       alert('submit')
     },
   })(Form)
