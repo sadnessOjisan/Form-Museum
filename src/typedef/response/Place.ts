@@ -1,3 +1,3 @@
-import { IPlace } from "../model/Place";
+import { IPlace } from '../model/Place'
 
-export type IPlacesResponse = IPlace[];
+export type IPlacesResponse = IPlace[]

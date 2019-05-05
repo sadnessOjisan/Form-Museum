@@ -1,24 +1,24 @@
-import * as React from "react";
-import styled from "styled-components";
+import * as React from 'react'
+import styled from 'styled-components'
 
 interface IProps {
-    message?: string;
-    className?: string;
+  message?: string
+  className?: string
 }
 
 const Balloon = (props: IProps) => {
-    const { message, className } = props;
-    return (
-        <Wrapper className={className}>
-            <Box>{message}</Box>
-            <Triangle />
-        </Wrapper>
-    );
-};
+  const { message, className } = props
+  return (
+    <Wrapper className={className}>
+      <Box>{message}</Box>
+      <Triangle />
+    </Wrapper>
+  )
+}
 
 const Wrapper = styled.div`
   position: relative;
-`;
+`
 
 const Triangle = styled.div`
   border: solid 1px red;
@@ -31,7 +31,7 @@ const Triangle = styled.div`
   top: -15px;
   left: 10px;
   position: absolute;
-`;
+`
 
 const Box = styled.div`
   background-color: pink;
@@ -40,6 +40,6 @@ const Box = styled.div`
   bottom: 10px;
   position: absolute;
   width: 200px;
-`;
+`
 
-export { Balloon };
+export { Balloon }

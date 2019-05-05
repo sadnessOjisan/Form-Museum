@@ -1,11 +1,10 @@
-import { fork, all, takeEvery, Effect, put } from "redux-saga/effects";
-import { types, actions } from "../module/kintai";
+import { fork, all, takeEvery, Effect, put } from 'redux-saga/effects'
+import { types, actions } from '../module/kintai'
 
 function* closeModalSaga(): Iterable<Effect> {
-    yield put(actions.reset());
+  yield put(actions.reset())
 }
 
 export default function* kintaiSaga() {
-    console.log("saga");
-    yield takeEvery(types.CLOSE_MODAL, closeModalSaga);
+  yield takeEvery(types.CLOSE_MODAL, closeModalSaga)
 }

@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  plugins: ["@typescript-eslint", "react"],
+  plugins: ["@typescript-eslint", "react", "jest"],
   parser: "@typescript-eslint/parser",
   extends: ["eslint:recommended", "prettier"],
   env: {
@@ -19,7 +19,6 @@ module.exports = {
     "@typescript-eslint/class-name-casing": "error",
     "@typescript-eslint/explicit-function-return-type": "warn",
     "@typescript-eslint/explicit-member-accessibility": "error",
-    indent: "off",
     "@typescript-eslint/indent": "error",
     "@typescript-eslint/member-delimiter-style": "error",
     "@typescript-eslint/no-angle-bracket-type-assertion": "error",

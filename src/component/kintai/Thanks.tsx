@@ -1,35 +1,35 @@
-import * as React from "react";
-import styled from "styled-components";
+import * as React from 'react'
+import styled from 'styled-components'
 
 const Thanks = () => {
-    return (
-        <Wrapper>
-            <h1>WorkingTime</h1>
-            <p>
+  return (
+    <Wrapper>
+      <h1>WorkingTime</h1>
+      <p>
         faaafwfaaafwfwefwefaaafwfwewefaaafwfwefwefaaafwfwefwefaaafwfwefwefaaafwfwefwefaaafwfwefwefwefwe
-            </p>
-            <p>
+      </p>
+      <p>
         faaafwfaaafwfwefwefaaafwfwewefaaafwfwefwefaaafwfwefwefaaafwfwefwefaaafwfwefwefaaafwfwefwefwefwe
-            </p>
-            <input />
-            <p>
+      </p>
+      <input />
+      <p>
         faaafwfaaafwfwefwefaaafwfwewefaaafwfwefwefaaafwfwefwefaaafwfwefwefaaafwfwefwefaaafwfwefwefwefwe
-            </p>
-            <p>
+      </p>
+      <p>
         faaafwfaaafwfwefwefaaafwfwewefaaafwfwefwefaaafwfwefwefaaafwfwefwefaaafwfwefwefaaafwfwefwefwefwe
-            </p>
-            <p>
+      </p>
+      <p>
         faaafwfaaafwfwefwefaaafwfwewefaaafwfwefwefaaafwfwefwefaaafwfwefwefaaafwfwefwefaaafwfwefwefwefwe
-            </p>
-        </Wrapper>
-    );
-};
+      </p>
+    </Wrapper>
+  )
+}
 const Wrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
   word-break: break-word;
-`;
+`
 
-export { Thanks };
+export { Thanks }

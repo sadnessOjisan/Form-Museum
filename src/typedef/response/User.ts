@@ -1,5 +1,5 @@
-import { IUser } from "../model/User";
+import { IUser } from '../model/User'
 
-type IUserResponse = IUser;
+type IUserResponse = IUser
 
-export { IUserResponse };
+export { IUserResponse }
