@@ -7,10 +7,20 @@ interface IProps {
 }
 
 const ScheduleItem = (props: IProps) => {
-  return <Wrapper>{props.item.item}</Wrapper>
+  const { item } = props
+  const { startTime, endTime } = item
+  return (
+    <Wrapper>
+      <TimeText>{startTime}</TimeText>
+      <TimeText>{endTime}</TimeText>
+      {item.item}
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.div``
+
+const TimeText = styled.span``
 
 const MemoizedScheduleItem = React.memo(
   ScheduleItem,

@@ -1,101 +1,120 @@
 import * as React from 'react'
+import { useEffect } from 'react'
 import { Dispatch, Action } from 'redux'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { withFormik, FormikProps, FieldArray } from 'formik'
+import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+import { WaveLoading } from 'styled-spinkit'
 import {
   actions as orderActions,
   initialState as orderState,
 } from '../../redux/module/order'
+
 import { IOrderItem } from '../../typedef/model/OrderItem'
 import { IStore } from '../../redux/module'
 import { Viewer } from './Viewer'
 import { MemoizedInputRow } from './EditorRow'
-import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+
 import Button from '../common/Button'
 
 interface StateProps {
   isSending: typeof orderState.isSending
   isSent: typeof orderState.isSent
   error: typeof orderState.error
+  isLoading: typeof orderState.isLoading
+  isLoaded: typeof orderState.isLoaded
+  data: typeof orderState.data
 }
 
 interface DispatchProps {
   startPostData: typeof orderActions.startPostData
-}
-
-interface OwnProps {
-  handleOutput: () => void
+  startFetchData: typeof orderActions.startFetchData
 }
 
 interface FormValues {
   schedule: IOrderItem[]
 }
 
-type IProps = StateProps & DispatchProps & OwnProps & FormikProps<FormValues>
+type IProps = StateProps & DispatchProps & FormikProps<FormValues>
 
 const Form = (props: IProps) => {
-  const { values, handleChange } = props
+  const {
+    values,
+    handleChange,
+    startFetchData,
+    isLoaded,
+    isLoading,
+    data,
+    error,
+  } = props
   const { schedule } = values
+  useEffect(() => {
+    startFetchData()
+  }, [])
   return (
     <FormWrapper>
       <ViewerWrapper>
         <Viewer schedule={schedule} />
       </ViewerWrapper>
       <Editor>
-        <FieldArray
-          name="schedule"
-          render={arrayHelpers => (
-            <DragDropContext
-              onDragEnd={result => {
-                const { source, destination } = result
-                const sourceIndex = source.index
-                const destinationIndex = destination ? destination.index : 0
-                arrayHelpers.move(sourceIndex, destinationIndex)
-              }}
-            >
-              <Droppable droppableId="droppable-items" type="ITEM">
-                {(provided, snapshot) => (
-                  <DrappableArea
-                    ref={provided.innerRef}
-                    {...provided.droppableProps}
-                  >
-                    {values.schedule.map((item, idx) => (
-                      <MemoizedInputRow
-                        handleChange={handleChange}
-                        handleRowRemove={(rowIndex: number) =>
-                          arrayHelpers.remove(rowIndex)
-                        }
-                        index={idx}
-                        name="schedule"
-                        value={item}
-                        key={idx}
-                      />
-                    ))}
-                    <AddButton
-                      type="button"
-                      onClick={() =>
-                        arrayHelpers.push({
-                          startTime: '',
-                          endTime: '',
-                          item: '',
-                        })
-                      }
+        {!(!isLoading && data) ? (
+          <WaveLoading />
+        ) : (
+          <FieldArray
+            name="schedule"
+            render={arrayHelpers => (
+              <DragDropContext
+                onDragEnd={result => {
+                  const { source, destination } = result
+                  const sourceIndex = source.index
+                  const destinationIndex = destination ? destination.index : 0
+                  arrayHelpers.move(sourceIndex, destinationIndex)
+                }}
+              >
+                <Droppable droppableId="droppable-items" type="ITEM">
+                  {(provided, snapshot) => (
+                    <DrappableArea
+                      ref={provided.innerRef}
+                      {...provided.droppableProps}
                     >
-                      ADD
-                    </AddButton>
-                    <SubmitButton />
-                    {snapshot.isDraggingOver && (
-                      <DragCover>
-                        変更したい箇所でカーソルを離してください
-                      </DragCover>
-                    )}
-                  </DrappableArea>
-                )}
-              </Droppable>
-            </DragDropContext>
-          )}
-        />
+                      {values.schedule.map((item, idx) => (
+                        <MemoizedInputRow
+                          handleChange={handleChange}
+                          handleRowRemove={(rowIndex: number) =>
+                            arrayHelpers.remove(rowIndex)
+                          }
+                          index={idx}
+                          name="schedule"
+                          value={item}
+                          key={idx}
+                        />
+                      ))}
+                      <AddButton
+                        type="button"
+                        onClick={() =>
+                          arrayHelpers.push({
+                            startTime: '',
+                            endTime: '',
+                            item: '',
+                          })
+                        }
+                      >
+                        ADD
+                      </AddButton>
+                      <SubmitButton />
+                      {snapshot.isDraggingOver && (
+                        <DragCover>
+                          変更したい箇所でカーソルを離してください
+                        </DragCover>
+                      )}
+                    </DrappableArea>
+                  )}
+                </Droppable>
+              </DragDropContext>
+            )}
+          />
+        )}
       </Editor>
     </FormWrapper>
   )
@@ -159,9 +178,12 @@ const SubmitButton = styled(Button.Circle)`
   bottom: 8px;
 `
 
-type MyFormProps = OwnProps & StateProps & DispatchProps
+type MyFormProps = StateProps & DispatchProps
 
 const mapStateToProps = (state: IStore): StateProps => ({
+  isLoading: state.order.isLoading,
+  isLoaded: state.order.isLoaded,
+  data: state.order.data,
   isSending: state.order.isSending,
   isSent: state.order.isSent,
   error: state.order.error,
@@ -169,6 +191,7 @@ const mapStateToProps = (state: IStore): StateProps => ({
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => ({
   startPostData: (query: any) => dispatch(orderActions.startPostData(query)),
+  startFetchData: () => dispatch(orderActions.startFetchData()),
 })
 
 const ConnectedForm = connect(
@@ -176,19 +199,16 @@ const ConnectedForm = connect(
   mapDispatchToProps
 )(
   withFormik<MyFormProps, FormValues>({
-    mapPropsToValues: () => {
-      const dummy = new Array(10).fill(0)
-      const dummy2 = dummy.map(() => {
-        return { startTime: '11', endTime: '12', item: 'hoge' }
-      })
-      return { schedule: dummy2 }
-    },
+    mapPropsToValues: props => ({
+      schedule: props.data ? props.data : [],
+    }),
     handleSubmit: (values, formikBag) => {
       const { props } = formikBag
       const { startPostData } = props
       startPostData(values)
       alert('submit')
     },
+    enableReinitialize: true,
   })(Form)
 )
 

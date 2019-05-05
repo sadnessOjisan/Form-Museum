@@ -29,14 +29,14 @@ const InputRow = (props: IProps) => {
           <DragPoint />
           <InputItems>
             <TimeInput
-              type="number"
+              type="text"
               name={`${name}.${index}.startTime`}
               onChange={handleChange}
               value={startTime}
             />
             <span>-</span>
             <TimeInput
-              type="number"
+              type="text"
               name={`${name}.${index}.endTime`}
               onChange={handleChange}
               value={endTime}

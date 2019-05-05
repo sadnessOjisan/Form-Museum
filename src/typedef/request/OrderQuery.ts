@@ -1,5 +1,5 @@
 import { IOrderItem } from '../model/OrderItem'
 
-export interface ISchedule {
+export interface IScheduleRequest {
   schedule: IOrderItem[]
 }
