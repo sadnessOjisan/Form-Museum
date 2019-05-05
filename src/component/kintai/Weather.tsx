@@ -1,61 +1,17 @@
 import * as React from 'react'
 import { useState } from 'react'
 import styled from 'styled-components'
-// @ts-ignore あとでちゃんとする
-import Rain from '../../asset/video/rain.mp4'
-// @ts-ignore あとでちゃんとする
-import Hare from '../../asset/video/hare.mp4'
-
-type TWeather = '晴れ' | '曇り' | '雨'
 
 const Weather = () => {
-  const [selectedWeather, set] = useState()
-  let videoPath: string | null
-  switch (selectedWeather) {
-    case '晴れ':
-      videoPath = Hare
-      break
-    case '曇り':
-      videoPath = ''
-      break
-    case '雨':
-      videoPath = Rain
-      break
-    default:
-      videoPath = null
-  }
   return (
     <Wrapper>
       <Layer>
-        {videoPath && (
-          <Video src={videoPath}>
-            <source />
-          </Video>
-        )}
-      </Layer>
-      <Layer>
         <h1>今日の天気を選んでください</h1>
-        <input
-          type="radio"
-          name="weather"
-          value="晴れ"
-          onClick={() => set('晴れ')}
-        />
+        <input type="radio" name="weather" value="晴れ" />
         晴れ
-        <input
-          type="radio"
-          name="weather"
-          value="曇り"
-          onClick={() => set('曇り')}
-        />
+        <input type="radio" name="weather" value="曇り" />
         曇り
-        <input
-          type="radio"
-          name="weather"
-          value="雨"
-          onClick={() => set('雨')}
-        />
-        雨
+        <input type="radio" name="weather" value="雨" />雨
       </Layer>
     </Wrapper>
   )
