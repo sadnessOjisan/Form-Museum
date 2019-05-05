@@ -33,7 +33,6 @@ const Masi = (props: IProps & FormikProps<FormValues>) => {
     touched,
     handleBlur,
   } = props
-  console.log('touched', touched)
   useEffect(() => {
     track(genLoadLog('load_masi'))
   }, [])
@@ -125,7 +124,6 @@ const MasiForm = connect(
       cost: props.cost,
     }),
     handleSubmit: values => {
-      console.log(values)
       alert('submit')
     },
     validationSchema: MasiSchema,

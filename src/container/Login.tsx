@@ -10,9 +10,7 @@ interface FormValues {
   password: string
 }
 
-interface IProps {}
-
-const Login = (props: IProps & FormikProps<FormValues>) => {
+const Login = (props: FormikProps<FormValues>) => {
   const { handleSubmit, errors, handleChange } = props
   const [{ st, xy }, set] = useSpring(() => ({ st: 0, xy: [0, 0] }))
   const interpEye = interpolate(

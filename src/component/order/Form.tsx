@@ -178,7 +178,6 @@ const ConnectedForm = connect(
   withFormik<MyFormProps, FormValues>({
     mapPropsToValues: props => {
       const dummy = new Array(10).fill(0)
-      console.log(dummy)
       const dummy2 = dummy.map(d => {
         return { startTime: '11', endTime: '12', item: 'hoge' }
       })
