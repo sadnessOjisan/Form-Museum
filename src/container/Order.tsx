@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { Header } from "../component/common/Header";
 import { SideBar } from "../component/common/Sidebar";
 import { Form } from "../component/order/Form";
-import Button from "../component/common/Button";
 type IProps = {};
 
 const Order = (props: IProps) => {

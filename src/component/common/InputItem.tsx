@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Balloon } from "../common/Balloon";
+import { Balloon } from "./Balloon";
+import { COLOR } from "../../const/color";
 
 interface IProps {
   label: string;
@@ -8,8 +9,10 @@ interface IProps {
   value: number;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleBlur: (e: React.FocusEvent<any>) => void;
+  onFocus?: () => void;
   errorMessage?: string;
   touched: boolean;
+  type: "number" | "string";
 }
 
 const InputItem = (props: IProps) => {
@@ -20,12 +23,13 @@ const InputItem = (props: IProps) => {
     value,
     errorMessage,
     handleBlur,
-    touched
+    touched,
+    type
   } = props;
   const isValid = errorMessage ? false : true;
   return (
     <Wrapper>
-      <Label>{label}</Label>
+      <Label for={name}>{label}</Label>
       <InputWrapper>
         {touched && !isValid && <ValidationBalloon message={errorMessage} />}
         <Input
@@ -34,6 +38,8 @@ const InputItem = (props: IProps) => {
           onBlur={handleBlur}
           value={value}
           shouldBeRed={!isValid && touched}
+          id={name}
+          type={type}
         />
       </InputWrapper>
     </Wrapper>
@@ -44,11 +50,18 @@ const Wrapper = styled.div``;
 const InputWrapper = styled.div`
   position: relative;
 `;
-const Label = styled.label``;
+const Label = styled.label<{ for: string }>``;
 
 const Input = styled.input<{ shouldBeRed: boolean }>`
   border: solid 1px gray;
   border-color: ${props => props.shouldBeRed && "red"};
+  height: 40px;
+  padding-left: 4px;
+  border-radius: 4px;
+  &:focus {
+    outline: 0;
+    border-color: ${COLOR.blue};
+  }
 `;
 
 const ValidationBalloon = styled(Balloon)`

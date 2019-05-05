@@ -20,7 +20,9 @@ const KusoFormPage = (props: IProps & FormikProps<FormValues>) => {
       <Header />
       <ContentsBox>
         <SideBar />
-        <Kuso />
+        <MainContentsWrapper>
+          <Kuso />
+        </MainContentsWrapper>
       </ContentsBox>
     </Wrapper>
   );
@@ -37,6 +39,11 @@ const ContentsBox = styled.div`
   height: 100%;
 `;
 
-interface MyFormProps {}
+const MainContentsWrapper = styled.form`
+  width: calc(100% - 200px);
+  height: 100%;
+  position: relative;
+  padding: 8px;
+`;
 
 export { KusoFormPage };

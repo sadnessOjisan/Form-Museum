@@ -26,8 +26,8 @@ $ yarn run build:prd
 
 ## task
 
-- [ ] validation の example を作る
 - [ ] Toast 作る
-- [ ] log の再生部分を作る
 - [ ] CSS 整える
 - [ ] SVG の整理
+- [ ] withbutton のテストを分厚くする（複雑な例として）
+- [ ] withbutton の 0 消しがなぜ必要かを解説する

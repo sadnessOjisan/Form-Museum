@@ -5,15 +5,17 @@ import { connect } from "react-redux";
 import { withFormik, FormikProps } from "formik";
 import { Header } from "../component/common/Header";
 import { SideBar } from "../component/common/Sidebar";
-import { FooterLayout } from "../component/common/Footer";
+import Button from "../component/common/Button";
 import {
   actions as placeActions,
   initialState as placeState
 } from "../redux/module/place";
 import { IStore } from "../redux/module";
 import { track } from "../redux/module/logging";
-import { genBlurLog } from "../helper/util";
+import { genBlurLog, genClickLog } from "../helper/util";
 import { ITracker } from "../typedef/Tracker";
+import { CheckBox } from "../component/withButton/CheckBox";
+import { InputItem } from "../component/common/InputItem";
 
 interface StateProps {
   isLoading: typeof placeState.isLoading;
@@ -23,13 +25,12 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  startFetchData: typeof placeActions.startFetchData;
   track: typeof track;
 }
 
 interface FormValues {
-  budget: string | null;
-  number: number | null;
+  budget: number;
+  number: number;
   options: string[];
 }
 
@@ -37,12 +38,26 @@ type IProps = StateProps & DispatchProps & FormikProps<FormValues>;
 
 const TEST_OR_TRACK_TARGET = {
   inputBudget: "input-budget",
+  BudgetPlusStepper: "budget-plus-stepper",
+  BudgetMinusStepper: "budget-minus-stepper",
+  NumberPlusStepper: "number-plus-stepper",
+  NumberMinusStepper: "number-minus-stepper",
   inputNumber: "input-number",
   inputPlace: "input-place"
 };
 
+const BUDGET_STEP = 100000;
+const NUM_STEP = 1;
+
 const WithButton = (props: IProps) => {
-  const { handleChange, handleSubmit, track, values, setFieldValue } = props;
+  const {
+    handleChange,
+    handleSubmit,
+    track,
+    values,
+    setFieldValue,
+    touched
+  } = props;
   return (
     <Wrapper>
       <Header />
@@ -55,11 +70,11 @@ const WithButton = (props: IProps) => {
           <div style={{ display: "flex" }}>
             <div>
               <InputGroup>
-                <label>予算</label>
-                <input
+                <InputItem
                   name="budget"
-                  onChange={handleChange}
-                  onBlur={() =>
+                  label="予算"
+                  handleChange={handleChange}
+                  handleBlur={() =>
                     track(
                       genBlurLog(
                         "input-budget",
@@ -68,17 +83,65 @@ const WithButton = (props: IProps) => {
                       )
                     )
                   }
+                  onFocus={() =>
+                    values.budget === 0 && setFieldValue("budget", "")
+                  }
                   data-testid={TEST_OR_TRACK_TARGET.inputBudget}
+                  value={values.budget}
+                  touched={touched.budget ? true : false}
+                  type="number"
                 />
-                <button type="button">+</button>
-                <button type="button">-</button>
+                <Button.Input
+                  type="button"
+                  onClick={() => {
+                    setFieldValue(
+                      "budget",
+                      Number(values.budget) > 0
+                        ? Number(values.budget) + BUDGET_STEP
+                        : 0 + BUDGET_STEP
+                    );
+                    track(
+                      genClickLog(
+                        "budget-stepper-click-plus",
+                        TEST_OR_TRACK_TARGET.inputBudget
+                      )
+                    );
+                  }}
+                  dataTestId={TEST_OR_TRACK_TARGET.BudgetPlusStepper}
+                >
+                  +
+                </Button.Input>
+                <Button.Input
+                  type="button"
+                  onClick={() => {
+                    setFieldValue(
+                      "budget",
+                      Number(values.budget) > 0
+                        ? Number(values.budget) - BUDGET_STEP > 0
+                          ? Number(values.budget) - BUDGET_STEP
+                          : 0
+                        : 0 - BUDGET_STEP > 0
+                        ? 0 - BUDGET_STEP
+                        : 0
+                    );
+                    track(
+                      genClickLog(
+                        "budget-stepper-click-minus",
+                        TEST_OR_TRACK_TARGET.inputBudget
+                      )
+                    );
+                  }}
+                  dataTestId={TEST_OR_TRACK_TARGET.BudgetMinusStepper}
+                >
+                  -
+                </Button.Input>
               </InputGroup>
               <InputGroup>
-                <label>何人</label>
-                <input
+                <InputItem
                   name="number"
-                  onChange={handleChange}
-                  onBlur={() =>
+                  label="何人"
+                  handleChange={handleChange}
+                  handleBlur={() =>
                     track(
                       genBlurLog(
                         "input-number",
@@ -87,51 +150,77 @@ const WithButton = (props: IProps) => {
                       )
                     )
                   }
+                  onFocus={() =>
+                    values.number === 0 && setFieldValue("number", "")
+                  }
+                  value={values.number}
                   data-testid={TEST_OR_TRACK_TARGET.inputNumber}
+                  touched={touched.budget ? true : false}
+                  type="number"
                 />
-                <button type="button">+</button>
-                <button type="button">-</button>
+                <Button.Input
+                  type="button"
+                  onClick={() => {
+                    setFieldValue(
+                      "number",
+                      Number(values.number) > 0
+                        ? Number(values.number) + NUM_STEP
+                        : 0 + NUM_STEP
+                    );
+                    track(
+                      genClickLog(
+                        "budget-stepper-click-minus",
+                        TEST_OR_TRACK_TARGET.inputBudget
+                      )
+                    );
+                  }}
+                  dataTestId={TEST_OR_TRACK_TARGET.NumberPlusStepper}
+                >
+                  +
+                </Button.Input>
+                <Button.Input
+                  type="button"
+                  onClick={() => {
+                    setFieldValue(
+                      "number",
+                      Number(values.number) > 0
+                        ? Number(values.number) - NUM_STEP > 0
+                          ? Number(values.number) - NUM_STEP
+                          : 0
+                        : 0 - NUM_STEP > 0
+                        ? 0 - NUM_STEP
+                        : 0
+                    );
+                    track(
+                      genClickLog(
+                        "budget-stepper-click-minus",
+                        TEST_OR_TRACK_TARGET.inputBudget
+                      )
+                    );
+                  }}
+                  dataTestId={TEST_OR_TRACK_TARGET.NumberMinusStepper}
+                >
+                  -
+                </Button.Input>
               </InputGroup>
               <InputGroup>
                 <label>オプションはどれにする</label>
-                <input
-                  type="checkbox"
+                <CheckBox
                   name="options"
+                  label="hoge"
                   value="hoge"
-                  checked={values.options.includes("hoge")}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    const clickedValue = e.target.value;
-                    if (values.options.includes(clickedValue)) {
-                      const nextOptions = values.options.filter(
-                        option => option !== clickedValue
-                      );
-                      setFieldValue("options", nextOptions);
-                    } else {
-                      const nextOptions = [...values.options, clickedValue];
-                      setFieldValue("options", nextOptions);
-                    }
-                  }}
+                  options={values.options}
+                  setFieldValue={setFieldValue}
+                  track={track}
                 />
-                hoge
-                <input
-                  type="checkbox"
+                <CheckBox
                   name="options"
+                  label="fuga"
                   value="fuga"
-                  checked={values.options.includes("fuga")}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    const clickedValue = e.target.value;
-                    if (values.options.includes(clickedValue)) {
-                      const nextOptions = values.options.filter(
-                        option => option !== clickedValue
-                      );
-                      setFieldValue("options", nextOptions);
-                    } else {
-                      const nextOptions = [...values.options, clickedValue];
-                      setFieldValue("options", nextOptions);
-                    }
-                  }}
+                  options={values.options}
+                  setFieldValue={setFieldValue}
+                  track={track}
                 />
-                fuga
               </InputGroup>
             </div>
           </div>
@@ -152,8 +241,6 @@ const mapStateToProps = (state: IStore): StateProps => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => ({
-  startFetchData: ({ budget, ParticipantNum }) =>
-    dispatch(placeActions.startFetchData({ budget, ParticipantNum })),
   track: (log: ITracker) => dispatch(track(log))
 });
 
@@ -163,15 +250,12 @@ const ConnectedForm = connect(
 )(
   withFormik<MyFormProps, FormValues>({
     mapPropsToValues: () => ({
-      budget: null,
-      number: null,
+      budget: 0,
+      number: 0,
       options: []
     }),
     handleSubmit: (values, formikBag) => {
       console.log(values);
-      const { props } = formikBag;
-      const { startFetchData } = props;
-      startFetchData({ budget: 1, ParticipantNum: 3 });
       alert("submit");
     }
   })(WithButton)
@@ -192,6 +276,7 @@ const MainContentsWrapper = styled.form`
   width: calc(100% - 200px);
   height: 100%;
   position: relative;
+  padding: 8px;
 `;
 
 const InputGroup = styled.div`

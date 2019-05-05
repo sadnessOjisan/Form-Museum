@@ -84,7 +84,7 @@ const InputItems = styled.div`
 `;
 
 const Input = styled.input`
-  height: 40px;
+  height: 20px;
   padding-left: 4px;
   border-radius: 4px;
   &:focus {

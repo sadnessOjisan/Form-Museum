@@ -10,7 +10,7 @@ import { SideBar } from "../component/common/Sidebar";
 import { track } from "../redux/module/logging";
 import { genLoadLog } from "../helper/util";
 import { ITracker } from "../typedef/Tracker";
-import { InputItem } from "../component/masi/InputItem";
+import { InputItem } from "../component/common/InputItem";
 
 interface DispatchProps {
   track: typeof track;
