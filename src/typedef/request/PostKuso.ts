@@ -1,3 +1,3 @@
 export interface PostKuso {
-  name: string;
+    name: string;
 }

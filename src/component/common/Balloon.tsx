@@ -2,18 +2,18 @@ import * as React from "react";
 import styled from "styled-components";
 
 interface IProps {
-  message?: string;
-  className?: string;
+    message?: string;
+    className?: string;
 }
 
 const Balloon = (props: IProps) => {
-  const { message, className } = props;
-  return (
-    <Wrapper className={className}>
-      <Box>{message}</Box>
-      <Triangle />
-    </Wrapper>
-  );
+    const { message, className } = props;
+    return (
+        <Wrapper className={className}>
+            <Box>{message}</Box>
+            <Triangle />
+        </Wrapper>
+    );
 };
 
 const Wrapper = styled.div`

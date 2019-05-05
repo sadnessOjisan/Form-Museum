@@ -14,12 +14,12 @@ import { genLog } from "../helper/util";
 interface OwnProps {}
 
 interface StateProps {
-  readonly selectedModal: ModalType;
+    readonly selectedModal: ModalType;
 }
 
 interface DispatchProps {
-  readonly closeModal: typeof kintaiActions.closeModal;
-  readonly selectModal: typeof kintaiActions.selectModal;
+    readonly closeModal: typeof kintaiActions.closeModal;
+    readonly selectModal: typeof kintaiActions.selectModal;
 }
 
 type IProps = OwnProps & StateProps & DispatchProps;
@@ -27,79 +27,79 @@ type IProps = OwnProps & StateProps & DispatchProps;
 const HEADER_HEIGHT = 40;
 
 const Kintai: React.SFC<IProps> = (props: IProps) => {
-  const { closeModal, selectedModal, selectModal } = props;
-  const pages = {
-    WORKING_TIME: ({ style }: { style: React.CSSProperties }) => (
-      <Body style={{ ...style }}>
-        <KintaiModal.WorkingTime />
-        <Button.Normal onClick={() => selectModal("WEATHER", selectLog)}>
+    const { closeModal, selectedModal, selectModal } = props;
+    const pages = {
+        WORKING_TIME: ({ style }: { style: React.CSSProperties }) => (
+            <Body style={{ ...style }}>
+                <KintaiModal.WorkingTime />
+                <Button.Normal onClick={() => selectModal("WEATHER", selectLog)}>
           次へ
-        </Button.Normal>
-      </Body>
-    ),
-    WEATHER: ({ style }: { style: React.CSSProperties }) => (
-      <Body style={{ ...style }}>
-        <KintaiModal.Weather />
-        <Button.Normal onClick={() => selectModal("THANKS", selectLog)}>
+                </Button.Normal>
+            </Body>
+        ),
+        WEATHER: ({ style }: { style: React.CSSProperties }) => (
+            <Body style={{ ...style }}>
+                <KintaiModal.Weather />
+                <Button.Normal onClick={() => selectModal("THANKS", selectLog)}>
           次へ
-        </Button.Normal>
-      </Body>
-    ),
-    THANKS: ({ style }: { style: React.CSSProperties }) => (
-      <Body style={{ ...style }}>
-        <KintaiModal.Thanks />
-      </Body>
-    )
-  };
-  const transitions = useTransition(selectedModal, p => p, {
-    from: { opacity: 0, transform: "translate3d(30%,0,0)" },
-    enter: { opacity: 1, transform: "translate3d(0%,0,0)" },
-    leave: { opacity: 0, transform: "translate3d(0%,0,0)" }
-  });
-  return (
-    <Wrapper data-testid="kintai-modal">
-      <Content>
-        <Header>
-          <CloseButton onClick={() => closeModal(closeLog)}>閉じる</CloseButton>
-          <ModalTitle>勤怠</ModalTitle>
-        </Header>
-        {transitions.map(({ props, key }) => {
-          const Page = pages[selectedModal];
-          return <Page key={key} style={props} />;
-        })}
-        <Footer>
-          <Button.Normal>eee</Button.Normal>
-        </Footer>
-      </Content>
-    </Wrapper>
-  );
+                </Button.Normal>
+            </Body>
+        ),
+        THANKS: ({ style }: { style: React.CSSProperties }) => (
+            <Body style={{ ...style }}>
+                <KintaiModal.Thanks />
+            </Body>
+        )
+    };
+    const transitions = useTransition(selectedModal, p => p, {
+        from: { opacity: 0, transform: "translate3d(30%,0,0)" },
+        enter: { opacity: 1, transform: "translate3d(0%,0,0)" },
+        leave: { opacity: 0, transform: "translate3d(0%,0,0)" }
+    });
+    return (
+        <Wrapper data-testid="kintai-modal">
+            <Content>
+                <Header>
+                    <CloseButton onClick={() => closeModal(closeLog)}>閉じる</CloseButton>
+                    <ModalTitle>勤怠</ModalTitle>
+                </Header>
+                {transitions.map(({ props, key }) => {
+                    const Page = pages[selectedModal];
+                    return <Page key={key} style={props} />;
+                })}
+                <Footer>
+                    <Button.Normal>eee</Button.Normal>
+                </Footer>
+            </Content>
+        </Wrapper>
+    );
 };
 
 const mapStateToProps = (state: IStore): StateProps => ({
-  selectedModal: state.kintai.selectedModal
+    selectedModal: state.kintai.selectedModal
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-  closeModal: (log: ITracker) => dispatch(kintaiActions.closeModal(log)),
-  selectModal: (modal: ModalType, log: ITracker) =>
-    dispatch(kintaiActions.selectModal(modal, log))
+    closeModal: (log: ITracker) => dispatch(kintaiActions.closeModal(log)),
+    selectModal: (modal: ModalType, log: ITracker) =>
+        dispatch(kintaiActions.selectModal(modal, log))
 });
 
 const closeLog = genLog({
-  eventType: "click",
-  target: "hoge",
-  eventName: "openModal"
+    eventType: "click",
+    target: "hoge",
+    eventName: "openModal"
 });
 
 const selectLog = genLog({
-  eventType: "click",
-  target: "hoge",
-  eventName: "selectModal"
+    eventType: "click",
+    target: "hoge",
+    eventName: "selectModal"
 });
 
 const ConnectedKintai = connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(Kintai);
 
 const Wrapper = styled.div`

@@ -7,53 +7,53 @@ import { DragPoint } from "../common/DragPoint";
 import { COLOR } from "../../const/color";
 
 interface IProps {
-  handleChange: any;
-  handleRowRemove: any;
-  index: number;
-  name: string;
-  value: IOrderItem;
+    handleChange: any;
+    handleRowRemove: any;
+    index: number;
+    name: string;
+    value: IOrderItem;
 }
 
 const InputRow = (props: IProps) => {
-  const { handleChange, index, name, value, handleRowRemove } = props;
-  const { startTime, endTime, item } = value;
-  return (
-    <Draggable draggableId={String(index)} index={index} isDragDisabled={false}>
-      {(provided, snapshot) => (
-        <Wrapper
-          isDragging={snapshot.isDragging}
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-        >
-          <DragPoint />
-          <InputItems>
-            <TimeInput
-              type="number"
-              name={`${name}.${index}.startTime`}
-              onChange={handleChange}
-              value={startTime}
-            />
-            <span>-</span>
-            <TimeInput
-              type="number"
-              name={`${name}.${index}.endTime`}
-              onChange={handleChange}
-              value={endTime}
-            />
-            <span>-</span>
-            <TextInput
-              type="text"
-              name={`${name}.${index}.item`}
-              onChange={handleChange}
-              value={item}
-            />
-          </InputItems>
-          <TrashButton onClick={() => handleRowRemove(index)} type="button" />
-        </Wrapper>
-      )}
-    </Draggable>
-  );
+    const { handleChange, index, name, value, handleRowRemove } = props;
+    const { startTime, endTime, item } = value;
+    return (
+        <Draggable draggableId={String(index)} index={index} isDragDisabled={false}>
+            {(provided, snapshot) => (
+                <Wrapper
+                    isDragging={snapshot.isDragging}
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                >
+                    <DragPoint />
+                    <InputItems>
+                        <TimeInput
+                            type="number"
+                            name={`${name}.${index}.startTime`}
+                            onChange={handleChange}
+                            value={startTime}
+                        />
+                        <span>-</span>
+                        <TimeInput
+                            type="number"
+                            name={`${name}.${index}.endTime`}
+                            onChange={handleChange}
+                            value={endTime}
+                        />
+                        <span>-</span>
+                        <TextInput
+                            type="text"
+                            name={`${name}.${index}.item`}
+                            onChange={handleChange}
+                            value={item}
+                        />
+                    </InputItems>
+                    <TrashButton onClick={() => handleRowRemove(index)} type="button" />
+                </Wrapper>
+            )}
+        </Draggable>
+    );
 };
 
 const Wrapper = styled.div<{ isDragging: boolean }>`
@@ -84,7 +84,7 @@ const InputItems = styled.div`
 `;
 
 const Input = styled.input`
-  height: 20px;
+  height: 18px;
   padding-left: 4px;
   border-radius: 4px;
   &:focus {
@@ -105,11 +105,11 @@ const TrashButton = styled(Button.Trash)``;
 
 // styled componentsに注意。memoizeしたものをs-cでかこうと、再計算が走る
 const MemoizedInputRow = React.memo(InputRow, (p, n) => {
-  return (
-    p.value.startTime === n.value.startTime &&
+    return (
+        p.value.startTime === n.value.startTime &&
     p.value.endTime === n.value.endTime &&
     p.value.item === n.value.item
-  );
+    );
 });
 
 export { MemoizedInputRow };

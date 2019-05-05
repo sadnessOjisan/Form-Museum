@@ -3,26 +3,26 @@ import styled from "styled-components";
 import { COLOR } from "../../../const/color";
 
 interface Props {
-  className?: string;
-  children: React.ReactNode;
-  onClick?: (e: React.MouseEvent) => void;
-  type?: "submit" | "button";
-  primary?: boolean;
-  dataTestId?: string;
+    className?: string;
+    children: React.ReactNode;
+    onClick?: (e: React.MouseEvent) => void;
+    type?: "submit" | "button";
+    primary?: boolean;
+    dataTestId?: string;
 }
 
 const Input = (props: Props) => {
-  const { className, children, onClick, type, dataTestId } = props;
-  return (
-    <Wrapper
-      className={className}
-      onClick={onClick}
-      type={type}
-      data-testid={dataTestId}
-    >
-      {children}
-    </Wrapper>
-  );
+    const { className, children, onClick, type, dataTestId } = props;
+    return (
+        <Wrapper
+            className={className}
+            onClick={onClick}
+            type={type}
+            data-testid={dataTestId}
+        >
+            {children}
+        </Wrapper>
+    );
 };
 
 const SIZE = 20;

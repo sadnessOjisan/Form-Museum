@@ -6,13 +6,13 @@ import userSaga from "./userSaga";
 import orderSaga from "./orderSaga";
 
 function* rootSaga() {
-  yield all([
-    fork(kintaiSaga),
-    fork(placeSaga),
-    fork(lauchSaga),
-    fork(userSaga),
-    fork(orderSaga)
-  ]);
+    yield all([
+        fork(kintaiSaga),
+        fork(placeSaga),
+        fork(lauchSaga),
+        fork(userSaga),
+        fork(orderSaga)
+    ]);
 }
 
 export default rootSaga;

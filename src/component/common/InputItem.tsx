@@ -4,46 +4,46 @@ import { Balloon } from "./Balloon";
 import { COLOR } from "../../const/color";
 
 interface IProps {
-  label: string;
-  name: string;
-  value: number;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleBlur: (e: React.FocusEvent<any>) => void;
-  onFocus?: () => void;
-  errorMessage?: string;
-  touched: boolean;
-  type: "number" | "string";
+    label: string;
+    name: string;
+    value: number;
+    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    handleBlur: (e: React.FocusEvent<any>) => void;
+    onFocus?: () => void;
+    errorMessage?: string;
+    touched: boolean;
+    type: "number" | "string";
 }
 
 const InputItem = (props: IProps) => {
-  const {
-    label,
-    name,
-    handleChange,
-    value,
-    errorMessage,
-    handleBlur,
-    touched,
-    type
-  } = props;
-  const isValid = errorMessage ? false : true;
-  return (
-    <Wrapper>
-      <Label for={name}>{label}</Label>
-      <InputWrapper>
-        {touched && !isValid && <ValidationBalloon message={errorMessage} />}
-        <Input
-          name={name}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={value}
-          shouldBeRed={!isValid && touched}
-          id={name}
-          type={type}
-        />
-      </InputWrapper>
-    </Wrapper>
-  );
+    const {
+        label,
+        name,
+        handleChange,
+        value,
+        errorMessage,
+        handleBlur,
+        touched,
+        type
+    } = props;
+    const isValid = errorMessage ? false : true;
+    return (
+        <Wrapper>
+            <Label for={name}>{label}</Label>
+            <InputWrapper>
+                {touched && !isValid && <ValidationBalloon message={errorMessage} />}
+                <Input
+                    name={name}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={value}
+                    shouldBeRed={!isValid && touched}
+                    id={name}
+                    type={type}
+                />
+            </InputWrapper>
+        </Wrapper>
+    );
 };
 
 const Wrapper = styled.div``;

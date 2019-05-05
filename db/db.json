@@ -5198,6 +5198,250 @@
       "url": "/with-button",
       "page": "WITH_BUTTON",
       "id": 340
+    },
+    {
+      "version": "0.0.1",
+      "pk": "e0168650-6efb-11e9-a2e6-73a959806e99",
+      "tk": "fdb6dd50-6efa-11e9-a2e6-73a959806e99",
+      "timeStamp": "2019-05-05T15:06:08+09:00",
+      "userId": "0b0eb086fc9a",
+      "userAgent": "mozilla/5.0 (macintosh; intel mac os x 10_14_4) applewebkit/537.36 (khtml, like gecko) chrome/74.0.3729.131 safari/537.36",
+      "sessionID": "e016ad60-6efb-11e9-a2e6-73a959806e99",
+      "eventName": "input-budget",
+      "target": "input-budget",
+      "eventType": "BLUR",
+      "property": {
+        "inputValue": 1222
+      },
+      "url": "/with-button",
+      "page": "WITH_BUTTON",
+      "id": 341
+    },
+    {
+      "version": "0.0.1",
+      "pk": "e11c3680-6efb-11e9-a2e6-73a959806e99",
+      "tk": "e0168650-6efb-11e9-a2e6-73a959806e99",
+      "timeStamp": "2019-05-05T15:06:10+09:00",
+      "userId": "0b0eb086fc9a",
+      "userAgent": "mozilla/5.0 (macintosh; intel mac os x 10_14_4) applewebkit/537.36 (khtml, like gecko) chrome/74.0.3729.131 safari/537.36",
+      "sessionID": "e11c3681-6efb-11e9-a2e6-73a959806e99",
+      "eventName": "input-budget",
+      "target": "input-budget",
+      "eventType": "BLUR",
+      "property": {
+        "inputValue": 1222
+      },
+      "url": "/with-button",
+      "page": "WITH_BUTTON",
+      "id": 342
+    },
+    {
+      "version": "0.0.1",
+      "pk": "e1621920-6efb-11e9-a2e6-73a959806e99",
+      "tk": "e11c3680-6efb-11e9-a2e6-73a959806e99",
+      "timeStamp": "2019-05-05T15:06:10+09:00",
+      "userId": "0b0eb086fc9a",
+      "userAgent": "mozilla/5.0 (macintosh; intel mac os x 10_14_4) applewebkit/537.36 (khtml, like gecko) chrome/74.0.3729.131 safari/537.36",
+      "sessionID": "e1621921-6efb-11e9-a2e6-73a959806e99",
+      "eventName": "input-number",
+      "target": "input-number",
+      "eventType": "BLUR",
+      "property": {
+        "inputValue": 0
+      },
+      "url": "/with-button",
+      "page": "WITH_BUTTON",
+      "id": 343
+    },
+    {
+      "version": "0.0.1",
+      "pk": "e1a9d080-6efb-11e9-a2e6-73a959806e99",
+      "tk": "e1621920-6efb-11e9-a2e6-73a959806e99",
+      "timeStamp": "2019-05-05T15:06:11+09:00",
+      "userId": "0b0eb086fc9a",
+      "userAgent": "mozilla/5.0 (macintosh; intel mac os x 10_14_4) applewebkit/537.36 (khtml, like gecko) chrome/74.0.3729.131 safari/537.36",
+      "sessionID": "e1a9d081-6efb-11e9-a2e6-73a959806e99",
+      "eventName": "input-budget",
+      "target": "input-budget",
+      "eventType": "BLUR",
+      "property": {
+        "inputValue": 1222
+      },
+      "url": "/with-button",
+      "page": "WITH_BUTTON",
+      "id": 344
+    },
+    {
+      "version": "0.0.1",
+      "pk": "e2f5ff90-6efb-11e9-a2e6-73a959806e99",
+      "tk": "e1a9d080-6efb-11e9-a2e6-73a959806e99",
+      "timeStamp": "2019-05-05T15:06:13+09:00",
+      "userId": "0b0eb086fc9a",
+      "userAgent": "mozilla/5.0 (macintosh; intel mac os x 10_14_4) applewebkit/537.36 (khtml, like gecko) chrome/74.0.3729.131 safari/537.36",
+      "sessionID": "e2f5ff91-6efb-11e9-a2e6-73a959806e99",
+      "eventName": "input-number",
+      "target": "input-number",
+      "eventType": "BLUR",
+      "property": {
+        "inputValue": 0
+      },
+      "url": "/with-button",
+      "page": "WITH_BUTTON",
+      "id": 345
+    },
+    {
+      "version": "0.0.1",
+      "pk": "f27ac6d0-6efb-11e9-bd54-4fed0f36fdba",
+      "tk": "-",
+      "timeStamp": "2019-05-05T15:06:39+09:00",
+      "userId": "0b0eb086fc9a",
+      "userAgent": "mozilla/5.0 (macintosh; intel mac os x 10_14_4) applewebkit/537.36 (khtml, like gecko) chrome/74.0.3729.131 safari/537.36",
+      "sessionID": "f27c4d70-6efb-11e9-bd54-4fed0f36fdba",
+      "eventName": "input-number",
+      "target": "input-number",
+      "eventType": "BLUR",
+      "property": {
+        "inputValue": 0
+      },
+      "url": "/with-button",
+      "page": "WITH_BUTTON",
+      "id": 346
+    },
+    {
+      "version": "0.0.1",
+      "pk": "0d1a6b80-6efc-11e9-aa37-779720980fa4",
+      "tk": "-",
+      "timeStamp": "2019-05-05T15:07:24+09:00",
+      "userId": "0b0eb086fc9a",
+      "userAgent": "mozilla/5.0 (macintosh; intel mac os x 10_14_4) applewebkit/537.36 (khtml, like gecko) chrome/74.0.3729.131 safari/537.36",
+      "sessionID": "0d1ab9a0-6efc-11e9-aa37-779720980fa4",
+      "eventName": "sidebar-click",
+      "target": "sidebar-item-kuso",
+      "eventType": "CLICK",
+      "url": "/with-button",
+      "page": "WITH_BUTTON",
+      "id": 347
+    },
+    {
+      "version": "0.0.1",
+      "pk": "158c9720-6efc-11e9-aa37-779720980fa4",
+      "tk": "0d1a6b80-6efc-11e9-aa37-779720980fa4",
+      "timeStamp": "2019-05-05T15:07:38+09:00",
+      "userId": "0b0eb086fc9a",
+      "userAgent": "mozilla/5.0 (macintosh; intel mac os x 10_14_4) applewebkit/537.36 (khtml, like gecko) chrome/74.0.3729.131 safari/537.36",
+      "sessionID": "158c9721-6efc-11e9-aa37-779720980fa4",
+      "eventName": "input-kuso-form",
+      "target": "input-sales",
+      "eventType": "BLUR",
+      "property": {
+        "inputValue": "aaa"
+      },
+      "url": "/kuso",
+      "page": "KUSO",
+      "id": 348
+    },
+    {
+      "version": "0.0.1",
+      "pk": "1932e2d0-6efc-11e9-aa37-779720980fa4",
+      "tk": "158c9720-6efc-11e9-aa37-779720980fa4",
+      "timeStamp": "2019-05-05T15:07:44+09:00",
+      "userId": "0b0eb086fc9a",
+      "userAgent": "mozilla/5.0 (macintosh; intel mac os x 10_14_4) applewebkit/537.36 (khtml, like gecko) chrome/74.0.3729.131 safari/537.36",
+      "sessionID": "1932e2d1-6efc-11e9-aa37-779720980fa4",
+      "eventName": "input-kuso-form",
+      "target": "input-sales",
+      "eventType": "BLUR",
+      "property": {
+        "inputValue": ""
+      },
+      "url": "/kuso",
+      "page": "KUSO",
+      "id": 349
+    },
+    {
+      "version": "0.0.1",
+      "pk": "1948b4c0-6efc-11e9-aa37-779720980fa4",
+      "tk": "1932e2d0-6efc-11e9-aa37-779720980fa4",
+      "timeStamp": "2019-05-05T15:07:44+09:00",
+      "userId": "0b0eb086fc9a",
+      "userAgent": "mozilla/5.0 (macintosh; intel mac os x 10_14_4) applewebkit/537.36 (khtml, like gecko) chrome/74.0.3729.131 safari/537.36",
+      "sessionID": "1948b4c1-6efc-11e9-aa37-779720980fa4",
+      "eventName": "sidebar-click",
+      "target": "sidebar-item-masi",
+      "eventType": "CLICK",
+      "url": "/kuso",
+      "page": "KUSO",
+      "id": 350
+    },
+    {
+      "version": "0.0.1",
+      "pk": "1951b570-6efc-11e9-aa37-779720980fa4",
+      "tk": "1948b4c0-6efc-11e9-aa37-779720980fa4",
+      "timeStamp": "2019-05-05T15:07:44+09:00",
+      "userId": "0b0eb086fc9a",
+      "userAgent": "mozilla/5.0 (macintosh; intel mac os x 10_14_4) applewebkit/537.36 (khtml, like gecko) chrome/74.0.3729.131 safari/537.36",
+      "sessionID": "1951b571-6efc-11e9-aa37-779720980fa4",
+      "eventName": "load_masi",
+      "eventType": "LOAD",
+      "url": "/masi",
+      "page": "MASI",
+      "id": 351
+    },
+    {
+      "version": "0.0.1",
+      "pk": "31e5aba0-6efc-11e9-9cec-03778c4836c2",
+      "tk": "-",
+      "timeStamp": "2019-05-05T15:08:25+09:00",
+      "userId": "0b0eb086fc9a",
+      "userAgent": "mozilla/5.0 (macintosh; intel mac os x 10_14_4) applewebkit/537.36 (khtml, like gecko) chrome/74.0.3729.131 safari/537.36",
+      "sessionID": "31e620d0-6efc-11e9-9cec-03778c4836c2",
+      "eventName": "load_masi",
+      "eventType": "LOAD",
+      "url": "/masi",
+      "page": "MASI",
+      "id": 352
+    },
+    {
+      "version": "0.0.1",
+      "pk": "104310d0-6efe-11e9-b16b-a189e277681b",
+      "tk": "-",
+      "timeStamp": "2019-05-05T15:21:48+09:00",
+      "userId": "0b0eb086fc9a",
+      "userAgent": "mozilla/5.0 (macintosh; intel mac os x 10_14_4) applewebkit/537.36 (khtml, like gecko) chrome/74.0.3729.131 safari/537.36",
+      "sessionID": "10438600-6efe-11e9-b16b-a189e277681b",
+      "eventName": "load_masi",
+      "eventType": "LOAD",
+      "url": "/masi",
+      "page": "MASI",
+      "id": 353
+    },
+    {
+      "version": "0.0.1",
+      "pk": "004e7b50-6eff-11e9-b082-8f2a9bdd64e7",
+      "tk": "-",
+      "timeStamp": "2019-05-05T15:28:31+09:00",
+      "userId": "0b0eb086fc9a",
+      "userAgent": "mozilla/5.0 (macintosh; intel mac os x 10_14_4) applewebkit/537.36 (khtml, like gecko) chrome/74.0.3729.131 safari/537.36",
+      "sessionID": "004ef080-6eff-11e9-b082-8f2a9bdd64e7",
+      "eventName": "load_masi",
+      "eventType": "LOAD",
+      "url": "/masi",
+      "page": "MASI",
+      "id": 354
+    },
+    {
+      "version": "0.0.1",
+      "pk": "9d3801c0-6eff-11e9-aa31-8f7aacb5392d",
+      "tk": "-",
+      "timeStamp": "2019-05-05T15:32:54+09:00",
+      "userId": "0b0eb086fc9a",
+      "userAgent": "mozilla/5.0 (macintosh; intel mac os x 10_14_4) applewebkit/537.36 (khtml, like gecko) chrome/74.0.3729.131 safari/537.36",
+      "sessionID": "9d389e00-6eff-11e9-aa31-8f7aacb5392d",
+      "eventName": "load_masi",
+      "eventType": "LOAD",
+      "url": "/masi",
+      "page": "MASI",
+      "id": 355
     }
   ]
 }

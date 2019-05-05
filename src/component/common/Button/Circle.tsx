@@ -3,19 +3,19 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface Props {
-  className?: string;
-  onClick?: (e: React.MouseEvent) => void;
-  type?: "submit" | "button";
-  primary?: boolean;
+    className?: string;
+    onClick?: (e: React.MouseEvent) => void;
+    type?: "submit" | "button";
+    primary?: boolean;
 }
 
 const Circle = (props: Props) => {
-  const { className, onClick, type } = props;
-  return (
-    <Wrapper className={className} onClick={onClick} type={type}>
-      <FontAwesomeIcon icon="trash" />
-    </Wrapper>
-  );
+    const { className, onClick, type } = props;
+    return (
+        <Wrapper className={className} onClick={onClick} type={type}>
+            <FontAwesomeIcon icon="trash" />
+        </Wrapper>
+    );
 };
 
 const SIZE = 90;

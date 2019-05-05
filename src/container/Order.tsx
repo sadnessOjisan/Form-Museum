@@ -4,25 +4,25 @@ import styled from "styled-components";
 import { Header } from "../component/common/Header";
 import { SideBar } from "../component/common/Sidebar";
 import { Form } from "../component/order/Form";
-type IProps = {};
+interface IProps {}
 
 const Order = (props: IProps) => {
-  const {} = props;
-  useEffect(() => {}, []);
-  return (
-    <Wrapper>
-      <Header />
-      <ContentsBox>
-        <SideBar />
-        <MainContentsWrapper>
-          <PageTitleRow>
-            <PageTitle>スケジュール出力</PageTitle>
-          </PageTitleRow>
-          <Form />
-        </MainContentsWrapper>
-      </ContentsBox>
-    </Wrapper>
-  );
+    const {} = props;
+    useEffect(() => {}, []);
+    return (
+        <Wrapper>
+            <Header />
+            <ContentsBox>
+                <SideBar />
+                <MainContentsWrapper>
+                    <PageTitleRow>
+                        <PageTitle>スケジュール出力</PageTitle>
+                    </PageTitleRow>
+                    <Form />
+                </MainContentsWrapper>
+            </ContentsBox>
+        </Wrapper>
+    );
 };
 
 const Wrapper = styled.div`

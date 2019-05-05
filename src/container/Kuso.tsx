@@ -6,26 +6,26 @@ import { SideBar } from "../component/common/Sidebar";
 import { Kuso } from "../component/kuso/Form";
 
 interface FormValues {
-  name: string | null;
-  sales: number | null;
-  cost: number | null;
+    name: string | null;
+    sales: number | null;
+    cost: number | null;
 }
 
 interface IProps {}
 
 const KusoFormPage = (props: IProps & FormikProps<FormValues>) => {
-  const { errors, handleSubmit, handleChange } = props;
-  return (
-    <Wrapper>
-      <Header />
-      <ContentsBox>
-        <SideBar />
-        <MainContentsWrapper>
-          <Kuso />
-        </MainContentsWrapper>
-      </ContentsBox>
-    </Wrapper>
-  );
+    const { errors, handleSubmit, handleChange } = props;
+    return (
+        <Wrapper>
+            <Header />
+            <ContentsBox>
+                <SideBar />
+                <MainContentsWrapper>
+                    <Kuso />
+                </MainContentsWrapper>
+            </ContentsBox>
+        </Wrapper>
+    );
 };
 
 const Wrapper = styled.div`

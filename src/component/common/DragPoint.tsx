@@ -2,22 +2,22 @@ import * as React from "react";
 import styled from "styled-components";
 
 const DragPoint = () => {
-  return (
-    <Wrapper>
-      <Row>
-        <Dot>・</Dot>
-        <Dot>・</Dot>
-      </Row>
-      <Row>
-        <Dot>・</Dot>
-        <Dot>・</Dot>
-      </Row>
-      <Row>
-        <Dot>・</Dot>
-        <Dot>・</Dot>
-      </Row>
-    </Wrapper>
-  );
+    return (
+        <Wrapper>
+            <Row>
+                <Dot>・</Dot>
+                <Dot>・</Dot>
+            </Row>
+            <Row>
+                <Dot>・</Dot>
+                <Dot>・</Dot>
+            </Row>
+            <Row>
+                <Dot>・</Dot>
+                <Dot>・</Dot>
+            </Row>
+        </Wrapper>
+    );
 };
 
 const Wrapper = styled.div`

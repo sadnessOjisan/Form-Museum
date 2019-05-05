@@ -13,7 +13,7 @@ import { Order } from "./Order";
 import { WithButton } from "./WithButton";
 
 interface IStateProps {
-  isOpenKintaiModal: boolean;
+    isOpenKintaiModal: boolean;
 }
 
 type Props = IStateProps;
@@ -21,24 +21,24 @@ type Props = IStateProps;
 library.add(faTrash);
 
 const App = (props: Props) => {
-  const { isOpenKintaiModal } = props;
-  return (
-    <PageWrapper>
-      <Switch>
-        <Route path="/" component={() => <span>home</span>} exact />
-        <Route path="/kuso" component={KusoFormPage} exact />
-        <Route path="/masi" component={Masi} exact />
-        <Route path="/login" component={Login} exact />
-        <Route path="/order" component={Order} exact />
-        <Route path="/with-button" component={WithButton} exact />
-      </Switch>
-      {isOpenKintaiModal && <Kintai />}
-    </PageWrapper>
-  );
+    const { isOpenKintaiModal } = props;
+    return (
+        <PageWrapper>
+            <Switch>
+                <Route path="/" component={() => <span>home</span>} exact />
+                <Route path="/kuso" component={KusoFormPage} exact />
+                <Route path="/masi" component={Masi} exact />
+                <Route path="/login" component={Login} exact />
+                <Route path="/order" component={Order} exact />
+                <Route path="/with-button" component={WithButton} exact />
+            </Switch>
+            {isOpenKintaiModal && <Kintai />}
+        </PageWrapper>
+    );
 };
 
 const mapStateToProps = (state: IStore) => ({
-  isOpenKintaiModal: state.kintai.isOpenModal
+    isOpenKintaiModal: state.kintai.isOpenModal
 });
 
 const PageWrapper = styled.div`

@@ -2,12 +2,12 @@ import * as React from "react";
 import styled from "styled-components";
 
 interface IProps {
-  children: React.ReactNode;
+    children: React.ReactNode;
 }
 
 const FooterLayout = (props: IProps) => {
-  const { children } = props;
-  return <Wrapper>{children}</Wrapper>;
+    const { children } = props;
+    return <Wrapper>{children}</Wrapper>;
 };
 
 const Wrapper = styled.div`

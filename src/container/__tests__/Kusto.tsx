@@ -10,12 +10,12 @@ jest.mock("../../asset/video/rain.mp4");
 jest.mock("../../asset/video/hare.mp4");
 
 describe("Header", () => {
-  it("必要なヘッダがある", () => {
-    const history = jest.fn();
-    const location = jest.fn();
-    const { getByTestId, queryByTestId } = renderWithReduxRouter(<Kuso />);
-    fireEvent.click(getByTestId("kintai-modal-opener"));
-    expect(queryByTestId("kintai-modal")).toBeInTheDocument();
-  });
-  it.todo("hoge");
+    it("必要なヘッダがある", () => {
+        const history = jest.fn();
+        const location = jest.fn();
+        const { getByTestId, queryByTestId } = renderWithReduxRouter(<Kuso />);
+        fireEvent.click(getByTestId("kintai-modal-opener"));
+        expect(queryByTestId("kintai-modal")).toBeInTheDocument();
+    });
+    it.todo("hoge");
 });

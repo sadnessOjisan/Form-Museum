@@ -6,21 +6,21 @@ import { API } from "../../service/API";
 import { assert } from "../../helper/util";
 
 function* fetchPlaceDataSaga(action: IStartPostDataAction): Iterable<Effect> {
-  const query: ISchedule = action.payload;
-  const { payload, error }: { payload: {}; error: IError } = yield call(
-    API.postSchedule,
-    query
-  );
+    const query: ISchedule = action.payload;
+    const { payload, error }: { payload: {}; error: IError } = yield call(
+        API.postSchedule,
+        query
+    );
 
-  if (payload && !error) {
-    yield put(actions.successPostData());
-  } else if (!payload && error) {
-    yield put(actions.failPostData(error));
-  } else {
-    assert("ありえない");
-  }
+    if (payload && !error) {
+        yield put(actions.successPostData());
+    } else if (!payload && error) {
+        yield put(actions.failPostData(error));
+    } else {
+        assert("ありえない");
+    }
 }
 
 export default function* placeSaga() {
-  yield takeEvery(types.START_POST_DATA, fetchPlaceDataSaga);
+    yield takeEvery(types.START_POST_DATA, fetchPlaceDataSaga);
 }
