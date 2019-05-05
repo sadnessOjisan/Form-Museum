@@ -4,7 +4,7 @@ export interface ITracker {
   eventName: string
   eventType: string
   target?: string
-  property?: Record<string, any> // object
+  property?: Record<string, Record<string, any>>
 }
 
 export interface ILog {

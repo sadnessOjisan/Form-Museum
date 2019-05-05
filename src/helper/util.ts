@@ -33,7 +33,7 @@ interface IOpiton {
   eventName: string
   eventType: string
   target?: string
-  property?: Record<string, any> // object
+  property?: Record<string, Record<string, any>> // object
 }
 
 export const genLog = (option: IOpiton): ITracker => {

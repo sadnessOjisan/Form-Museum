@@ -61,7 +61,6 @@ const reducer = (
   state: IState = initialState,
   action: Action | ReduxAction<'@@redux/INIT'>
 ): IState => {
-  console.log(action)
   switch (action.type) {
     case types.START_POST_DATA:
       return { ...state, isSending: true, error: null }

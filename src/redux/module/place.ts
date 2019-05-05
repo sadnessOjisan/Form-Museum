@@ -69,7 +69,6 @@ const reducer = (
 ): IState => {
   switch (action.type) {
     case types.START_FETCH_DATA:
-      console.log('place action: ', action)
       return { ...state, isLoading: true, error: null }
     case types.SUCCESS_FETCH_DATA:
       return {

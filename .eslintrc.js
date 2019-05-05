@@ -14,6 +14,8 @@ module.exports = {
   },
   rules: {
     'no-console': 'error',
+    'react/jsx-uses-react': [1],
+    'react/jsx-uses-vars': 1,
     // ここを参考に: https://github.com/typescript-eslint/typescript-eslint/blob/ecc96318f47d821c19513652f262b47b15fd8257/packages/eslint-plugin/src/configs/recommended.json
     // なぜこうするかは, https://teppeis.hatenablog.com/entry/2019/02/typescript-eslint
     '@typescript-eslint/adjacent-overload-signatures': 'error',

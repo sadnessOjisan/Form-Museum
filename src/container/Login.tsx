@@ -119,7 +119,6 @@ const LoginForm = withFormik<MyFormProps, FormValues>({
     password: '',
   }),
   handleSubmit: values => {
-    console.log(values)
     alert('submit')
   },
   validationSchema: LoginSchema,

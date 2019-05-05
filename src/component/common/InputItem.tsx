@@ -8,7 +8,7 @@ interface IProps {
   name: string
   value: number
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  handleBlur: (e: React.FocusEvent<any>) => void
+  handleBlur: (e: React.FocusEvent<HTMLInputElement>) => void
   onFocus?: () => void
   errorMessage?: string
   touched: boolean

@@ -1,4 +1,4 @@
-import { fork, all, takeEvery, Effect, put } from 'redux-saga/effects'
+import { takeEvery, Effect, put } from 'redux-saga/effects'
 import { types, actions } from '../module/kintai'
 
 function* closeModalSaga(): Iterable<Effect> {

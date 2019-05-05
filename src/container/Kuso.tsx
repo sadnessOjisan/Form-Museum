@@ -11,9 +11,7 @@ interface FormValues {
   cost: number | null
 }
 
-interface IProps {}
-
-const KusoFormPage = (props: IProps & FormikProps<FormValues>) => {
+const KusoFormPage = (props: FormikProps<FormValues>) => {
   const { errors, handleSubmit, handleChange } = props
   return (
     <Wrapper>

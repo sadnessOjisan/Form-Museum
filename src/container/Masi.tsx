@@ -123,7 +123,7 @@ const MasiForm = connect(
       sales: props.sales,
       cost: props.cost,
     }),
-    handleSubmit: values => {
+    handleSubmit: () => {
       alert('submit')
     },
     validationSchema: MasiSchema,

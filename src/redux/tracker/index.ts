@@ -24,7 +24,6 @@ const trackerMiddleware = (store: Store<IStore, Action>) => (next: any) => (
 }
 
 const _genLog = (tracker: ITracker, store: IStore): ILog => {
-  console.log(store)
   return {
     version: '0.0.1',
     pk: uuidv1(),
