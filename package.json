@@ -86,7 +86,8 @@
     "mock:local": "json-server ./db/db.json --routes ./db/routes.json -p 3010",
     "jest": "jest REACT_APP_ENV='test'",
     "test": "jest REACT_APP_ENV='test'",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "now-build": "BUILD_MODE='production' REACT_APP_ENV=production webpack"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

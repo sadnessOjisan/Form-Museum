@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { Header } from '../component/common/Header'
-import { SideBar } from '../component/common/Sidebar'
+import { SideBar } from '../component/common/SideBar'
 import { Form } from '../component/order/Form'
 
 const Order = () => {

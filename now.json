@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "name": "if-form",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@now/static-build",
+      "config": { "distDir": "dist" }
+    }
+  ],
+  "routes": []
+}
