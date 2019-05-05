@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { useState } from 'react'
 import styled from 'styled-components'
 
 const Weather = () => {
@@ -31,13 +30,6 @@ const Layer = styled.div`
   height: 100%;
   top: 0;
   left: 0;
-`
-
-const Video = styled.video.attrs({
-  autoPlay: true,
-  loop: true,
-})`
-  width: 100%;
 `
 
 export { Weather }
