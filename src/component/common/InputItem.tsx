@@ -4,9 +4,9 @@ import { Balloon } from './Balloon'
 import { COLOR } from '../../const/color'
 
 interface IProps {
-  label: string
-  name: string
-  value: number
+  label: string | null
+  name: string | null
+  value: number | null
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   handleBlur: (e: React.FocusEvent<HTMLInputElement>) => void
   onFocus?: () => void
