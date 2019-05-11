@@ -4,7 +4,6 @@ import { COLOR } from '../../../const/color'
 
 interface Props {
   children: React.ReactNode
-  title: string
   color?: string
 }
 

@@ -39,7 +39,7 @@ const Box = styled.div`
   border: solid 1px red;
   bottom: 10px;
   position: absolute;
-  width: 200px;
+  width: 400px;
 `
 
 export { Balloon }

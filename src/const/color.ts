@@ -6,6 +6,7 @@ export const lightGray = '#f5f5f5'
 export const gray = '#eeeeee'
 export const darkGray = '#999999'
 export const white = '#ffffff'
+export const red = 'red'
 
 const COLOR = {
   black,
@@ -16,6 +17,7 @@ const COLOR = {
   gray,
   darkGray,
   white,
+  red,
 }
 
 export { COLOR }

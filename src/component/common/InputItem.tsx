@@ -4,15 +4,16 @@ import { Balloon } from './Balloon'
 import { COLOR } from '../../const/color'
 
 interface IProps {
-  label: string | null
-  name: string | null
-  value: number | null
+  label: string
+  name: string
+  value: number | undefined
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   handleBlur: (e: React.FocusEvent<HTMLInputElement>) => void
   onFocus?: () => void
   errorMessage?: string
   touched: boolean
   type: 'number' | 'string'
+  placeholder: string
 }
 
 const InputItem = (props: IProps) => {
@@ -25,6 +26,7 @@ const InputItem = (props: IProps) => {
     handleBlur,
     touched,
     type,
+    placeholder,
   } = props
   const isValid = errorMessage ? false : true
   return (
@@ -40,24 +42,35 @@ const InputItem = (props: IProps) => {
           shouldBeRed={!isValid && touched}
           id={name}
           type={type}
+          placeholder={placeholder}
         />
       </InputWrapper>
     </Wrapper>
   )
 }
 
-const Wrapper = styled.div``
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 const InputWrapper = styled.div`
   position: relative;
 `
-const Label = styled.label<{ for: string }>``
+const Label = styled.label<{ for: string }>`
+  font-size: 16px;
+  margin-bottom: 8px;
+`
 
-const Input = styled.input<{ shouldBeRed: boolean }>`
-  border: solid 1px gray;
-  border-color: ${props => props.shouldBeRed && 'red'};
-  height: 40px;
+const Input = styled.input.attrs(props => {
+  return { placeholder: 'aaaaaaa' }
+})<{ shouldBeRed: boolean }>`
+  height: 30px;
+  border: 1px solid ${props => (props.shouldBeRed ? COLOR.red : COLOR.darkGray)};
+  width: 100%;
   padding-left: 4px;
   border-radius: 4px;
+  outline: none;
   &:focus {
     outline: 0;
     border-color: ${COLOR.blue};

@@ -6,13 +6,14 @@ import { COLOR } from '../../const/color'
 interface IProps {
   label: string
   name: string
-  value: string
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  handleBlur: (e: React.FocusEvent<HTMLInputElement>) => void
+  value: string | undefined
+  handleChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+  handleBlur: (e: React.FocusEvent<HTMLTextAreaElement>) => void
   onFocus?: () => void
   errorMessage?: string
   touched: boolean
   type: 'number' | 'text'
+  placeholder: string
 }
 
 const TextAreaItem = (props: IProps) => {
@@ -25,6 +26,7 @@ const TextAreaItem = (props: IProps) => {
     handleBlur,
     touched,
     type,
+    placeholder,
   } = props
   const isValid = errorMessage ? false : true
   return (
@@ -40,21 +42,28 @@ const TextAreaItem = (props: IProps) => {
           shouldBeRed={!isValid && touched}
           id={name}
           type={type}
+          placeholder={!touched && placeholder}
         />
       </InputWrapper>
     </Wrapper>
   )
 }
 
-const Wrapper = styled.div``
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 const InputWrapper = styled.div`
   position: relative;
 `
-const Label = styled.label<{ for: string }>``
+const Label = styled.label<{ for: string }>`
+  margin-bottom: 8px;
+`
 
 const Input = styled.textarea<{ shouldBeRed: boolean }>`
-  border: solid 1px gray;
-  border-color: ${props => props.shouldBeRed && 'red'};
+  width: 100%;
+  border: 1px solid ${props => (props.shouldBeRed ? COLOR.red : COLOR.darkGray)};
   height: 140px;
   padding-left: 4px;
   border-radius: 4px;
