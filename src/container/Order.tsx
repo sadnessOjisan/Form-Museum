@@ -1,22 +1,19 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { Header } from '../component/common/Header'
-import { SideBar } from '../component/common/SideBar'
 import { Form } from '../component/order/Form'
+import Layout from '../component/common/layout'
 
 const Order = () => {
   return (
     <Wrapper>
-      <Header />
-      <ContentsBox>
-        <SideBar />
+      <Layout.MainContent pageTitle="再レンダリングやばい">
         <MainContentsWrapper>
           <PageTitleRow>
             <PageTitle>スケジュール出力</PageTitle>
           </PageTitleRow>
           <Form />
         </MainContentsWrapper>
-      </ContentsBox>
+      </Layout.MainContent>
     </Wrapper>
   )
 }

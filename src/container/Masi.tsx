@@ -5,12 +5,13 @@ import { withFormik, FormikProps } from 'formik'
 import * as Yup from 'yup'
 import { Dispatch, Action } from 'redux'
 import { connect } from 'react-redux'
-import { Header } from '../component/common/Header'
-import { SideBar } from '../component/common/SideBar'
 import { track } from '../redux/module/logging'
 import { genLoadLog } from '../helper/util'
 import { ITracker } from '../typedef/Tracker'
 import { InputItem } from '../component/common/InputItem'
+import { TextAreaItem } from '../component/common/TextAreaItem'
+import Button from '../component/common/Button'
+import Layout from '../component/common/layout'
 
 interface DispatchProps {
   track: typeof track
@@ -19,6 +20,7 @@ interface DispatchProps {
 interface FormValues {
   sales: number
   cost: number
+  comment: string
 }
 
 type IProps = DispatchProps
@@ -38,9 +40,7 @@ const Masi = (props: IProps & FormikProps<FormValues>) => {
   }, [])
   return (
     <Wrapper>
-      <Header />
-      <ContentsBox>
-        <SideBar />
+      <Layout.MainContent pageTitle="マシなForm">
         <MainContentsWrapper onSubmit={handleSubmit}>
           <h1>mASI</h1>
           <InputItem
@@ -63,14 +63,21 @@ const Masi = (props: IProps & FormikProps<FormValues>) => {
             touched={touched.cost ? true : false}
             type="number"
           />
-          <button
-            type="submit"
+          <TextAreaItem
+            name="comment"
+            handleChange={handleChange}
+            handleBlur={handleBlur}
+            value={values.comment}
+            label="コメント"
+            errorMessage={errors.comment}
+            touched={touched.comment ? true : false}
+            type="text"
+          />
+          <Button.Submit
             disabled={Object.keys(errors).length !== 0 ? true : false}
-          >
-            送信
-          </button>
+          />
         </MainContentsWrapper>
-      </ContentsBox>
+      </Layout.MainContent>
     </Wrapper>
   )
 }
@@ -97,6 +104,7 @@ type MyFormProps = {
   name: string
   sales: number
   cost: number
+  comment: string
 } & DispatchProps
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => ({
@@ -112,6 +120,7 @@ const MasiSchema = Yup.object().shape({
     .max(1000000, '最大値は100000です')
     .positive('正数を入れてください')
     .required('Required'),
+  comment: Yup.string().required('Required'),
 })
 
 const MasiForm = connect(
@@ -122,6 +131,7 @@ const MasiForm = connect(
     mapPropsToValues: props => ({
       sales: props.sales,
       cost: props.cost,
+      comment: props.comment,
     }),
     handleSubmit: () => {
       alert('submit')

@@ -1,15 +1,18 @@
 import * as React from 'react'
 import styled from 'styled-components'
+import Avatar from 'react-avatar'
 import { Dispatch, Action } from 'redux'
 import { connect } from 'react-redux'
 import { actions as kintaiActions } from '../../redux/module/kintai'
 import { ITracker } from '../../typedef/Tracker'
 import { genLog } from '../../helper/util'
 import { EVENT_TYPE } from '../../const/event'
+import { COLOR } from '../../const/color'
 
 interface OwnProps {
   readonly className?: string
   readonly onClick?: any
+  readonly pageTitle: string
 }
 
 interface DispatchProps {
@@ -23,19 +26,21 @@ const TEST_OR_TRACK_TARGET = {
 }
 
 const Header = (props: IProps) => {
-  const { className, openModal } = props
+  const { className, openModal, pageTitle } = props
   return (
     <Wrapper className={className} data-testid="header">
       <LeftArea>
-        <div>logo</div>
+        <div>{pageTitle}</div>
       </LeftArea>
       <RightArea>
-        <div
+        <Avatar githubHandle="sitebase" size={50} round={true} />
+        <Link
           onClick={() => openModal(openModalLog)}
           data-testid={TEST_OR_TRACK_TARGET.kintaiModalOpener}
         >
-          kintai
-        </div>
+          勤怠
+        </Link>
+        <Link href="/login">ログアウト</Link>
       </RightArea>
     </Wrapper>
   )
@@ -61,8 +66,8 @@ const Wrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  height: 70px;
-  background-color: pink;
+  height: 80px;
+  background-color: ${COLOR.white};
   padding: 12px;
 `
 
@@ -76,6 +81,15 @@ const RightArea = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  > * {
+    margin-right: 32px;
+  }
+`
+
+const Link = styled.a`
+  color: ${COLOR.peachYellow};
+  cursor: pointer;
+  text-decoration: underline;
 `
 
 export { ConnectedHeader as Header }

@@ -7,12 +7,15 @@ import { withRouter, RouteComponentProps } from 'react-router'
 import { track } from '../../redux/module/logging'
 import { ITracker } from '../../typedef/Tracker'
 import { genClickLog } from '../../helper/util'
+import { COLOR } from '../../const/color'
+
 interface DispatchProps {
   track: typeof track
 }
 
 interface IProps extends RouteComponentProps {
   className?: string
+  width: number
 }
 
 const TEST_OR_TRACK_TARGET = {
@@ -24,11 +27,21 @@ const TEST_OR_TRACK_TARGET = {
 }
 
 const SideBar = (props: IProps & DispatchProps) => {
-  const { className, history, location, track } = props
+  const { className, history, location, track, width } = props
+  console.log('props: ', props)
   const { push } = history
   const { pathname } = location
   return (
-    <Wrapper className={className} data-testid={TEST_OR_TRACK_TARGET.sidebar}>
+    <Wrapper
+      className={className}
+      data-testid={TEST_OR_TRACK_TARGET.sidebar}
+      width={width}
+    >
+      <LogoBox>
+        <span>Kekkon</span>
+        <span>siyo</span>
+      </LogoBox>
+      <Hr />
       <SideBarItem
         name="kuso"
         onClick={() => {
@@ -79,12 +92,27 @@ const SideBar = (props: IProps & DispatchProps) => {
   )
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<IProps>`
   display: flex;
   flex-direction: column;
-  width: 200px;
+  align-items: center;
+  width: ${props => props.width}px;
   height: 100%;
-  background-color: navy;
+  background-color: ${COLOR.white};
+  border-right: solid 1px ${COLOR.gray};
+`
+
+const LogoBox = styled.div`
+  height: 160px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+
+const Hr = styled.hr`
+  　width: 80%;
 `
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => ({

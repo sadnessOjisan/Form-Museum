@@ -1,5 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
+import { COLOR } from '../../const/color'
 
 interface Props {
   name: string
@@ -30,11 +31,13 @@ const Wrapper = styled.div`
 `
 const Label = styled.label`
   font-size: 16px;
+  margin-bottom: 8px;
 `
 
 const TextArea = styled.textarea`
   min-height: 100px;
   max-height: 150px;
+  border: solid 1px ${COLOR.darkGray};
 `
 
 export { TextAreaItem }

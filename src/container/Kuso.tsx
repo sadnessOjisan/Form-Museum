@@ -1,18 +1,15 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { Header } from '../component/common/Header'
-import { SideBar } from '../component/common/SideBar'
 import { Kuso } from '../component/kuso/Form'
+import Layout from '../component/common/layout'
 
 const KusoFormPage = () => {
   return (
     <Wrapper>
-      <Header />
       <ContentsBox>
-        <SideBar />
-        <MainContentsWrapper>
+        <Layout.MainContent pageTitle="やばいForm">
           <Kuso />
-        </MainContentsWrapper>
+        </Layout.MainContent>
       </ContentsBox>
     </Wrapper>
   )

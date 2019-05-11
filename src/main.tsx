@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import { App } from './container/App'
 import configureStore from './redux'
 import './asset/css/reset.css'
+import './asset/css/normalize.css'
 
 const store = configureStore()
 const history = createBrowserHistory()

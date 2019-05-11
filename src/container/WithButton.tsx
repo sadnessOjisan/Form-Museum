@@ -13,6 +13,7 @@ import { genBlurLog, genClickLog } from '../helper/util'
 import { ITracker } from '../typedef/Tracker'
 import { CheckBox } from '../component/withButton/CheckBox'
 import { InputItem } from '../component/common/InputItem'
+import Layout from '../component/common/layout'
 
 interface StateProps {
   isLoading: typeof placeState.isLoading
@@ -57,9 +58,7 @@ const WithButton = (props: IProps) => {
   } = props
   return (
     <Wrapper>
-      <Header />
-      <ContentsBox>
-        <SideBar />
+      <Layout.MainContent pageTitle="親切フォーム">
         <MainContentsWrapper onSubmit={handleSubmit}>
           <h1>
             with-button・シミュレーションに適する。（面談シートから生成する）
@@ -223,7 +222,7 @@ const WithButton = (props: IProps) => {
           </div>
           <button type="submit">見積もり詳細をDLする</button>
         </MainContentsWrapper>
-      </ContentsBox>
+      </Layout.MainContent>
     </Wrapper>
   )
 }

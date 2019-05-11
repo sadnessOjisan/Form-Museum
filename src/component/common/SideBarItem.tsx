@@ -1,5 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
+import { COLOR } from '../../const/color'
 
 interface IProps {
   className?: string
@@ -25,14 +26,16 @@ const SideBarItem = (props: IProps) => {
 
 const Wrapper = styled.div<{ selected: boolean }>`
   display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
   flex-direction: column;
   width: 100%;
   height: 70px;
-  color: white;
-  background-color: ${props => (props.selected ? 'red' : 'initial')};
+  color: ${props => (props.selected ? COLOR.peachPink : COLOR.black)};
   cursor: pointer;
   &:hover {
-    background-color: yellow;
+    background-color: ${COLOR.lightGray};
   }
 `
 
