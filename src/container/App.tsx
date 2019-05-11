@@ -25,8 +25,7 @@ const App = (props: Props) => {
   return (
     <PageWrapper>
       <Switch>
-        <Route path="/" component={() => <span>home</span>} exact />
-        <Route path="/kuso" component={KusoFormPage} exact />
+        <Route path="/" component={KusoFormPage} exact />
         <Route path="/masi" component={Masi} exact />
         <Route path="/login" component={Login} exact />
         <Route path="/order" component={Order} exact />

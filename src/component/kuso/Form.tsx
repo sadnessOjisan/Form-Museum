@@ -6,10 +6,14 @@ import { withFormik, FormikProps } from 'formik'
 import { track } from '../../redux/module/logging'
 import { genBlurLog } from '../../helper/util'
 import { ITracker } from '../../typedef/Tracker'
+import { TextInputItem } from './TextInputItem'
+import { TextAreaItem } from './TextAreaItem'
+import { cps } from 'redux-saga/effects'
 
 interface FormValues {
   sales: number | null
   cost: number | null
+  comment: string | null
 }
 
 interface DispatchProps {
@@ -19,48 +23,67 @@ interface DispatchProps {
 const TEST_OR_TRACK_TARGET = {
   inputSales: 'input-sales',
   inputCost: 'input-cost',
+  inputComment: 'input-comment',
 }
 
 const Form = (props: FormikProps<FormValues> & DispatchProps) => {
   const { handleSubmit, handleChange, values, track } = props
   return (
     <MainContentsWrapper onSubmit={handleSubmit}>
-      <h1>kUSO</h1>
-      <div>
-        <label>売り上げ</label>
-        <input
-          name="sales"
-          onChange={handleChange}
-          onBlur={() =>
-            track(
-              genBlurLog('input-kuso-form', TEST_OR_TRACK_TARGET.inputSales, {
-                inputValue: values.sales,
-              })
-            )
-          }
-        />
-      </div>
-      <div>
-        <label>人件費</label>
-        <input
-          name="cost"
-          onChange={handleChange}
-          onBlur={() =>
-            track(
-              genBlurLog('input-kuso-form', TEST_OR_TRACK_TARGET.inputCost, {
-                inputValue: values.cost,
-              })
-            )
-          }
-        />
-      </div>
-      <button type="submit">送信</button>
+      <h1>悪い例フォーム</h1>
+      <TextInputItem
+        label="売上"
+        name="sales"
+        handleChange={handleChange}
+        handleBlur={() =>
+          track(
+            genBlurLog('input-kuso-form', TEST_OR_TRACK_TARGET.inputSales, {
+              inputValue: values.sales,
+            })
+          )
+        }
+        dataTestId={TEST_OR_TRACK_TARGET.inputSales}
+      />
+      <TextInputItem
+        label="人件費"
+        name="cost"
+        handleChange={handleChange}
+        handleBlur={() =>
+          track(
+            genBlurLog('input-kuso-form', TEST_OR_TRACK_TARGET.inputCost, {
+              inputValue: values.cost,
+            })
+          )
+        }
+        dataTestId={TEST_OR_TRACK_TARGET.inputCost}
+      />
+      <TextAreaItem
+        label="コメント"
+        name="comment"
+        handleChange={handleChange}
+        handleBlur={() =>
+          track(
+            genBlurLog('input-kuso-form', TEST_OR_TRACK_TARGET.inputComment, {
+              inputValue: values.comment,
+            })
+          )
+        }
+        dataTestId={TEST_OR_TRACK_TARGET.inputComment}
+      />
+      <Button type="submit">送信</Button>
     </MainContentsWrapper>
   )
 }
 
 const MainContentsWrapper = styled.form`
   width: 100%;
+`
+
+const Button = styled.button`
+  height: 32px;
+  padding: 4px 8px;
+  font-size: 16px;
+  margin-top: 24px;
 `
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => ({
@@ -75,6 +98,7 @@ const KusoForm = connect(
     mapPropsToValues: () => ({
       sales: null,
       cost: null,
+      comment: null,
     }),
     handleSubmit: () => {
       alert('submit')

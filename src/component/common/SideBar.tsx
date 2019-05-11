@@ -35,9 +35,9 @@ const SideBar = (props: IProps & DispatchProps) => {
           track(
             genClickLog('sidebar-click', TEST_OR_TRACK_TARGET.kuso, undefined)
           )
-          push('/kuso')
+          push('/')
         }} // 遷移を全部sagaにやらせてもよかったかも？
-        selected={pathname === '/kuso'}
+        selected={pathname === '/'}
         dataTestId={TEST_OR_TRACK_TARGET.kuso}
       />
       <SideBarItem
