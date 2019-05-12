@@ -99,7 +99,7 @@ const Wrapper = styled.div<IProps>`
   width: ${props => props.width}px;
   height: 100%;
   background-color: ${COLOR.white};
-  border-right: solid 1px ${COLOR.gray};
+  border-right: solid 1px ${COLOR.darkGray};
 `
 
 const LogoBox = styled.div`

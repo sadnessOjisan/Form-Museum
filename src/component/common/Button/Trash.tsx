@@ -32,6 +32,9 @@ const Wrapper = styled.button`
   > * {
     color: ${COLOR.lightGray};
   }
+  :hover {
+    background-color: ${COLOR.darkGray};
+  }
 `
 
 export { Trash }
