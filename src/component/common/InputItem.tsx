@@ -14,6 +14,8 @@ interface IProps {
   touched: boolean
   type: 'number' | 'string'
   placeholder: string
+  dataTestId: string
+  className: string
 }
 
 const InputItem = (props: IProps) => {
@@ -27,10 +29,12 @@ const InputItem = (props: IProps) => {
     touched,
     type,
     placeholder,
+    dataTestId,
+    className,
   } = props
   const isValid = errorMessage ? false : true
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <Label for={name}>{label}</Label>
       <InputWrapper>
         {touched && !isValid && <ValidationBalloon message={errorMessage} />}
@@ -43,6 +47,7 @@ const InputItem = (props: IProps) => {
           id={name}
           type={type}
           placeholder={placeholder}
+          data-testid={dataTestId}
         />
       </InputWrapper>
     </Wrapper>
@@ -62,10 +67,8 @@ const Label = styled.label<{ for: string }>`
   margin-bottom: 8px;
 `
 
-const Input = styled.input.attrs(props => {
-  return { placeholder: 'aaaaaaa' }
-})<{ shouldBeRed: boolean }>`
-  height: 30px;
+const Input = styled.input<{ shouldBeRed: boolean }>`
+  height: 50px;
   border: 1px solid ${props => (props.shouldBeRed ? COLOR.red : COLOR.darkGray)};
   width: 100%;
   padding-left: 4px;

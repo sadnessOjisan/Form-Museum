@@ -4,7 +4,7 @@ import { COLOR } from '../../../const/color'
 
 interface Props {
   className?: string
-  children: React.ReactNode
+  children: string
   onClick?: (e: React.MouseEvent) => void
   type?: 'submit' | 'button'
   primary?: boolean
@@ -20,15 +20,15 @@ const Input = (props: Props) => {
       type={type}
       data-testid={dataTestId}
     >
-      {children}
+      <span style={{ fontSize: '28px' }}>{children}</span>
     </Wrapper>
   )
 }
 
-const SIZE = 20
+const SIZE = 50
 
 const Wrapper = styled.button`
-  background-color: ${COLOR.peachPink};
+  background-color: ${COLOR.lightGray};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,10 +37,13 @@ const Wrapper = styled.button`
   outline: 0;
   border: 0;
   border-radius: ${SIZE / 2}px;
-  padding: 2px 24px;
-  color: white;
-  font-size: 20px;
+  color: ${COLOR.black};
+
+  border: solid 1px ${COLOR.darkGray};
   cursor: pointer;
+  :hover {
+    background-color: ${COLOR.darkGray};
+  }
 `
 
 export { Input }
