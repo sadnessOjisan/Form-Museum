@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 import { InputItem } from '../common/InputItem'
 import Button from '../../component/common/Button'
@@ -8,7 +9,7 @@ import { track } from '../../redux/module/logging'
 interface IProps {
   label: string
   name: string
-  value: number | undefined
+  value: string | number | undefined
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   errorMessage?: string
   touched: boolean
@@ -18,6 +19,7 @@ interface IProps {
   handleMinusButtonClick: () => void
   track: typeof track
   setFieldValue: any
+  unit: '¥' | '人'
 }
 
 const InputGroup = (props: IProps) => {
@@ -28,36 +30,52 @@ const InputGroup = (props: IProps) => {
     value,
     errorMessage,
     touched,
-    type,
     placeholder,
     handlePlusButtonClick,
     handleMinusButtonClick,
     track,
     setFieldValue,
+    unit,
   } = props
+  const [isFocused, setFocus] = useState(false)
   const TEST_OR_TRACK_TARGET = {
     input: `${name}-input`,
     plusStepper: `${name}-plus-stepper`,
     minusStepper: `${name}-minus-stepper`,
   }
+  const formattedValue =
+    unit === '¥'
+      ? `¥${Number(value).toLocaleString()}`
+      : unit === '人'
+      ? `${Number(value).toLocaleString()}人`
+      : Number(value).toLocaleString()
   return (
     <Wrapper>
       <Input
         name={name}
         label={label}
         handleChange={handleChange}
-        handleBlur={() =>
+        handleBlur={() => {
+          setFocus(false)
+          if (value === '') {
+            setFieldValue(name, 0)
+          }
           track(
             genBlurLog('input-budget', TEST_OR_TRACK_TARGET.input, {
               inputValue: value,
             })
           )
-        }
-        onFocus={() => value === 0 && setFieldValue(name, '')}
+        }}
+        handleFocus={() => {
+          setFocus(true)
+          if (value === 0) {
+            setFieldValue(name, '')
+          }
+        }}
         dataTestId={TEST_OR_TRACK_TARGET.input}
-        value={value}
+        value={isFocused ? value : formattedValue}
         touched={touched ? true : false}
-        type={type}
+        type={isFocused ? 'number' : 'text'}
         placeholder={placeholder}
         errorMessage={errorMessage}
       />

@@ -16,6 +16,7 @@ interface IProps {
   placeholder: string
   dataTestId: string
   className?: string
+  handleFocus?: () => void
 }
 
 const InputItem = (props: IProps) => {
@@ -31,6 +32,7 @@ const InputItem = (props: IProps) => {
     placeholder,
     dataTestId,
     className,
+    handleFocus,
   } = props
   const isValid = errorMessage ? false : true
   return (
@@ -42,6 +44,7 @@ const InputItem = (props: IProps) => {
           name={name}
           onChange={handleChange}
           onBlur={handleBlur}
+          onFocus={handleFocus}
           value={value}
           shouldBeRed={!isValid && touched}
           id={name}

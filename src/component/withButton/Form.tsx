@@ -46,8 +46,8 @@ const Form = (props: Props) => {
           setFieldValue={setFieldValue}
           value={values.budget}
           touched={touched.budget ? true : false}
-          type="number"
           placeholder="¥1,000,000"
+          unit="¥"
           handlePlusButtonClick={() => {
             setFieldValue(
               'budget',
@@ -77,8 +77,8 @@ const Form = (props: Props) => {
           touched={touched.budget ? true : false}
           track={track}
           setFieldValue={setFieldValue}
-          type="number"
           placeholder="2,000人"
+          unit="人"
           handlePlusButtonClick={() => {
             setFieldValue(
               'number',
