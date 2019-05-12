@@ -12,11 +12,12 @@ interface IProps {
   index: number
   name: string
   value: IOrderItem
+  className?: string
 }
 
 const InputRow = (props: IProps) => {
-  const { handleChange, index, name, value, handleRowRemove } = props
-  const { startTime, endTime, event } = value
+  const { handleChange, index, name, value, handleRowRemove, className } = props
+  const { startTime, event } = value
   return (
     <Draggable draggableId={String(index)} index={index} isDragDisabled={false}>
       {(provided, snapshot) => (
@@ -25,6 +26,7 @@ const InputRow = (props: IProps) => {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
+          className={className}
         >
           <DragPoint />
           <InputItems>
@@ -33,13 +35,6 @@ const InputRow = (props: IProps) => {
               name={`${name}.${index}.startTime`}
               onChange={handleChange}
               value={startTime}
-            />
-            <span>-</span>
-            <TimeInput
-              type="text"
-              name={`${name}.${index}.endTime`}
-              onChange={handleChange}
-              value={endTime}
             />
             <span>-</span>
             <TextInput
@@ -58,35 +53,39 @@ const InputRow = (props: IProps) => {
 
 const Wrapper = styled.div<{ isDragging: boolean }>`
   padding: 8px 12px;
-  border-left: solid 1px black;
-  border-right: solid 1px black;
-  border-bottom: solid 1px black;
-  :first-child {
-    border-top: solid 1px black;
-  }
-  height: 80px;
+  border: solid 1px ${COLOR.darkGray};
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   > *:first-child {
     margin-right: 24px;
   }
-  background-color: ${props => props.isDragging && COLOR.blue};
+  background: ${props =>
+    props.isDragging &&
+    `${`linear-gradient(90deg, ${COLOR.apricotOrange}, ${
+      COLOR.apricotYellow
+    })`}`};
   position: relative;
   width: 100%;
   &:hover {
-    background-color: yellow;
+    background-color: ${COLOR.gray};
   }
 `
 
 const InputItems = styled.div`
-  width: calc(100% - 82px);
+  display: flex;
+  width: calc(100% - 80px);
+  > * {
+    margin-right: 12px;
+  }
 `
 
 const Input = styled.input`
-  height: 18px;
+  height: 40px;
   padding-left: 4px;
   border-radius: 4px;
+  border: solid 1px ${COLOR.darkGray};
   &:focus {
     outline: 0;
     border-color: ${COLOR.blue};
@@ -94,11 +93,13 @@ const Input = styled.input`
 `
 
 const TimeInput = styled(Input)`
-  width: 40px;
+  width: 20%;
+  max-width: 100px;
 `
 
 const TextInput = styled(Input)`
-  width: 120px;
+  width: 80%;
+  max-width: 300px;
 `
 
 const TrashButton = styled(Button.Trash)``

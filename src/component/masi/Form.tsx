@@ -22,9 +22,13 @@ interface FormValues {
   comment: string | null
 }
 
-interface Props {}
+const TEST_OR_TRACK_TARGET = {
+  inputSales: `sales-input`,
+  inputCost: `cost-input`,
+  inputComment: `comment-input`,
+}
 
-const Form = (props: Props & FormikProps<FormValues>) => {
+const Form = (props: FormikProps<FormValues>) => {
   const {
     handleSubmit,
     values,
@@ -34,9 +38,9 @@ const Form = (props: Props & FormikProps<FormValues>) => {
     touched,
   } = props
   return (
-    <MainContentsWrapper onSubmit={handleSubmit}>
+    <MainContentsWrapper>
       <Text.PageTitle>売上</Text.PageTitle>
-      <FormWrapper>
+      <FormWrapper onSubmit={handleSubmit}>
         <InputItem
           name="sales"
           handleChange={handleChange}
@@ -47,6 +51,7 @@ const Form = (props: Props & FormikProps<FormValues>) => {
           touched={touched.sales ? true : false}
           type="number"
           placeholder="¥1,000,000"
+          dataTestId={TEST_OR_TRACK_TARGET.inputSales}
         />
         <InputItem
           name="cost"
@@ -58,6 +63,7 @@ const Form = (props: Props & FormikProps<FormValues>) => {
           touched={touched.cost ? true : false}
           type="number"
           placeholder="2,000人"
+          dataTestId={TEST_OR_TRACK_TARGET.inputCost}
         />
         <TextAreaItem
           name="comment"
@@ -69,6 +75,7 @@ const Form = (props: Props & FormikProps<FormValues>) => {
           touched={touched.comment ? true : false}
           type="text"
           placeholder="急に人が増えて、大変でした。"
+          dataTestId={TEST_OR_TRACK_TARGET.inputComment}
         />
         <Button.Submit
           disabled={Object.keys(errors).length !== 0 ? true : false}
@@ -78,7 +85,7 @@ const Form = (props: Props & FormikProps<FormValues>) => {
   )
 }
 
-const MainContentsWrapper = styled.form`
+const MainContentsWrapper = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${COLOR.lightGray};

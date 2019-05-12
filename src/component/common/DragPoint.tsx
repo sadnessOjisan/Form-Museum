@@ -33,7 +33,7 @@ const Row = styled.div`
 `
 
 const Dot = styled.span`
-  font-size: 12px;
+  font-size: 4px;
   font-weight: bold;
 `
 

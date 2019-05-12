@@ -24,18 +24,20 @@ const Cute = (props: Props) => {
   )
 }
 
+const SIZE = 50
+
 const Wrapper = styled.button`
-  background: ${`linear-gradient(90deg, ${COLOR.peachYellow}, ${
-    COLOR.peachPink
+  background: ${`linear-gradient(90deg, ${COLOR.apricotOrange}, ${
+    COLOR.apricotYellow
   })`};
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 42px;
+  height: ${SIZE}px;
+  width: ${SIZE}px;
   outline: 0;
   border: 0;
-  border-radius: 21px;
-  padding: 8px 24px;
+  border-radius: ${SIZE / 2}px;
   color: white;
   font-size: 20px;
   cursor: pointer;

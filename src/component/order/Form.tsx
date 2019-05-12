@@ -10,12 +10,11 @@ import {
   actions as orderActions,
   initialState as orderState,
 } from '../../redux/module/order'
-
+import { COLOR } from '../../const/color'
 import { IOrderItem } from '../../typedef/model/OrderItem'
 import { IStore } from '../../redux/module'
 import { Viewer } from './Viewer'
 import { MemoizedInputRow } from './EditorRow'
-
 import Button from '../common/Button'
 
 interface StateProps {
@@ -39,15 +38,7 @@ interface FormValues {
 type IProps = StateProps & DispatchProps & FormikProps<FormValues>
 
 const Form = (props: IProps) => {
-  const {
-    values,
-    handleChange,
-    startFetchData,
-    isLoaded,
-    isLoading,
-    data,
-    error,
-  } = props
+  const { values, handleChange, startFetchData, isLoading, data } = props
   const { schedule } = values
   useEffect(() => {
     startFetchData()
@@ -79,7 +70,7 @@ const Form = (props: IProps) => {
                       {...provided.droppableProps}
                     >
                       {values.schedule.map((item, idx) => (
-                        <MemoizedInputRow
+                        <Row
                           handleChange={handleChange}
                           handleRowRemove={(rowIndex: number) =>
                             arrayHelpers.remove(rowIndex)
@@ -100,9 +91,9 @@ const Form = (props: IProps) => {
                           })
                         }
                       >
-                        ADD
+                        +
                       </AddButton>
-                      <SubmitButton />
+
                       {snapshot.isDraggingOver && (
                         <DragCover>
                           変更したい箇所でカーソルを離してください
@@ -115,6 +106,7 @@ const Form = (props: IProps) => {
             )}
           />
         )}
+        <SubmitButton />
       </Editor>
     </FormWrapper>
   )
@@ -139,10 +131,13 @@ const Editor = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: ${COLOR.white};
+  padding: 8px;
+  /* DragCoverの親であることを明示するため */
+  position: relative;
 `
 
 const DrappableArea = styled.div`
-  border: 1px solid lightgrey;
   overflow-y: scroll;
   height: 100%;
   border-radius: 2px;
@@ -166,17 +161,18 @@ const DragCover = styled.div`
   font-size: 24px;
 `
 
+const Row = styled(MemoizedInputRow)`
+  margin-bottom: 18px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+`
+
 const AddButton = styled(Button.Cute)`
   margin: auto;
   margin-top: 24px;
   margin-bottom: 24px;
 `
 
-const SubmitButton = styled(Button.Circle)`
-  position: absolute;
-  right: 8px;
-  bottom: 8px;
-`
+const SubmitButton = styled(Button.Submit)``
 
 type MyFormProps = StateProps & DispatchProps
 

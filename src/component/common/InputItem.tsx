@@ -6,7 +6,7 @@ import { COLOR } from '../../const/color'
 interface IProps {
   label: string
   name: string
-  value: number | undefined
+  value: number | undefined | null
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   handleBlur: (e: React.FocusEvent<HTMLInputElement>) => void
   onFocus?: () => void
@@ -15,7 +15,7 @@ interface IProps {
   type: 'number' | 'string'
   placeholder: string
   dataTestId: string
-  className: string
+  className?: string
 }
 
 const InputItem = (props: IProps) => {

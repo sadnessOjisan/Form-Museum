@@ -1,6 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { COLOR } from '../../../const/color'
 
 interface Props {
   className?: string
@@ -24,9 +25,13 @@ const Wrapper = styled.button`
   width: ${`${SIZE}px`};
   height: ${`${SIZE}px`};
   border-radius: ${`${SIZE / 2}px`};
-  background-color: red;
-  color: white;
+  background-color: ${COLOR.lightGray};
+  color: ${COLOR.lightGray};
+  border: none;
   cursor: pointer;
+  > * {
+    color: ${COLOR.lightGray};
+  }
 `
 
 export { Trash }

@@ -1,36 +1,37 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { IOrderItem } from '../../typedef/model/OrderItem'
-
+import { COLOR } from '../../const/color'
 interface IProps {
   item: IOrderItem
 }
 
 const ScheduleItem = (props: IProps) => {
   const { item } = props
-  const { startTime, endTime, event } = item
+  const { startTime, event } = item
   return (
     <Wrapper>
       <TimeText>{startTime}</TimeText>
-      <TimeSpan>-</TimeSpan>
-      <TimeText>{endTime}</TimeText>
       <EventText> {event}</EventText>
     </Wrapper>
   )
 }
 
 const Wrapper = styled.div`
+  color: ${COLOR.apricotOrange};
   font-size: 18px;
-  font-family: 'Caveat', cursive;
+  font-weight: bold;
+  font-family: 'Teko', sans-serif;
+  width: 80%;
 `
 
 const TimeText = styled.span`
+  color: ${COLOR.apricotOrange};
   margin-right: 8px;
   margin-left: 8px;
 `
-
-const TimeSpan = styled.span``
 const EventText = styled.span`
+  color: ${COLOR.apricotOrange};
   margin-left: 24px;
 `
 const MemoizedScheduleItem = React.memo(

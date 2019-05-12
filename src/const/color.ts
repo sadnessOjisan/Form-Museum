@@ -7,7 +7,8 @@ export const gray = '#eeeeee'
 export const darkGray = '#999999'
 export const white = '#ffffff'
 export const red = 'red'
-
+export const apricotYellow = '#FEEA51'
+export const apricotOrange = '#F7B362'
 const COLOR = {
   black,
   blue,
@@ -18,6 +19,8 @@ const COLOR = {
   darkGray,
   white,
   red,
+  apricotYellow,
+  apricotOrange,
 }
 
 export { COLOR }

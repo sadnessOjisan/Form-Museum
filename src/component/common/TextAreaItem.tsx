@@ -14,6 +14,7 @@ interface IProps {
   touched: boolean
   type: 'number' | 'text'
   placeholder: string
+  dataTestId: string
 }
 
 const TextAreaItem = (props: IProps) => {
@@ -27,6 +28,7 @@ const TextAreaItem = (props: IProps) => {
     touched,
     type,
     placeholder,
+    dataTestId,
   } = props
   const isValid = errorMessage ? false : true
   return (
@@ -43,6 +45,7 @@ const TextAreaItem = (props: IProps) => {
           id={name}
           type={type}
           placeholder={!touched && placeholder}
+          data-testid={dataTestId}
         />
       </InputWrapper>
     </Wrapper>
