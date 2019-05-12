@@ -1,24 +1,31 @@
 import * as React from 'react'
-import { cleanup, waitForElement } from 'react-testing-library'
+import { cleanup, waitForElement, fireEvent } from 'react-testing-library'
 import 'jest-dom/extend-expect'
 import { WithButton } from '../WithButton'
-import axios from 'axios'
 import { renderWithReduxRouter } from '../../helper/testUtil'
 
-jest.mock('axios')
 afterEach(cleanup)
 
-jest.mock('../../asset/video/rain.mp4')
-jest.mock('../../asset/video/hare.mp4')
+const setup = () => {
+  const { getByLabelText, getByTestId } = renderWithReduxRouter(<WithButton />)
+  const input = getByLabelText('予算')
+  return {
+    input,
+    getByLabelText,
+    getByTestId,
+  }
+}
 
-it('setup', async () => {
-  const returnData = [
-    { id: 1, name: '2', place: '2', number: 4 },
-    { id: 2, name: '2', place: '2', number: 4 },
-  ]
-  ;(axios.get as any).mockResolvedValue({ data: returnData })
-  const { getAllByTestId } = renderWithReduxRouter(<WithButton />)
-
-  const Places = await waitForElement(() => getAllByTestId('place-item'))
-  expect(returnData.length).toBe(Places.length)
+describe('budget-input', () => {
+  it('click plus once', () => {
+    const { input, getByTestId } = setup()
+    fireEvent.click(getByTestId('budget-plus-stepper'))
+    expect(input.value).toEqual('¥100,000')
+  })
+  it('click plus twice', () => {
+    const { input, getByTestId } = setup()
+    fireEvent.click(getByTestId('budget-plus-stepper'))
+    fireEvent.click(getByTestId('budget-plus-stepper'))
+    expect(input.value).toEqual('¥200,000')
+  })
 })

@@ -15,6 +15,10 @@ interface IProps {
   className?: string
 }
 
+const TEST_OR_TRACK_TARGET = {
+  row: 'editRow',
+}
+
 const InputRow = (props: IProps) => {
   const { handleChange, index, name, value, handleRowRemove, className } = props
   const { startTime, event } = value
@@ -27,6 +31,7 @@ const InputRow = (props: IProps) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           className={className}
+          data-testid={TEST_OR_TRACK_TARGET.row}
         >
           <DragPoint />
           <InputItems>

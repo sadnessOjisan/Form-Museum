@@ -28,7 +28,6 @@ const TEST_OR_TRACK_TARGET = {
 
 const SideBar = (props: IProps & DispatchProps) => {
   const { className, history, location, track, width } = props
-  console.log('props: ', props)
   const { push } = history
   const { pathname } = location
   return (

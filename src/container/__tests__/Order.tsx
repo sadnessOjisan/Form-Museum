@@ -6,16 +6,22 @@ import axios from 'axios'
 import { renderWithReduxRouter } from '../../helper/testUtil'
 
 jest.mock('axios')
+jest.mock('@fortawesome/react-fontawesome')
 afterEach(cleanup)
 
 it('setup', async () => {
-  const returnData = [
-    { id: 1, name: '2', place: '2', number: 4 },
-    { id: 2, name: '2', place: '2', number: 4 },
-  ]
-  ;(axios.get as any).mockResolvedValue({ data: returnData })
-  const { getAllByTestId } = renderWithReduxRouter(<Order />)
-
-  const Places = await waitForElement(() => getAllByTestId('place-item'))
-  expect(returnData.length).toBe(Places.length)
+  //   const returnData = [
+  //     {
+  //       startTime: '09:00',
+  //       event: '新郎新婦入場',
+  //     },
+  //     {
+  //       startTime: '09:20',
+  //       event: '新郎新婦退場',
+  //     },
+  //   ]
+  //   ;(axios.get as any).mockResolvedValue({ data: returnData })
+  //   const { getAllByTestId } = renderWithReduxRouter(<Order />)
+  //   const Orders = await waitForElement(() => getAllByTestId('editRow'))
+  //   expect(returnData.length).toBe(Orders.length)
 })
