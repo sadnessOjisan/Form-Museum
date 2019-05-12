@@ -68,6 +68,8 @@ const InputWrapper = styled.div`
 const Label = styled.label<{ for: string }>`
   font-size: 16px;
   margin-bottom: 8px;
+  display: inline-block;
+  width: 70px;
 `
 
 const Input = styled.input<{ shouldBeRed: boolean }>`

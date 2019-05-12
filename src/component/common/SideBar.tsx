@@ -39,7 +39,9 @@ const SideBar = (props: IProps & DispatchProps) => {
     >
       <LogoBox>
         <span>Kekkon</span>
-        <span>siyo</span>
+        <span>
+          siyo<span style={{ color: 'pink' }}>♡</span>
+        </span>
       </LogoBox>
       <Hr />
       <SideBarItem
