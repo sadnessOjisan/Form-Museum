@@ -17,5 +17,4 @@ describe('Header', () => {
     // fireEvent.click(getByTestId('kintai-modal-opener'))
     // expect(queryByTestId('kintai-modal')).toBeInTheDocument()
   })
-  it.todo('hoge')
 })
