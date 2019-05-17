@@ -6,12 +6,18 @@ interface Props {
   onClick?: () => void
   type?: 'submit' | 'button'
   primary?: boolean
+  dataTestId: string
 }
 
 const Normal = (props: Props) => {
-  const { className, children, onClick, type } = props
+  const { className, children, onClick, type, dataTestId } = props
   return (
-    <Wrapper className={className} onClick={onClick} type={type}>
+    <Wrapper
+      className={className}
+      onClick={onClick}
+      type={type}
+      data-testid={dataTestId}
+    >
       {children}
     </Wrapper>
   )

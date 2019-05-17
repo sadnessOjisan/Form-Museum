@@ -31,7 +31,7 @@ const Form = (props: FormikProps<FormValues> & DispatchProps) => {
   const { handleSubmit, handleChange, values, track } = props
   return (
     <MainContentsWrapper onSubmit={() => handleSubmit()}>
-      <Text.PageTitle>悪い例フォーム</Text.PageTitle>
+      <Text.PageTitle>特に何もしていないフォーム</Text.PageTitle>
       <FormWrapper>
         <TextInputItem
           label="売上"

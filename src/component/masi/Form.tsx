@@ -11,6 +11,7 @@ import { track } from '../../redux/module/logging'
 import { ITracker } from '../../typedef/Tracker'
 import Text from '../common/text'
 import { COLOR } from '../../const/color'
+import { genBlurLog } from '../../helper/util'
 
 interface DispatchProps {
   track: typeof track
@@ -36,15 +37,23 @@ const Form = (props: FormikProps<FormValues>) => {
     handleBlur,
     errors,
     touched,
+    track,
   } = props
   return (
     <MainContentsWrapper>
-      <Text.PageTitle>売上</Text.PageTitle>
+      <Text.PageTitle>利益計算</Text.PageTitle>
       <FormWrapper onSubmit={handleSubmit}>
         <InputItem
           name="sales"
           handleChange={handleChange}
-          handleBlur={handleBlur}
+          handleBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+            handleBlur(e)
+            track(
+              genBlurLog('input-masi-form', TEST_OR_TRACK_TARGET.inputSales, {
+                inputValue: values.sales,
+              })
+            )
+          }}
           value={values.sales}
           label="売り上げ"
           errorMessage={errors.sales}
@@ -56,7 +65,14 @@ const Form = (props: FormikProps<FormValues>) => {
         <InputItem
           name="cost"
           handleChange={handleChange}
-          handleBlur={handleBlur}
+          handleBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+            handleBlur(e)
+            track(
+              genBlurLog('input-masi-form', TEST_OR_TRACK_TARGET.inputCost, {
+                inputValue: values.cost,
+              })
+            )
+          }}
           value={values.cost}
           label="人件費"
           errorMessage={errors.cost}
@@ -68,7 +84,14 @@ const Form = (props: FormikProps<FormValues>) => {
         <TextAreaItem
           name="comment"
           handleChange={handleChange}
-          handleBlur={handleBlur}
+          handleBlur={(e: React.FocusEvent<HTMLTextAreaElement>) => {
+            handleBlur(e)
+            track(
+              genBlurLog('input-masi-form', TEST_OR_TRACK_TARGET.inputComment, {
+                inputValue: values.comment,
+              })
+            )
+          }}
           value={values.comment}
           label="コメント"
           errorMessage={errors.comment}

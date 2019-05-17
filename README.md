@@ -2,7 +2,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/fb1d4ea4-2a54-4421-8c3e-08fedfcb3644/deploy-status)](https://app.netlify.com/sites/if-form/deploys)
 
-Inside Frontend 用のサンプルコードです。
+Inside Frontend 用のサンプルコードです。リファクタが間に合っておらずゴミが混じっており、ご容赦ください、、、
 
 ## 環境
 

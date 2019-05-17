@@ -24,13 +24,21 @@ type IProps = StateProps & DispatchProps
 
 const HEADER_HEIGHT = 40
 
+const TEST_OR_TRACK_TARGET = {
+  close: 'close-modal-btn',
+  next: 'next-modal-btn',
+}
+
 const Kintai: React.SFC<IProps> = (props: IProps) => {
   const { closeModal, selectedModal, selectModal } = props
   const pages = {
     WORKING_TIME: ({ style }: { style: React.CSSProperties }) => (
       <Body style={{ ...style }}>
         <KintaiModal.WorkingTime />
-        <Button.Normal onClick={() => selectModal('WEATHER', selectLog)}>
+        <Button.Normal
+          onClick={() => selectModal('WEATHER', selectLog)}
+          dataTestId={TEST_OR_TRACK_TARGET.next}
+        >
           次へ
         </Button.Normal>
       </Body>
@@ -38,7 +46,10 @@ const Kintai: React.SFC<IProps> = (props: IProps) => {
     WEATHER: ({ style }: { style: React.CSSProperties }) => (
       <Body style={{ ...style }}>
         <KintaiModal.Weather />
-        <Button.Normal onClick={() => selectModal('THANKS', selectLog)}>
+        <Button.Normal
+          onClick={() => selectModal('THANKS', selectLog)}
+          dataTestId={TEST_OR_TRACK_TARGET.next}
+        >
           次へ
         </Button.Normal>
       </Body>
@@ -67,7 +78,10 @@ const Kintai: React.SFC<IProps> = (props: IProps) => {
         })}
         <Footer>
           {selectedModal === 'THANKS' && (
-            <Button.Normal onClick={() => closeModal(closeLog)}>
+            <Button.Normal
+              onClick={() => closeModal(closeLog)}
+              dataTestId={TEST_OR_TRACK_TARGET.close}
+            >
               送信する
             </Button.Normal>
           )}
