@@ -39,7 +39,7 @@ const SideBar = (props: IProps & DispatchProps) => {
       <LogoBox>
         <span>Kekkon</span>
         <span>
-          siyo<span style={{ color: 'pink' }}>♡</span>
+          kanri<span style={{ color: 'pink' }}>♡</span>
         </span>
       </LogoBox>
       <Hr />
@@ -93,14 +93,14 @@ const SideBar = (props: IProps & DispatchProps) => {
   )
 }
 
-const Wrapper = styled.div<IProps>`
+const Wrapper = styled.div<{ width: number }>`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: ${props => props.width}px;
   height: 100%;
   background-color: ${COLOR.white};
-  border-right: solid 1px ${COLOR.darkGray};
+  border-right: solid 1px ${COLOR.gray};
 `
 
 const LogoBox = styled.div`
@@ -114,6 +114,7 @@ const LogoBox = styled.div`
 
 const Hr = styled.hr`
   　width: 80%;
+  border-color: ${COLOR.gray};
 `
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => ({

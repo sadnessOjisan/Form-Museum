@@ -27,7 +27,7 @@ const Viewer = (props: IProps) => {
 
 const Wrapper = styled.div`
   padding: 12px;
-  border: solid 1px ${COLOR.darkGray};
+  border: solid 1px ${COLOR.gray};
   background-color: ${COLOR.white};
   height: 100%;
   overflow-y: scroll;

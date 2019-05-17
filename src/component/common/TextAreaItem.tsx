@@ -6,13 +6,12 @@ import { COLOR } from '../../const/color'
 interface IProps {
   label: string
   name: string
-  value: string | undefined
+  value: string | null
   handleChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
   handleBlur: (e: React.FocusEvent<HTMLTextAreaElement>) => void
   onFocus?: () => void
   errorMessage?: string
   touched: boolean
-  type: 'number' | 'text'
   placeholder: string
   dataTestId: string
 }
@@ -26,7 +25,6 @@ const TextAreaItem = (props: IProps) => {
     errorMessage,
     handleBlur,
     touched,
-    type,
     placeholder,
     dataTestId,
   } = props
@@ -40,11 +38,10 @@ const TextAreaItem = (props: IProps) => {
           name={name}
           onChange={handleChange}
           onBlur={handleBlur}
-          value={value}
+          value={value ? value : undefined}
           shouldBeRed={!isValid && touched}
           id={name}
-          type={type}
-          placeholder={!touched && placeholder}
+          placeholder={!touched ? placeholder : ''}
           data-testid={dataTestId}
         />
       </InputWrapper>

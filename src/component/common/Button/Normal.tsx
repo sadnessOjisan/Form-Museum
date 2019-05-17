@@ -3,7 +3,7 @@ import styled from 'styled-components'
 interface Props {
   className?: string
   children: React.ReactNode
-  onClick?: (e: React.MouseEvent) => void
+  onClick?: () => void
   type?: 'submit' | 'button'
   primary?: boolean
 }
@@ -11,12 +11,7 @@ interface Props {
 const Normal = (props: Props) => {
   const { className, children, onClick, type } = props
   return (
-    <Wrapper
-      className={className}
-      onClick={onClick}
-      type={type}
-      style={{ backgroundColor: 'pink' }}
-    >
+    <Wrapper className={className} onClick={onClick} type={type}>
       {children}
     </Wrapper>
   )

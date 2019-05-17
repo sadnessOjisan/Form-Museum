@@ -6,13 +6,13 @@ import { COLOR } from '../../const/color'
 interface IProps {
   label: string
   name: string
-  value: number | undefined | null
+  value: string | number | undefined | null
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   handleBlur: (e: React.FocusEvent<HTMLInputElement>) => void
   onFocus?: () => void
   errorMessage?: string
   touched: boolean
-  type: 'number' | 'string'
+  type: 'number' | 'text'
   placeholder: string
   dataTestId: string
   className?: string
@@ -45,7 +45,7 @@ const InputItem = (props: IProps) => {
           onChange={handleChange}
           onBlur={handleBlur}
           onFocus={handleFocus}
-          value={value}
+          value={value ? value : undefined}
           shouldBeRed={!isValid && touched}
           id={name}
           type={type}

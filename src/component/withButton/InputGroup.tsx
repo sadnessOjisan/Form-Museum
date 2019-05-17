@@ -13,7 +13,6 @@ interface IProps {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   errorMessage?: string
   touched: boolean
-  type: 'number' | 'string'
   placeholder: string
   handlePlusButtonClick: () => void
   handleMinusButtonClick: () => void

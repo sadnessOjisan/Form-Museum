@@ -13,8 +13,8 @@ const PageTitle = (props: Props) => {
 
 const SText = styled.h2<{ color?: string }>`
   font-size: 24px;
-  margin-top: 24px;
-  margin-bottom: 24px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   color: ${props => (props.color ? props.color : COLOR.black)};
   font-weight: normal;
 `

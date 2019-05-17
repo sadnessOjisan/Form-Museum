@@ -66,7 +66,11 @@ const Kintai: React.SFC<IProps> = (props: IProps) => {
           return <Page key={key} style={props} />
         })}
         <Footer>
-          <Button.Normal>eee</Button.Normal>
+          {selectedModal === 'THANKS' && (
+            <Button.Normal onClick={() => closeModal(closeLog)}>
+              送信する
+            </Button.Normal>
+          )}
         </Footer>
       </Content>
     </Wrapper>

@@ -4,23 +4,8 @@ import styled from 'styled-components'
 const Thanks = () => {
   return (
     <Wrapper>
-      <h1>WorkingTime</h1>
-      <p>
-        faaafwfaaafwfwefwefaaafwfwewefaaafwfwefwefaaafwfwefwefaaafwfwefwefaaafwfwefwefaaafwfwefwefwefwe
-      </p>
-      <p>
-        faaafwfaaafwfwefwefaaafwfwewefaaafwfwefwefaaafwfwefwefaaafwfwefwefaaafwfwefwefaaafwfwefwefwefwe
-      </p>
+      <h1>労働時間申請</h1>
       <input />
-      <p>
-        faaafwfaaafwfwefwefaaafwfwewefaaafwfwefwefaaafwfwefwefaaafwfwefwefaaafwfwefwefaaafwfwefwefwefwe
-      </p>
-      <p>
-        faaafwfaaafwfwefwefaaafwfwewefaaafwfwefwefaaafwfwefwefaaafwfwefwefaaafwfwefwefaaafwfwefwefwefwe
-      </p>
-      <p>
-        faaafwfaaafwfwefwefaaafwfwewefaaafwfwefwefaaafwfwefwefaaafwfwefwefaaafwfwefwefaaafwfwefwefwefwe
-      </p>
     </Wrapper>
   )
 }

@@ -139,7 +139,7 @@ const MainContentsWrapper = styled.form`
 
 const FormWrapper = styled.form`
   background-color: ${COLOR.white};
-  border: solid 1px ${COLOR.darkGray};
+  border: solid 1px ${COLOR.gray};
   border-radius: 4px;
   display: flex;
   flex-direction: column;

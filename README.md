@@ -19,17 +19,12 @@ $ yarn -v
 ```sh
 $ yarn install
 
+// mock server起動
+$ yarn run mock:local
+
 // localで起動
 $ yarn run start:local
 
 // prd用にbuild
 $ yarn run build:prd
 ```
-
-## task
-
-- [ ] Toast 作る
-- [ ] CSS 整える
-- [ ] SVG の整理
-- [ ] withbutton のテストを分厚くする（複雑な例として）
-- [ ] withbutton の 0 消しがなぜ必要かを解説する

@@ -80,6 +80,7 @@ const Wrapper = styled.div<{ isDragging: boolean }>`
 
 const InputItems = styled.div`
   display: flex;
+  align-items: center;
   width: calc(100% - 80px);
   > * {
     margin-right: 12px;

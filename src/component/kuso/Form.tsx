@@ -30,7 +30,7 @@ const TEST_OR_TRACK_TARGET = {
 const Form = (props: FormikProps<FormValues> & DispatchProps) => {
   const { handleSubmit, handleChange, values, track } = props
   return (
-    <MainContentsWrapper onSubmit={handleSubmit}>
+    <MainContentsWrapper onSubmit={() => handleSubmit()}>
       <Text.PageTitle>悪い例フォーム</Text.PageTitle>
       <FormWrapper>
         <TextInputItem
@@ -87,13 +87,13 @@ const MainContentsWrapper = styled.div`
 
 const FormWrapper = styled.form`
   background-color: ${COLOR.white};
-  border: solid 1px ${COLOR.darkGray}
+  border: solid 1px ${COLOR.gray};
   border-radius: 4px;
   display: flex;
   flex-direction: column;
-  align-items:center;
+  align-items: center;
   padding: 32px;
-  > div{
+  > div {
     width: 80%;
     margin-bottom: 24px;
   }

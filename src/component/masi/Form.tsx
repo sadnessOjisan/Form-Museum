@@ -50,7 +50,7 @@ const Form = (props: FormikProps<FormValues>) => {
           errorMessage={errors.sales}
           touched={touched.sales ? true : false}
           type="number"
-          placeholder="¥1,000,000"
+          placeholder="¥1000000"
           dataTestId={TEST_OR_TRACK_TARGET.inputSales}
         />
         <InputItem
@@ -62,7 +62,7 @@ const Form = (props: FormikProps<FormValues>) => {
           errorMessage={errors.cost}
           touched={touched.cost ? true : false}
           type="number"
-          placeholder="2,000人"
+          placeholder="¥2000"
           dataTestId={TEST_OR_TRACK_TARGET.inputCost}
         />
         <TextAreaItem
@@ -73,7 +73,6 @@ const Form = (props: FormikProps<FormValues>) => {
           label="コメント"
           errorMessage={errors.comment}
           touched={touched.comment ? true : false}
-          type="text"
           placeholder="急に人が増えて、大変でした。"
           dataTestId={TEST_OR_TRACK_TARGET.inputComment}
         />
@@ -94,7 +93,7 @@ const MainContentsWrapper = styled.div`
 
 const FormWrapper = styled.form`
   background-color: ${COLOR.white};
-  border: solid 1px ${COLOR.darkGray};
+  border: solid 1px ${COLOR.gray};
   border-radius: 4px;
   display: flex;
   flex-direction: column;
@@ -114,10 +113,12 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => ({
 
 const MasiSchema = Yup.object().shape({
   sales: Yup.number()
+    .typeError('数値を入力してください')
     .max(1000000, '最大値は100000です')
     .positive('正数を入れてください')
     .required('Required'),
   cost: Yup.number()
+    .typeError('数値を入力してください')
     .max(1000000, '最大値は100000です')
     .positive('正数を入れてください')
     .required('Required'),

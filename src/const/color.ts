@@ -9,6 +9,7 @@ export const white = '#ffffff'
 export const red = 'red'
 export const apricotYellow = '#FEEA51'
 export const apricotOrange = '#F7B362'
+export const lightPink = '#fe8cb9'
 const COLOR = {
   black,
   blue,
@@ -21,6 +22,7 @@ const COLOR = {
   red,
   apricotYellow,
   apricotOrange,
+  lightPink,
 }
 
 export { COLOR }

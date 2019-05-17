@@ -26,6 +26,10 @@ const Wrapper = styled.button`
   })`};
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
   border: none;
+  outline: none;
+  :hover {
+    background: ${COLOR.lightPink};
+  }
 `
 
 export { Submit }
