@@ -8,7 +8,7 @@ import { genBlurLog } from '../../helper/util'
 import { ITracker } from '../../typedef/Tracker'
 import { TextInputItem } from './TextInputItem'
 import { TextAreaItem } from './TextAreaItem'
-import Text from '../common/text'
+import { PageTitle } from '../common/Text/PageTitle'
 import { COLOR } from '../../const/color'
 import Button from '../common/Button'
 interface FormValues {
@@ -31,7 +31,7 @@ const Form = (props: FormikProps<FormValues> & DispatchProps) => {
   const { handleSubmit, handleChange, values, track } = props
   return (
     <MainContentsWrapper onSubmit={() => handleSubmit()}>
-      <Text.PageTitle>特に何もしていないフォーム</Text.PageTitle>
+      <PageTitle>特に何もしていないフォーム</PageTitle>
       <FormWrapper>
         <TextInputItem
           label="売上"

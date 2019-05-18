@@ -907,6 +907,50 @@
       "url": "/with-button",
       "page": "WITH_BUTTON",
       "id": 53
+    },
+    {
+      "version": "0.0.1",
+      "pk": "f83f6ef0-791d-11e9-8f10-ef73094abf89",
+      "tk": "ec8dcfc0-791d-11e9-8f10-ef73094abf89",
+      "timeStamp": "2019-05-18T12:35:23+09:00",
+      "userId": "0b0eb086fc9a",
+      "userAgent": "mozilla/5.0 (macintosh; intel mac os x 10_14_4) applewebkit/537.36 (khtml, like gecko) chrome/74.0.3729.157 safari/537.36",
+      "sessionID": "f83f9600-791d-11e9-8f10-ef73094abf89",
+      "eventName": "sidebar-click",
+      "target": "sidebar-item-with-button",
+      "eventType": "CLICK",
+      "url": "/order",
+      "page": "ORDER",
+      "id": 54
+    },
+    {
+      "version": "0.0.1",
+      "pk": "f8431870-791d-11e9-8f10-ef73094abf89",
+      "tk": "f83f6ef0-791d-11e9-8f10-ef73094abf89",
+      "timeStamp": "2019-05-18T12:35:23+09:00",
+      "userId": "0b0eb086fc9a",
+      "userAgent": "mozilla/5.0 (macintosh; intel mac os x 10_14_4) applewebkit/537.36 (khtml, like gecko) chrome/74.0.3729.157 safari/537.36",
+      "sessionID": "f8431871-791d-11e9-8f10-ef73094abf89",
+      "eventName": "load_withButton",
+      "eventType": "LOAD",
+      "url": "/with-button",
+      "page": "WITH_BUTTON",
+      "id": 55
+    },
+    {
+      "version": "0.0.1",
+      "pk": "f8b3dba0-791d-11e9-8f10-ef73094abf89",
+      "tk": "f8431870-791d-11e9-8f10-ef73094abf89",
+      "timeStamp": "2019-05-18T12:35:24+09:00",
+      "userId": "0b0eb086fc9a",
+      "userAgent": "mozilla/5.0 (macintosh; intel mac os x 10_14_4) applewebkit/537.36 (khtml, like gecko) chrome/74.0.3729.157 safari/537.36",
+      "sessionID": "f8b3dba1-791d-11e9-8f10-ef73094abf89",
+      "eventName": "order",
+      "target": "sidebar-item-order",
+      "eventType": "CLICK",
+      "url": "/with-button",
+      "page": "WITH_BUTTON",
+      "id": 56
     }
   ]
 }

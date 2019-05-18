@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { Form } from '../component/order/Form'
 import Layout from '../component/common/layout'
-import Text from '../component/common/text'
+import Text from '../component/common/Text'
 import { COLOR } from '../const/color'
 
 const Order = () => {

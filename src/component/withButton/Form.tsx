@@ -6,7 +6,7 @@ import { withFormik, FormikProps } from 'formik'
 import { track } from '../../redux/module/logging'
 import { ITracker } from '../../typedef/Tracker'
 import { COLOR } from '../../const/color'
-import Text from '../common/text'
+import { PageTitle } from '../common/Text/PageTitle'
 import Button from '../../component/common/Button'
 import { InputGroup } from './InputGroup'
 
@@ -36,7 +36,7 @@ const Form = (props: Props) => {
   } = props
   return (
     <MainContentsWrapper>
-      <Text.PageTitle>式場シミュレーター</Text.PageTitle>
+      <PageTitle>式場シミュレーター</PageTitle>
       <FormWrapper onSubmit={handleSubmit}>
         <InputGroup
           name="budget"

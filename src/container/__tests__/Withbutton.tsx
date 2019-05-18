@@ -26,12 +26,7 @@ describe('budget-input', () => {
     fireEvent.change(input, { target: { value: 100000 } })
     expect(input.value).toEqual('¥100,000')
   })
-  it('値が0のとき、focusを当てると数値が消える', () => {
-    const { input, getByTestId } = setup()
-    fireEvent.focus(getByTestId('budget-input'))
-    expect(input.value).toEqual('')
-  })
-  it('値が0じゃないとき、focusを当てると数値が消える', () => {
+  it('値が0じゃないとき、focusを当てると単位が消える', () => {
     const { input, getByTestId } = setup()
     fireEvent.change(input, { target: { value: 100000 } })
     fireEvent.focus(getByTestId('budget-input'))
@@ -55,4 +50,14 @@ describe('budget-input', () => {
     fireEvent.click(getByTestId('budget-minus-stepper'))
     expect(input.value).toEqual('¥0')
   })
+})
+
+describe('cost-input', () => {
+  it.todo('初期状態は0')
+  it.todo('入力値に単位がつく')
+  it.todo('値が0のとき、focusを当てると数値が消える')
+  it.todo('値が0じゃないとき、focusを当てると数値が消える')
+  it.todo('プラスボタンを1回クリックすると、¥100,000円加算される')
+  it.todo('プラスボタンを2回クリックすると、¥200,000円加算される')
+  it.todo('100000未満の数字から100000を引くと負の数字にならずに0になる')
 })

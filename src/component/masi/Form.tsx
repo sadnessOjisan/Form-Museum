@@ -9,7 +9,7 @@ import { Dispatch, Action } from 'redux'
 import { connect } from 'react-redux'
 import { track } from '../../redux/module/logging'
 import { ITracker } from '../../typedef/Tracker'
-import Text from '../common/text'
+import { PageTitle } from '../common/Text/PageTitle'
 import { COLOR } from '../../const/color'
 import { genBlurLog } from '../../helper/util'
 
@@ -41,7 +41,7 @@ const Form = (props: FormikProps<FormValues>) => {
   } = props
   return (
     <MainContentsWrapper>
-      <Text.PageTitle>利益計算</Text.PageTitle>
+      <PageTitle>利益計算</PageTitle>
       <FormWrapper onSubmit={handleSubmit}>
         <InputItem
           name="sales"
